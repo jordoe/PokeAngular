@@ -1,14 +1,11 @@
 <h3>Pokemon list</h3>
 <div>
-    <div class="pokemon-list">
-        <div class="pokemon-list__img"></div>
-        <div class="pokemon-list__name"></div>
-        <div class="pokemon-list__name"></div>
-        <div><button class="sectionList__button" routerLink="/edit/{{i}}">Editar</button></div>
-        <div><button (click)="delete(i)" class="sectionList__button">Archivar</button></div>
+    <div class="pokemon-list" *ngFor="let pokemon of pokemonList">
+        <div class="pokemon-list__img">{{pokemon.species.front_default}}</div>
+        <div class="pokemon-list__name">{{pokemon.sprites.name}}</div>
+        <div class="pokemon-list__options">
+            <div><button class="btn">Details</button></div>
+            <div><button class="btn">Location</button></div>
+        </div>
     </div>
-</div>
-<br>
-<div>
-    <button routerLink="/add">Registrar denuncia</button>
 </div>
