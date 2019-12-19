@@ -1,11 +1,10 @@
-<h3>Pokemon list</h3>
-<div>
-    <div class="pokemon-list" *ngFor="let pokemon of pokemonList">
-        <div class="pokemon-list__img">{{pokemon.species.front_default}}</div>
-        <div class="pokemon-list__name">{{pokemon.sprites.name}}</div>
+<div class="container">
+    <div class="pokemon-list" *ngFor="let pokemon of pokemonList; index as i">
+        <div class="pokemon-list__img">{{pokemon.sprites.front_default}}</div>
+        <div class="pokemon-list__name">{{pokemon.species.name}}</div>
         <div class="pokemon-list__options">
-            <div><button class="btn">Details</button></div>
-            <div><button class="btn">Location</button></div>
+            <div><button class="btn" routerLink="/detail/{{i}}">Details</button></div>
+            <div><button class="btn" routerLink="/map">Location</button></div>
         </div>
     </div>
 </div>

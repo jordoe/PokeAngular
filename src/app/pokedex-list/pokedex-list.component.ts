@@ -17,7 +17,6 @@ export class PokedexListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.pokemonList);
   }
 
 }
