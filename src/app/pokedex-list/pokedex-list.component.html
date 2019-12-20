@@ -1,7 +1,7 @@
 <div class="container">
     <div class="pokemon-list" *ngFor="let pokemon of pokemonList; index as i">
         <div class="pokemon-list__img">{{pokemon.sprites.front_default}}</div>
-        <div class="pokemon-list__name">{{pokemon.species.name}}</div>
+        <div class="pokemon-list__name">{{pokemon.name}}</div>
         <div class="pokemon-list__options">
             <div><button class="btn" routerLink="/detail/{{i}}">Details</button></div>
             <div><button class="btn" routerLink="/map">Location</button></div>
