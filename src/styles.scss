@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~leaflet/dist/leaflet.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -9,13 +11,12 @@
 html {
     // This defines what 1rem is
     font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+    height: auto;
 }
 
 body {
     box-sizing: border-box;
-    // background-color: red;
     background: linear-gradient(rgba(255,255,255,0) 39%, rgba(226,223,223,0.5914740896358543) 100%);
 
     width: 100vw;
-    height: 100vh;
 }

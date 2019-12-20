@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PokedexListComponent implements OnInit {
 
   @Input() pokemonList: object[];
+  @Input() pokemonSelected;
 
   @Output() choosePokemonEvent = new EventEmitter<object>();
   choosePokemon(pokemon: object) {
