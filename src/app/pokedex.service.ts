@@ -5,16 +5,34 @@ import { HttpClient } from'@angular/common/http'
   providedIn: 'root'
 })
 export class PokedexService {
-	pokemonList: any[]
-
+	pokemonList: any[] = []
+	Pokedex = require('pokeapi-js-wrapper');
+	interval = {
+		limit: 10,
+		offset: 35
+	}
 	constructor(private http: HttpClient) {
-		//Por si utilizamos WEB STORAGE
 		if(!window.localStorage.getItem('pokemonFullList')){
 			window.localStorage.setItem('pokemonFullList', JSON.stringify(this.pokemonList));
 		}
 	}
 	getPokemonList():any{
+		const P = new this.Pokedex.Pokedex();
+		let list = []
+
+		return P.getPokemonsList(this.interval).then(function(response) {
+			response.results.forEach((pokemon) =>{
+				P.getPokemonByName(pokemon.name).then(function(response) {
+					//console.log(response)
+					list.push(response)
+				})
+			})
+		}).then(function(response) {
+			return list
+		})
+		/*
 		return this.http.get("http://pokeapi.co/api/v2/pokemon/?limit=50")
+		*/
 	}
 	getPokemonByType(type):any{
 		let url  ="http://pokeapi.co/api/v2/type/" + type + "/"
