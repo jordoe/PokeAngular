@@ -9,7 +9,7 @@ export class PokedexService {
 	Pokedex = require('pokeapi-js-wrapper');
 	interval = {
 		limit: 10,
-		offset: 34
+		offset: 35
 	}
 	constructor(private http: HttpClient) {
 		if(!window.localStorage.getItem('pokemonFullList')){
