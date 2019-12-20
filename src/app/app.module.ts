@@ -10,6 +10,7 @@ import { PokedexDetailComponent } from './pokedex-detail/pokedex-detail.componen
 import { PokedexMapComponent } from './pokedex-map/pokedex-map.component';
 
 const appRoutes: Routes = [
+  { path: 'test', component: PokedexComponent },
   { path: 'list', component: PokedexListComponent },
   { path: 'detail', component: PokedexDetailComponent },
   { path: 'detail/:id', component: PokedexDetailComponent },
