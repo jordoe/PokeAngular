@@ -1,31 +1,47 @@
 .container {
+    margin: 0 auto;
+    padding: 1.5rem;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     overflow: auto;
-    background-color: yellow;
+    background-color: red;
     width: 80%;
-    height: auto;
+    height: 30rem;
 
-    margin: 0 auto;
-    padding: 1.5rem;
 }
 
-.pokemon-list {
-    width: 70%;
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    margin-top: 10px;
-    background-color: white;
+// .container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
 
-    &__options {
-        display: flex;
-    }
-}
+//     overflow: auto;
+//     background-color: yellow;
+//     width: 80%;
+//     height: auto;
 
-.btn {
-    margin-right: 10px;
-}
+//     margin: 0 auto;
+//     padding: 1.5rem;
+// }
+
+// .pokemon-list {
+//     width: 70%;
+//     display: flex;
+//     justify-content: space-around;
+//     padding: 20px;
+//     margin-top: 10px;
+//     background-color: white;
+
+//     &__options {
+//         display: flex;
+//     }
+// }
+
+// .btn {
+//     margin-right: 10px;
+// }

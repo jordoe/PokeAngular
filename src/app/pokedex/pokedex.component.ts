@@ -7,11 +7,13 @@ import { PokedexService } from'../pokedex.service'
   styleUrls: ['./pokedex.component.scss']
 })
 export class PokedexComponent implements OnInit {
-  pokemons = []
-  pokemon = {}
-  ability = {}
+  pokemons = [];
+  pokemon = {};
+  ability = {};
+
   pokemonList: object[];
   pokemonSelected : object;
+  displayNone: boolean = false;
 
   constructor(private pokedexService: PokedexService) { }
 
@@ -20,9 +22,10 @@ export class PokedexComponent implements OnInit {
   }
 
   ngOnInit() {
-	this.pokedexService.getPokemonList().subscribe((pokemons: string[]) => { 
-		this.pokemons = pokemons
-		//console.log(this.pokemons)
+	this.pokedexService.getPokemonList().subscribe((pokemons) => { 
+		this.pokemonList = pokemons.results
+		console.log(this.pokemonList)
+		// console.log(this.pokemons)
 	})
 
 	this.pokedexService.getPokemonByType("water").subscribe((pokemons: string[]) => { 
@@ -32,7 +35,7 @@ export class PokedexComponent implements OnInit {
 
 	this.pokedexService.getPokemonByName("arcanine").subscribe((pokemon: string[]) => { 
 		this.pokemon = pokemon
-		//console.log(this.pokemon)
+		// console.log(this.pokemon)
 	})
 
 	this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => { 
