@@ -31,7 +31,7 @@ export class PokedexComponent implements OnInit {
 
 	this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => { 
 		this.ability = ability
-		console.log(this.ability)
+		//console.log(this.ability)
 	})
   }
 }
