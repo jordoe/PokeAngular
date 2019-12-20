@@ -5,6 +5,7 @@ import { HttpClient } from'@angular/common/http'
   providedIn: 'root'
 })
 export class PokedexService {
+
 	pokemonList: any[] = []
 	Pokedex = require('pokeapi-js-wrapper');
 	interval = {
@@ -15,6 +16,7 @@ export class PokedexService {
 		if(!window.localStorage.getItem('pokemonFullList')){
 			window.localStorage.setItem('pokemonFullList', JSON.stringify(this.pokemonList));
 		}
+		let p = "prueba"
 	}
 	getPokemonList():any{
 		const P = new this.Pokedex.Pokedex();
