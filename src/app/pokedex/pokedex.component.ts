@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokedexComponent implements OnInit {
 
+prueba: object;
+
   constructor() { }
 
   ngOnInit() {
+    console.log("CARGANDO PADRE")
+     this.prueba = {
+        id: 'esto',
+        name: 'pikachu',
+        ability: 'lo que sea',
+        berry: 'otras cosas'
+    };
   }
 
 }
