@@ -3,15 +3,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    overflow: auto;
+    background-color: yellow;
+    width: 80%;
+    height: 50%;
+
+    margin: 0 auto;
+    margin-bottom: 50vh;
+    padding: 15px;
 }
 
 .pokemon-list {
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: space-around;
     padding: 20px;
     margin-top: 10px;
-    background-color: red;
+    background-color: white;
 
 
     &__options {
