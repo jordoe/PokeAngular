@@ -8,6 +8,7 @@ import { PokedexComponent } from './pokedex/pokedex.component';
 import { PokedexListComponent } from './pokedex-list/pokedex-list.component';
 import { PokedexDetailComponent } from './pokedex-detail/pokedex-detail.component';
 import { PokedexMapComponent } from './pokedex-map/pokedex-map.component';
+import { MapComponent } from './map/map.component';
 
 const appRoutes: Routes = [
   { path: 'list', component: PokedexListComponent },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     PokedexComponent,
     PokedexListComponent,
     PokedexDetailComponent,
-    PokedexMapComponent
+    PokedexMapComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
