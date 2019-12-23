@@ -40,7 +40,6 @@
     &__name {
         padding-left: 3rem;
     }
-
 }
 
 // SCROLLBAR
@@ -69,4 +68,26 @@
     
     border: 1.3rem solid #FFFFFF;
     border-radius: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__name {
+        width: 90%;
+        height: 20%;
+        background-color: white;
+
+        text-align: center;
+        font-size: 2rem;
+        color: #478390;
+    }
+
+    &__image {
+        margin-top: 1rem;
+        width: 90%;
+        height: 65%;
+        background-color: white;
+    }
 }
