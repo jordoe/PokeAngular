@@ -1,8 +1,15 @@
 <div class="container">
-    <div class="pokemon-list">
-        <div class="pokemon-list__item" *ngFor="let pokemon of pokemonList; index as i" (click)="choosePokemon(pokemon)">
-            <div *ngIf="i<10"><span>0{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
-            <div *ngIf="i>9"><span>{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+    <div class="left">
+        <form action="#" class="search">
+            <input type="text" class="search__input" placeholder="Search Pokemon">
+            <button class="search__button">
+            </button>
+        </form>
+        <div class="pokemon-list">
+            <div class="pokemon-list__item" *ngFor="let pokemon of pokemonList; index as i" (click)="choosePokemon(pokemon)">
+                <div *ngIf="i<10"><span>0{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+                <div *ngIf="i>9"><span>{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+            </div>
         </div>
     </div>
     <div class="right">
