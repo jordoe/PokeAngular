@@ -1,7 +1,7 @@
 <div class="container">
     <div class="pokemon-list">
         <div class="pokemon-list__item" *ngFor="let pokemon of pokemonList; index as i">
-            <div class="pokemon-list__name">{{pokemon.name}}</div>
+            <div><span>{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
         </div>
     </div>
     <div class="pokemon-display">
