@@ -13,12 +13,14 @@
         </div>
     </div>
     <div class="right">
-        <i class="fas fa-caret-left"></i>
-        <div class="pokemon-display">
-            <div class="pokemon-display__name">{{pokemonSelected.name | uppercase}}</div>
-            <div class="pokemon-display__image"></div>
+        <div class="inline">
+            <i class="arrow fas fa-caret-left"></i>
+            <div class="pokemon-display">
+                <div class="pokemon-display__name">{{pokemonSelected.name | uppercase}}</div>
+                <div class="pokemon-display__image"></div>
+            </div>
+            <i class="arrow fas fa-caret-right"></i>
         </div>
-        <i class="fas fa-caret-right"></i>
         <div class="options">
             <div><a href="#" class="btn" routerLink="/detail/{{i}}">Details</a></div>
             <div><a href="#" class="btn" routerLink="/map">Location</a></div>
