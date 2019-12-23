@@ -7,16 +7,18 @@
         </form>
         <div class="pokemon-list">
             <div class="pokemon-list__item" *ngFor="let pokemon of pokemonList; index as i" (click)="choosePokemon(pokemon)">
-                <div *ngIf="i<10"><span>0{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
-                <div *ngIf="i>9"><span>{{i}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+                <div *ngIf="i<9"><span>0{{i+1}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+                <div *ngIf="i>8"><span>{{i+1}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
             </div>
         </div>
     </div>
     <div class="right">
+        <i class="fas fa-caret-left"></i>
         <div class="pokemon-display">
             <div class="pokemon-display__name">{{pokemonSelected.name | uppercase}}</div>
             <div class="pokemon-display__image"></div>
         </div>
+        <i class="fas fa-caret-right"></i>
         <div class="options">
             <div><a href="#" class="btn" routerLink="/detail/{{i}}">Details</a></div>
             <div><a href="#" class="btn" routerLink="/map">Location</a></div>
