@@ -18,12 +18,16 @@ export class PokedexComponent implements OnInit {
   constructor(private pokedexService: PokedexService) { }
 
   pokemonSelect(pokemon:object){
-    this.pokemonSelected = pokemon;
+	this.pokemonSelected = pokemon;
+	console.log(this.pokemonSelected);
   }
 
+
   ngOnInit() {
+	//   setTimeout(()=> console.log(this.pokemonSelected), 5000)
 	this.pokedexService.getPokemonList().subscribe((pokemons) => { 
 		this.pokemonList = pokemons.results
+		this.pokemonSelected = this.pokemonList[0];
 		console.log(this.pokemonList)
 		// console.log(this.pokemons)
 	})
