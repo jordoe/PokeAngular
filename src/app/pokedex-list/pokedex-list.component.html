@@ -1,10 +1,29 @@
 <div class="container">
-    <div class="pokemon-list" *ngFor="let pokemon of pokemonList; index as i">
-        <div class="pokemon-list__img">{{pokemon.sprites.front_default}}</div>
-        <div class="pokemon-list__name">{{pokemon.name}}</div>
-        <div class="pokemon-list__options">
-            <div><button class="btn" routerLink="/detail/{{i}}">Details</button></div>
-            <div><button class="btn" routerLink="/map">Location</button></div>
+    <div class="left">
+        <form action="#" class="search">
+            <input type="text" class="search__input" placeholder="Search Pokemon">
+            <button class="search__button">
+            </button>
+        </form>
+        <div class="pokemon-list">
+            <div class="pokemon-list__item" *ngFor="let pokemon of pokemonList; index as i" (click)="choosePokemon(pokemon)">
+                <div *ngIf="i<9"><span>0{{i+1}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+                <div *ngIf="i>8"><span>{{i+1}}</span><span class="pokemon-list__name">{{pokemon.name | uppercase}}</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="inline">
+            <i class="arrow fas fa-caret-left"></i>
+            <div class="pokemon-display">
+                <div class="pokemon-display__name">{{pokemonSelected.name | uppercase}}</div>
+                <div class="pokemon-display__image"></div>
+            </div>
+            <i class="arrow fas fa-caret-right"></i>
+        </div>
+        <div class="options">
+            <div><a href="#" class="btn" routerLink="/detail/{{i}}">Details</a></div>
+            <div><a href="#" class="btn" routerLink="/map">Location</a></div>
         </div>
     </div>
 </div>

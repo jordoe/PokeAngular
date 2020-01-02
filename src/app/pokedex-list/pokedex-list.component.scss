@@ -1,31 +1,251 @@
 .container {
+    margin: 0 auto;
+    padding: 3rem;
+    padding-left: 5rem;
+
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
 
-    overflow: auto;
-    background-color: yellow;
-    width: 80%;
-    height: auto;
+    background-color: #EA4747;
+    width: 80rem;
+    height: 40rem;
 
-    margin: 0 auto;
-    padding: 1.5rem;
+    border-radius: 2rem;
+
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+}
+
+.left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (max-width: 800px) {
+        width: 80%;
+        height: 40%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 450px) {
+        display: none;
+    }
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    &__input {
+        font-size: 2rem;
+        color: #B5B5B5;
+        background-color: #FFFFFF;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-webkit-input-placeholder {
+            color: #B5B5B5;
+        }
+    }
+
+    &__button {
+        border: none;
+        background-color: white;
+
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
 .pokemon-list {
-    width: 70%;
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    margin-top: 10px;
-    background-color: white;
+    width: 100%;
+    height: 90%;
+    background-color: #81C8D8;
+    
+    border: 1.3rem solid #FFFFFF;
+    border-radius: 2rem;
+    overflow: auto;
 
-    &__options {
+    &__item {
         display: flex;
+        flex-direction: column;
+
+        background-color: #358496;
+        border-radius: .5rem;
+        margin: 1rem 1rem;
+
+        color: #FFFFFF;
+        padding: .5rem 1rem;
+        font-size: 1.8rem;
+
+        &:hover {
+            background-color: #359999;
+        }
+
+        // It doesn´t work. I don´t know the reason.
+        &:focus {
+            background-color: #359999;
+        }
+    }
+
+    &__name {
+        padding-left: 3rem;
+    }
+}
+
+// SCROLLBAR
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    margin: 1rem;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #FFFFFF;
+    border-radius: 1rem;
+    border: 2px solid #358496;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #358496;
+    border-radius: 1rem;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        width: 80%;
+        height: 50%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 450px) {
+        height: 100vh;
+    }
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+
+    @media only screen and (max-width: 375px) {
+        height: 70%;
+    }
+}
+
+.arrow {
+    font-size: 10rem;
+    margin: 1rem;
+    color: #503737;
+}
+
+.pokemon-display {
+    width: 75%;
+    height: 85%;
+    background-color: #81C8D8;
+    
+    border: 1.3rem solid #FFFFFF;
+    border-radius: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (max-width: 450px) {
+        height: 70%;
+        width: 100%;
+    }
+
+    &__name {
+        width: 90%;
+        height: 20%;
+
+        font-size: 3rem;
+        color: #478390;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media only screen and (max-width: 450px) {
+            font-size: 2rem;
+        }
+
+        @media only screen and (max-width: 375px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__image {
+        margin-top: 1rem;
+        width: 90%;
+        height: 65%;
+    }
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @media only screen and (max-width: 375px) {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
 .btn {
-    margin-right: 10px;
+    background-color: #E7F0F2;
+    text-decoration: none;
+    color: black;
+    padding: 1rem 3rem;
+    border-radius: 1.5rem;
+    font-size: 2.5rem;
+    margin: 1rem;
+    box-shadow: 0 1rem 0.8rem rgba(0, 0, 0, 0.2);
+
+    @media only screen and (max-width: 375px) {
+        padding: 1rem 3rem;
+        font-size: 2rem;
+        line-height: 3;
+        // margin: 1rem;
+    }
 }
