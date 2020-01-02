@@ -29,9 +29,16 @@ export class PokedexService {
 	  	}));
 	  	return pokemon;
 	}
-	getPokemonByType(type):any{
-		let url  ="http://pokeapi.co/api/v2/type/" + type + "/"
-		return this.http.get(url)
+	async getPokemonByType(type){
+		const url  ="http://pokeapi.co/api/v2/type/" + type + "/"
+		const res = await fetch(url); 
+		const data = await res.json();
+	  	const pokemon = data.pokemon.map((data, index) => ({
+		    name: data.pokemon.name,
+		    id: data.pokemon.url.match(/\/([^\/]+)\/?$/)[1],
+		    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.pokemon.url.match(/\/([^\/]+)\/?$/)[1]}.png`,
+	  	}));
+	  	return pokemon;
 	}
 	getPokemonByName(name):any{
 		let url  ="http://pokeapi.co/api/v2/pokemon/" + name + "/"

@@ -1,7 +1,6 @@
 .prueba{
-    display: none !important;
+    display:none;
 }
-
 .container {
     margin: 0 auto;
     padding: 3rem;
@@ -54,7 +53,17 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 1rem;
-
+    
+    &__select{
+        font-size: 2rem;
+        color: #B5B5B5;
+        background-color: #FFFFFF;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        width: 60%;  
+        margin-right: 1rem;
+    }
     &__input {
         font-size: 2rem;
         color: #B5B5B5;

@@ -12,22 +12,33 @@ export class PokedexListComponent implements OnInit {
   @Input() pokemonSelected;
 
   @Output() choosePokemonEvent = new EventEmitter<object>();
+  @Output() chooseTypeEvent = new EventEmitter<object>();
 
+  selectedOption: string = ""
   pokemonSearchInput: String = ""
-  idPokemonSelected: number = 1
+  pokemonSelect: object = undefined
 
   constructor() { }
 
   ngOnInit() { }
   
   choosePokemon(pokemon) {
-    this.idPokemonSelected = pokemon.id
+    this.pokemonSelect = pokemon
     this.choosePokemonEvent.emit(pokemon);
   }
 
+  chooseType(type) {
+    this.chooseTypeEvent.emit(type)
+  }
+
+  onChange(type) {
+     this.pokemonSelect = undefined
+     this.chooseType(type)
+  }
+  /*Deprecated method, use if you need to cut array insted of filter it
   filterList(inputValue) {
     this.pokemonSearchInput = inputValue
-    /*
+    
     let arr = this.pokemonList
 
     let filteredArray = arr.filter((x) => {
@@ -35,6 +46,7 @@ export class PokedexListComponent implements OnInit {
     })
 
     console.log(filteredArray)
-    */
+    
   }
+  */
 }
