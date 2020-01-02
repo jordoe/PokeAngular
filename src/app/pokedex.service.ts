@@ -19,22 +19,21 @@ export class PokedexService {
 		}
 	}
 	getPokemonList():any{
-		const P = new this.Pokedex.Pokedex();
-		let list = []
+		// const P = new this.Pokedex.Pokedex();
+		// let list = []
 
-		return P.getPokemonsList(this.interval).then(function(response) {
-			response.results.forEach((pokemon) =>{
-				P.getPokemonByName(pokemon.name).then(function(response) {
-					//console.log(response)
-					list.push(response)
-				})
-			})
-		}).then(function(response) {
-			return list
-		})
-		/*
+		// return P.getPokemonsList(this.interval).then(function(response) {
+		// 	response.results.forEach((pokemon) =>{
+		// 		P.getPokemonByName(pokemon.name).then(function(response) {
+		// 			//console.log(response)
+		// 			list.push(response)
+		// 		})
+		// 	})
+		// }).then(function(response) {
+		// 	return list
+		// })
+
 		return this.http.get("http://pokeapi.co/api/v2/pokemon/?limit=50")
-		*/
 	}
 	getPokemonByType(type):any{
 		let url  ="http://pokeapi.co/api/v2/type/" + type + "/"
