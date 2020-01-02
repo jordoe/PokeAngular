@@ -24,25 +24,12 @@ export class PokedexComponent implements OnInit {
 
 
   ngOnInit() {
-<<<<<<< HEAD
-
-  	this.pokedexService.getPokemonList().then((pokemon:any) =>{
-  		 this.pokemonSelected = pokemon;
-  		 console.log(pokemon)
-  	})
-
-  	/*
-	this.pokedexService.getPokemonList().then((pokemons: string[]) => { 
-		this.pokemons = pokemons
-		console.log(this.pokemons)
-=======
 	//   setTimeout(()=> console.log(this.pokemonSelected), 5000)
 	this.pokedexService.getPokemonList().subscribe((pokemons) => { 
 		this.pokemonList = pokemons.results
 		this.pokemonSelected = this.pokemonList[0];
 		console.log(this.pokemonList)
 		// console.log(this.pokemons)
->>>>>>> feature-beautyList
 	})
 	
 	this.pokedexService.getPokemonByType("water").subscribe((pokemons: string[]) => { 
@@ -58,6 +45,6 @@ export class PokedexComponent implements OnInit {
 	this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => { 
 		this.ability = ability
 		//console.log(this.ability)
-	})*/
+	})
   }
 }
