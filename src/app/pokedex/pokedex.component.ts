@@ -15,37 +15,18 @@ export class PokedexComponent implements OnInit {
   pokemonSelected : object;
   displayNone: boolean = false;
 
-
   constructor(private pokedexService: PokedexService) { }
 
   pokemonSelect(pokemon:object){
-	this.pokemonSelected = pokemon;
-	console.log(this.pokemonSelected);
+	this.pokedexService.getPokemonByName(pokemon.name).subscribe((pokeFull) => { 
+		this.pokemonSelected = pokeFull;
+	})
   }
 
-
   ngOnInit() {
-	//   setTimeout(()=> console.log(this.pokemonSelected), 5000)
 	this.pokedexService.getPokemonList().subscribe((pokemons) => { 
 		this.pokemonList = pokemons.results
 		this.pokemonSelected = this.pokemonList[0];
-		console.log(this.pokemonList)
-		// console.log(this.pokemons)
 	})
-
-	// this.pokedexService.getPokemonByType("water").subscribe((pokemons: string[]) => {
-	// 	this.pokemons = pokemons
-	// 	//console.log(this.pokemons)
-	// })
-
-	// this.pokedexService.getPokemonByName("arcanine").subscribe((pokemon: string[]) => {
-	// 	this.pokemon = pokemon
-	// 	// console.log(this.pokemon)
-	// })
-
-	// this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => {
-	// 	this.ability = ability
-	// 	//console.log(this.ability)
-	// })
   }
 }

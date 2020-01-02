@@ -11,13 +11,12 @@ export class PokedexListComponent implements OnInit {
   @Input() pokemonSelected;
 
   @Output() choosePokemonEvent = new EventEmitter<object>();
-  choosePokemon(pokemon: object) {
-    this.choosePokemonEvent.emit(pokemon);
-  }
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+  
+  choosePokemon(pokemon: object) {
+    this.choosePokemonEvent.emit(pokemon);
   }
-
 }
