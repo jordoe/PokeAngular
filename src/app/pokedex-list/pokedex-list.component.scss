@@ -1,3 +1,7 @@
+.prueba{
+    display: none !important;
+}
+
 .container {
     margin: 0 auto;
     padding: 3rem;
@@ -215,9 +219,16 @@
     }
 
     &__image {
-        margin-top: 1rem;
-        width: 90%;
-        height: 65%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 87%;
+        height: auto;  
+        img{
+            margin-top: 1rem;
+            width: 160%;
+            height: auto;  
+        }
     }
 }
 

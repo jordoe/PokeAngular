@@ -18,8 +18,16 @@ export class PokedexService {
 			window.localStorage.setItem('pokemonFullList', JSON.stringify(this.pokemonList));
 		}
 	}
-	getPokemonList():any{
-		return this.http.get("http://pokeapi.co/api/v2/pokemon/?limit=811")
+	async getPokemonList(){
+		const res = await fetch("http://pokeapi.co/api/v2/pokemon/?limit=811"); 
+		const data = await res.json();
+	  	const pokemon = data.results.map((data, index) => ({
+		    name: data.name,
+		    id: index + 1,
+		    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index +
+		      1}.png`,
+	  	}));
+	  	return pokemon;
 	}
 	getPokemonByType(type):any{
 		let url  ="http://pokeapi.co/api/v2/type/" + type + "/"
