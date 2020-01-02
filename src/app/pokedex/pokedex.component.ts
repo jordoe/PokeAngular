@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PokedexService } from'../pokedex.service'
+import { PokedexService } from'../pokedex.service';
 
 @Component({
   selector: 'app-pokedex',
@@ -15,6 +15,7 @@ export class PokedexComponent implements OnInit {
   pokemonSelected : object;
   displayNone: boolean = false;
 
+
   constructor(private pokedexService: PokedexService) { }
 
   pokemonSelect(pokemon:object){
@@ -23,6 +24,7 @@ export class PokedexComponent implements OnInit {
   }
 
 
+<<<<<<< HEAD
   ngOnInit() {
 	//   setTimeout(()=> console.log(this.pokemonSelected), 5000)
 	this.pokedexService.getPokemonList().subscribe((pokemons) => { 
@@ -30,19 +32,25 @@ export class PokedexComponent implements OnInit {
 		this.pokemonSelected = this.pokemonList[0];
 		console.log(this.pokemonList)
 		// console.log(this.pokemons)
+=======
+  	/*
+	this.pokedexService.getPokemonList().then((pokemons: string[]) => {
+		this.pokemons = pokemons
+		console.log(this.pokemons)
+>>>>>>> feature-detail-style
 	})
-	
-	this.pokedexService.getPokemonByType("water").subscribe((pokemons: string[]) => { 
+
+	this.pokedexService.getPokemonByType("water").subscribe((pokemons: string[]) => {
 		this.pokemons = pokemons
 		//console.log(this.pokemons)
 	})
 
-	this.pokedexService.getPokemonByName("arcanine").subscribe((pokemon: string[]) => { 
+	this.pokedexService.getPokemonByName("arcanine").subscribe((pokemon: string[]) => {
 		this.pokemon = pokemon
 		// console.log(this.pokemon)
 	})
 
-	this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => { 
+	this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => {
 		this.ability = ability
 		//console.log(this.ability)
 	})
