@@ -12,7 +12,8 @@ import { PokedexMapComponent } from './pokedex-map/pokedex-map.component';
 import { MapComponent } from './map/map.component';
 
 import { FilterNamePipe } from './filter-name.pipe';
-import { Pipe, PipeTransform } from '@angular/core'; 
+import { Pipe, PipeTransform } from '@angular/core';
+import { NavComponent } from './nav/nav.component'; 
 
 const appRoutes: Routes = [
   { path: 'list', component: PokedexComponent },
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     PokedexDetailComponent,
     PokedexMapComponent,
     MapComponent,
-    FilterNamePipe
+    FilterNamePipe,
+    NavComponent
   ],
   imports: [
     BrowserModule,
