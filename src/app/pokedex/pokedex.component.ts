@@ -12,28 +12,38 @@ export class PokedexComponent implements OnInit {
   ability = {};
 
   pokemonList: object[];
-  pokemonSelected;
-  displayNone: boolean = false;
+  pokemonSelected: any = undefined;
+
+  showList = true;
+  showDetail = false;
+
 
   constructor(private pokedexService: PokedexService) { }
 
   ngOnInit() {
 	this.pokedexService.getPokemonList().then((response) =>{
 		this.pokemonList = response
-		this.pokemonSelected = response[0]
 	})
   }
 
+
   pokemonSelect(pokemon){
-  	this.pokedexService.getPokemonByName(pokemon.name).subscribe((pokeFull) => { 
-  		this.pokemonSelected = pokeFull;
+  	this.pokedexService.getPokemonByName(pokemon.name).subscribe((pokeFull) => {
+      this.pokemonSelected = pokeFull;
+      console.log(this.pokemonSelected);
   	})
   }
 
-  typeSelect(type){
-	this.pokedexService.getPokemonByType(type).then((response) =>{
-		this.pokemonList = response
-		this.pokemonSelected = response[0]
-	})
+  typeSelect(type) {
+    this.pokedexService.getPokemonByType(type).then((response) => {
+      this.pokemonList = response;
+      this.pokemonSelected = response[0];
+    });
+}
+
+  changeView() {
+    this.showList = !this.showList;
+    this.showDetail = !this.showDetail;
   }
+
 }
