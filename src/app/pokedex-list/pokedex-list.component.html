@@ -39,7 +39,7 @@
             <div class="inline">
                 <i class="arrow fas fa-caret-left"></i>
                 <div class="pokemon-display">
-                    <div *ngIf="pokemonSelect !== undefined">
+                    <div class="pokemon-display__container" *ngIf="pokemonSelect !== undefined">
                         <div class="pokemon-display__name">{{pokemonSelect.name | uppercase}}</div>
                         <div class="pokemon-display__image">
                             <img src="{{pokemonSelect.image}}" alt="pokemonImage">
