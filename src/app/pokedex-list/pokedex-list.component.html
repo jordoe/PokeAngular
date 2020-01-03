@@ -36,7 +36,7 @@
     </div>
     <div class="right">
         <div class="inline">
-            <i class="arrow fas fa-caret-left"></i>
+            <i class="arrow fas fa-caret-left" (click)="leftArrow()"></i>
             <div class="pokemon-display">
                 <div *ngIf="pokemonSelect !== undefined">
                     <div class="pokemon-display__name">{{pokemonSelect.name | uppercase}}</div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <i class="arrow fas fa-caret-right"></i>
+            <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>
         </div>
         <div class="options">
             <div><a href="#" class="btn" routerLink="/detail/{{i}}">Details</a></div>
