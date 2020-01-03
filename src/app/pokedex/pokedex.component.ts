@@ -13,7 +13,7 @@ export class PokedexComponent implements OnInit {
 
     pokemonList: object[];
     pokemonSelected;
-    displayNone: boolean = false;
+    displayNone = false;
 
     constructor(private pokedexService: PokedexService) {}
 

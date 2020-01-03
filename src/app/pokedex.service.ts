@@ -23,8 +23,8 @@ export class PokedexService {
     async getPokemonList() {
         const res = await fetch('http://pokeapi.co/api/v2/pokemon/?limit=811');
         const data = await res.json();
-        const pokemon = data.results.map((data, index) => ({
-            name: data.name,
+        const pokemon = data.results.map((result, index) => ({
+            name: result.name,
             id: index + 1,
             image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index +
                 1}.png`,
@@ -35,21 +35,21 @@ export class PokedexService {
         const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
         const res = await fetch(url);
         const data = await res.json();
-        const pokemon = data.pokemon.map((data, index) => ({
-            name: data.pokemon.name,
-            id: data.pokemon.url.match(/\/([^\/]+)\/?$/)[1],
+        const pokemon = data.pokemon.map((result, index) => ({
+            name: result.pokemon.name,
+            id: result.pokemon.url.match(/\/([^\/]+)\/?$/)[1],
             image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                data.pokemon.url.match(/\/([^\/]+)\/?$/)[1]
+                result.pokemon.url.match(/\/([^\/]+)\/?$/)[1]
             }.png`,
         }));
         return pokemon;
     }
     getPokemonByName(name): any {
-        let url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
+        const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
         return this.http.get(url);
     }
     getPokemonAbility(ability): any {
-        let url = 'http://pokeapi.co/api/v2/ability/' + ability + '/';
+        const url = 'http://pokeapi.co/api/v2/ability/' + ability + '/';
         return this.http.get(url);
     }
 }

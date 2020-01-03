@@ -18,6 +18,6 @@ export class MapService {
   constructor() { }
 
   getMap() {
-    return this.map
+    return this.map;
   }
 }

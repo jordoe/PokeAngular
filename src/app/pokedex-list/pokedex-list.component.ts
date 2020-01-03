@@ -12,11 +12,10 @@ export class PokedexListComponent implements OnInit {
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
 
-    selectedOption: string = '';
-    pokemonSearchInput: String = '';
+    selectedOption = '';
+    pokemonSearchInput = '';
     pokemonSelect: object = undefined;
-
-    currentListIndex: number = 0;
+    currentListIndex = 0;
 
     constructor() {}
 
@@ -51,18 +50,4 @@ export class PokedexListComponent implements OnInit {
             this.choosePokemon(this.pokemonList[this.currentListIndex + 1]);
         }
     }
-    /*Deprecated method, use if you need to cut array insted of filter it
-  filterList(inputValue) {
-    this.pokemonSearchInput = inputValue
-    
-    let arr = this.pokemonList
-
-    let filteredArray = arr.filter((x) => {
-      return x.name.includes(inputValue)
-    })
-
-    console.log(filteredArray)
-    
-  }
-  */
 }

@@ -8,13 +8,6 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit {
     private map;
-
-    constructor() {}
-
-    ngAfterViewInit(): void {
-        this.initMap();
-    }
-
     private myIcon = L.icon({
         iconUrl: 'https://freepngimg.com/thumb/pokemon/6-2-pokemon-png-hd.png',
         iconSize: [38, 38],
@@ -24,6 +17,12 @@ export class MapComponent implements AfterViewInit {
         Math.floor(Math.random() * (90 - -90 + 1) + -90),
         Math.floor(Math.random() * (180 - -180 + 1) + -180),
     ];
+
+    constructor() {}
+
+    ngAfterViewInit(): void {
+        this.initMap();
+    }
 
     private initMap(): void {
         this.map = L.map('map', {
