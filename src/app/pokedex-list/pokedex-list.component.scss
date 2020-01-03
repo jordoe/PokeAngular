@@ -275,3 +275,54 @@
         // margin: 1rem;
     }
 }
+
+.optionColor {
+    &__normal {
+        color: rgb(180, 172, 146);
+    }
+    &__fighting {
+        color: rgb(196, 72, 72);
+    }
+    &__flying {
+        color: rgb(197, 170, 240);
+    }
+    &__poison {
+        color: rgb(179, 87, 187);
+    }
+    &__ground {
+        color: rgb(233, 210, 136);
+    }
+    &__rock {
+        color: rgb(206, 181, 113);
+    }
+    &__bug {
+        color: rgb(186, 218, 114);
+    }
+    &__steel {
+        color: rgb(204, 206, 216);
+    }
+    &__fire {
+        color: rgb(243, 160, 65);
+    }
+    &__water {
+        color: rgb(140, 176, 231);
+    }
+    &__grass {
+        color: rgb(143, 212, 111);
+    }
+    &__electric {
+        color: rgb(180, 172, 146);
+    }
+    &__psychic {
+        color: rgb(240, 118, 179);
+    }
+    &__ice {
+        color: rgb(156, 229, 235);
+    }
+    &__dark {
+        color: rgb(78, 73, 54);
+    }
+    &__fairy {
+        color: rgb(245, 181, 213);
+    }
+}
