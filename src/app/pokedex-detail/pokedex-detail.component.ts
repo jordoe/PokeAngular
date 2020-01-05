@@ -29,7 +29,7 @@ export class PokedexDetailComponent implements OnInit {
   }
 
   changeView() {
-    if(this.pokemonSelect !== undefined)
+    if(this.pokemonSelected !== undefined)
       this.changeViewEvent.emit();
   }
 
