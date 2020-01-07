@@ -7,37 +7,23 @@
                 (change)="onChange($event.target.value)"
             >
                 <option value="" selected style="display:none">Type</option>
-                <option value="any">Any</option>
-                <option value="normal" class="optionColor__normal"
-                    >Normal</option
-                >
-                <option value="fighting" class="optionColor__fighting"
-                    >Fighting</option
-                >
-                <option value="flying" class="optionColor__flying"
-                    >Flying</option
-                >
-                <option value="poison" class="optionColor__poison"
-                    >Poison</option
-                >
-                <option value="ground" class="optionColor__ground"
-                    >Ground</option
-                >
-                <option value="rock" class="optionColor__rock">Rock</option>
-                <option value="bug" class="optionColor__bug">Bug</option>
-                <option value="steel" class="optionColor__steel">Steel</option>
-                <option value="fire" class="optionColor__fire">Fire</option>
-                <option value="water" class="optionColor__water">Water</option>
-                <option value="grass" class="optionColor__grass">Grass</option>
-                <option value="electric" class="optionColor__electric"
-                    >Electric</option
-                >
-                <option value="psychic" class="optionColor__psychic"
-                    >Psychic</option
-                >
-                <option value="ice" class="optionColor__ice">Ice</option>
-                <option value="dark" class="optionColor__dark">Dark</option>
-                <option value="fairy" class="optionColor__fairy">Fairy</option>
+                <option value="anygit ">Any</option>
+                <option value="normal">Normal</option>
+                <option value="fighting">Fighting</option>
+                <option value="flying">Flying</option>
+                <option value="poison">Poison</option>
+                <option value="ground">Ground</option>
+                <option value="rock">Rock</option>
+                <option value="bug">Bug</option>
+                <option value="steel">Steel</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="grass">Grass</option>
+                <option value="electric">Electric</option>
+                <option value="psychic">Psychic</option>
+                <option value="ice">Ice</option>
+                <option value="dark">Dark</option>
+                <option value="fairy">Fairy</option>
             </select>
             <input
                 type="text"
@@ -89,9 +75,7 @@
             <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>
         </div>
         <div class="options">
-            <div>
-                <a href="#" class="btn" routerLink="/detail/{{ i }}">Details</a>
-            </div>
+            <div><a class="btn" (click)="changeView()">Details</a></div>
             <div><a href="#" class="btn" routerLink="/map">Location</a></div>
         </div>
     </div>

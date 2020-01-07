@@ -12,8 +12,10 @@ export class PokedexComponent implements OnInit {
     ability = {};
 
     pokemonList: object[];
-    pokemonSelected;
-    displayNone = false;
+    pokemonSelected: any = undefined;
+
+    showList = true;
+    showDetail = false;
 
     constructor(private pokedexService: PokedexService) {}
 
@@ -24,18 +26,23 @@ export class PokedexComponent implements OnInit {
         });
     }
 
-    pokemonSelect(pokemon) {
-        this.pokedexService
-            .getPokemonByName(pokemon.name)
-            .subscribe(pokeFull => {
-                this.pokemonSelected = pokeFull;
-            });
-    }
-
     typeSelect(type) {
         this.pokedexService.getPokemonByType(type).then(response => {
             this.pokemonList = response;
             this.pokemonSelected = response[0];
         });
+    }
+    pokemonSelect(pokemon) {
+        this.pokedexService
+            .getPokemonByName(pokemon.name)
+            .subscribe(pokeFull => {
+                this.pokemonSelected = pokeFull;
+                console.log(this.pokemonSelected);
+            });
+    }
+
+    changeView() {
+        this.showList = !this.showList;
+        this.showDetail = !this.showDetail;
     }
 }

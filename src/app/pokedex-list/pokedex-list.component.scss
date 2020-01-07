@@ -240,7 +240,9 @@
         align-items: center;
         flex-grow: 1;
         width: 87%;
+        height: auto;
         img {
+            margin-top: 1rem;
             width: 160%;
             height: auto;
         }

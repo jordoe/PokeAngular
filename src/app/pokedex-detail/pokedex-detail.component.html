@@ -1,89 +1,55 @@
-<div class="container">
-    <div class="container__general">
-        <div class="container__general--name">
-            <div class="container__general--name--title">
-                <!-- {{pokemon.name}} -->
-                Pikachu
-            </div>
-            <div class="container__general--name--img">
-                <img
-                    src="https://freepngimg.com/thumb/pokemon/6-2-pokemon-png-hd.png"
-                    alt=""
-                />
-                <!-- <img src="" alt=""> -->
-            </div>
-        </div>
-        <div class="container__general--details">
-            <div class="container__general--details1">
-                <div class="container__general--details1--property1">
-                    <div
-                        class="container__general--details1--property1--number"
-                    >
-                        <!-- {{ }} -->
-                        Nº 25
-                    </div>
-                    <div class="container__general--details1--property1--1">
-                        <!-- {{ }} -->
-                        Electric
-                    </div>
-                    <div class="container__general--details1--property1--2">
-                        <!-- {{ }} -->
-                        Fight
-                    </div>
-                </div>
-                <div class="container__general--details1--property2">
-                    <div class="container__general--details1--property2--1">
-                        <p>
-                            Height
-                            <!-- {{  }} -->
-                        </p>
-                        <div
-                            class="container__general--details1--property2--units"
-                        >
-                            <p>
-                                39,5
-                                <!-- {{  }} -->
-                                cm
-                            </p>
-                        </div>
-                    </div>
-                    <div class="container__general--details1--property2--2">
-                        <p>
-                            Weight
-                            <!-- {{  }} -->
-                        </p>
-                        <div
-                            class="container__general--details1--property2--units"
-                        >
-                            <p>
-                                2
-                                <!-- {{  }} -->
-                                Kg
-                            </p>
-                        </div>
-                    </div>
-                    <div class="container__general--details1--property2--3">
-                        <p>
-                            Description
-                            <!-- {{  }} -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="container__general--details2">
-                <div class="container__general--details2--description">
-                    <!-- {{  }} -->
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Magni accusamus similique dolor obcaecati assumenda mollitia
-                    quisquam fugit illum, tempora?
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="container__buttons">
-        <!-- <a class="container__buttons--back"></a> -->
-        <i class="fas fa-caret-left"></i>
-        <a class="container__buttons--location">Location<!-- {{  }} --></a>
+<div class="container">
+  <div class="general">
+    <div class="left">
+      <div class="left--title">
+        {{ pokemonSelected.name }}
+      </div>
+      <div class="left--img">
+        <img src="{{ pokemonSelected.sprites.front_default }}" alt="">
+      </div>
     </div>
+    <div class="right">
+      <div class="details">
+        <div class="details__element1">
+          <div class="details__element1--position">
+            {{ pokemonSelected.id }}
+          </div>
+          <div class="details__element1--property1">
+            {{ pokemonSelected.types[0].type.name }}
+          </div>
+          <div *ngIf="pokemonSelected.types[1]" class="details__element1--property2">
+            {{ pokemonSelected.types[1].type.name }}
+          </div>
+        </div>
+        <div class="details__element2">
+          <div class="details__element2--property1">
+            <p>Height</p>
+            <div class="details__element2--units">
+              <p> {{ pokemonSelected.height }} cm</p>
+            </div>
+          </div>
+          <div class="details__element2--property2">
+            <p>Weight</p>
+            <div class="details__element2--units">
+              <p> {{ pokemonSelected.weight }} Kg</p>
+            </div>
+          </div>
+          <div class="details__element2--descriptionTitle">
+            <p>Description</p>
+          </div>
+        </div>
+      </div>
+      <div class="description">
+        <div class="description--text">
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis inventore nostrum, provident quaerat pariatur quas autem consectetur animi aliquid
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <i class="fas fa-caret-left" routerLink="/list"></i>
+    <a class="buttons--location" routerLink="/map" >Location</a>
+  </div>
 </div>
