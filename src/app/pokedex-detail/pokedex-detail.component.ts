@@ -8,27 +8,22 @@ import { PokedexComponent } from '../pokedex/pokedex.component';
     styleUrls: ['./pokedex-detail.component.scss'],
 })
 export class PokedexDetailComponent implements OnInit {
+    @Output() changeViewEvent = new EventEmitter<object>();
 
-  @Output() changeViewEvent = new EventEmitter<object>();
+    @Input() pokemonSelected: PokedexComponent;
 
-  @Input() pokemonSelected: PokedexComponent;
-
-  // @Input() display: object;
+    // @Input() display: object;
 
     @Input() pokemonS; // TEST
     pokemontest: object; // TEST
 
     constructor() {}
 
-  ngOnInit() {
+    ngOnInit() {
+        console.log(this.pokemonSelected);
+    }
 
-    console.log(this.pokemonSelected);
-
-  }
-
-  changeView() {
-    if(this.pokemonSelected !== undefined)
-      this.changeViewEvent.emit();
-  }
-
+    changeView() {
+        if (this.pokemonSelected !== undefined) this.changeViewEvent.emit();
+    }
 }
