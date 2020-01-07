@@ -22,12 +22,12 @@ export class PokedexListComponent implements OnInit {
 
     ngOnInit() {}
 
-    ngOnChanges(){
-        if(this.pokemonSelect === undefined){
-            this.pokemonSelect = this.pokemonList[0]
+    ngOnChanges() {
+        if (this.pokemonSelect === undefined) {
+            this.pokemonSelect = this.pokemonList[0];
         }
     }
-    
+
     choosePokemon(pokemon) {
         this.pokemonSelect = pokemon;
         this.currentListIndex = this.pokemonList.findIndex(
