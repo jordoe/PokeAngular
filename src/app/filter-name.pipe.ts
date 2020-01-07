@@ -5,9 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterNamePipe implements PipeTransform {
     transform(pokemonList: any[], name: string): any {
+        let result
         if (name === undefined) {
             name = '';
         }
-        return pokemonList.filter(pokemon => pokemon.name.indexOf(name) !== -1);
+        if(pokemonList !== undefined){
+            result = pokemonList.filter(pokemon => pokemon.name.indexOf(name) !== -1);
+        }
+        return result
     }
 }
