@@ -50,17 +50,17 @@ export class PokedexService {
         const res = await fetch(url);
         const data = await res.json();
         //Get pokemon deatils
-        const details = await fetch(data.species.url)
-        const detailsData = await details.json()
+        const details = await fetch(data.species.url);
+        const detailsData = await details.json();
         //Creating new pokemon
         const pokemon = {
             pokemon: data,
-            details: detailsData
-        }
-        return pokemon
+            details: detailsData,
+        };
+        return pokemon;
     }
 
-    getPokemonDetails(url){
+    getPokemonDetails(url) {
         return this.http.get(url);
     }
     getPokemonByName(name): any {
