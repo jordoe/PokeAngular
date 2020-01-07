@@ -4,6 +4,17 @@
     </a>
     <div class="elements-right">
         <div class="title">PokeAngular</div>
-        <div class="option">About Us</div>
+        <div class="option" (click)="clickAboutButton()">
+            About Us
+            <div class="about-container" *ngIf="showAbout">
+                <i class="arrow fas fa-caret-up"></i>
+                <div class="about">
+                    <h3 class="about--name">Jorge Domínguez</h3>
+                    <h3 class="about--name">Rubén Martín</h3>
+                    <h3 class="about--name">Jesús Puertas</h3>
+                    <h3 class="about--name">Eduardo Vela</h3>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
