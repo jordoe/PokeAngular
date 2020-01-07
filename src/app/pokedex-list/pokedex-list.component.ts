@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'app-pokedex-list',
     templateUrl: './pokedex-list.component.html',
     styleUrls: ['./pokedex-list.component.scss'],
 })
-export class PokedexListComponent implements OnInit {
+export class PokedexListComponent implements OnInit, OnChanges {
     @Input() pokemonList: object[];
     @Input() pokemonSelected;
 
