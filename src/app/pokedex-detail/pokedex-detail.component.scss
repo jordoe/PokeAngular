@@ -175,7 +175,7 @@
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    color: rgb(42, 158, 143);
+    color: $primary-textColor;
 
     &--property1 {
       width: 50%;
@@ -254,23 +254,23 @@
 
   i {
     font-size: 6rem;
-    color: $buttonBackColor;
+    color: $arrowColor;
   }
 
-  &--location {
-    width: 130px;
-    height: 40px;
-    margin-left: 2rem;
-    box-sizing: border-box;
-    background-color: $quaternary-backgroundColor;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: $secondary-textColor;
-    border-radius: 1.5rem;
-    font-size: 2.5rem;
-  }
+  // &--location {
+  //   width: 130px;
+  //   height: 40px;
+  //   margin-left: 2rem;
+  //   box-sizing: border-box;
+  //   background-color: $quaternary-backgroundColor;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   text-decoration: none;
+  //   color: $secondary-textColor;
+  //   border-radius: 1.5rem;
+  //   font-size: 2.5rem;
+  // }
 }
 
 
