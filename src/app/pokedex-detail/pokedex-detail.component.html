@@ -1,55 +1,59 @@
-
 <div class="container">
-  <div class="general">
-    <div class="left">
-      <div class="left--title">
-        {{ pokemonSelected.name }}
-      </div>
-      <div class="left--img">
-        <img src="{{ pokemonSelected.sprites.front_default }}" alt="">
-      </div>
-    </div>
-    <div class="right">
-      <div class="details">
-        <div class="details__element1">
-          <div class="details__element1--position">
-            {{ pokemonSelected.id }}
-          </div>
-          <div class="details__element1--property1">
-            {{ pokemonSelected.types[0].type.name }}
-          </div>
-          <div *ngIf="pokemonSelected.types[1]" class="details__element1--property2">
-            {{ pokemonSelected.types[1].type.name }}
-          </div>
-        </div>
-        <div class="details__element2">
-          <div class="details__element2--property1">
-            <p>Height</p>
-            <div class="details__element2--units">
-              <p> {{ pokemonSelected.height }} cm</p>
+    <div class="general">
+        <div class="left">
+            <div class="left--title">
+                {{ pokemonSelected.name }}
             </div>
-          </div>
-          <div class="details__element2--property2">
-            <p>Weight</p>
-            <div class="details__element2--units">
-              <p> {{ pokemonSelected.weight }} Kg</p>
+            <div class="left--img">
+                <img src="{{ pokemonSelected.sprites.front_default }}" alt="" />
             </div>
-          </div>
-          <div class="details__element2--descriptionTitle">
-            <p>Description</p>
-          </div>
         </div>
-      </div>
-      <div class="description">
-        <div class="description--text">
-           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis inventore nostrum, provident quaerat pariatur quas autem consectetur animi aliquid
+        <div class="right">
+            <div class="details">
+                <div class="details__element1">
+                    <div class="details__element1--position">
+                        {{ pokemonSelected.id }}
+                    </div>
+                    <div class="details__element1--property1">
+                        {{ pokemonSelected.types[0].type.name }}
+                    </div>
+                    <div
+                        *ngIf="pokemonSelected.types[1]"
+                        class="details__element1--property2"
+                    >
+                        {{ pokemonSelected.types[1].type.name }}
+                    </div>
+                </div>
+                <div class="details__element2">
+                    <div class="details__element2--property1">
+                        <p>Height</p>
+                        <div class="details__element2--units">
+                            <p>{{ pokemonSelected.height }} cm</p>
+                        </div>
+                    </div>
+                    <div class="details__element2--property2">
+                        <p>Weight</p>
+                        <div class="details__element2--units">
+                            <p>{{ pokemonSelected.weight }} Kg</p>
+                        </div>
+                    </div>
+                    <div class="details__element2--descriptionTitle">
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <div class="description--text">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis inventore nostrum, provident quaerat pariatur
+                    quas autem consectetur animi aliquid
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="buttons">
-    <i class="fas fa-caret-left" routerLink="/list"></i>
-    <a class="buttons--location" routerLink="/map" >Location</a>
-  </div>
+    <div class="buttons">
+        <i class="fas fa-caret-left" routerLink="/list"></i>
+        <a class="buttons--location" routerLink="/map">Location</a>
+    </div>
 </div>
