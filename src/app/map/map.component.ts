@@ -22,9 +22,9 @@ export class MapComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
         this.pokedexService
-            .getPokemonByName(this.pokemonId)
-            .subscribe(response => {
-                this.pokemonSelected = response;
+            .getPokemonDetailsByName(this.pokemonId)
+            .then(response => {
+                this.pokemonSelected = response.pokemon;
                 this.initMap();
             });
     }
