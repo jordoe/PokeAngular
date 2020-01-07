@@ -44,6 +44,25 @@ export class PokedexService {
         }));
         return pokemon;
     }
+    async getPokemonDetailsByName(name) {
+        //Get pokemon object
+        const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
+        const res = await fetch(url);
+        const data = await res.json();
+        //Get pokemon deatils
+        const details = await fetch(data.species.url)
+        const detailsData = await details.json()
+        //Creating new pokemon
+        const pokemon = {
+            pokemon: data,
+            details: detailsData
+        }
+        return pokemon
+    }
+
+    getPokemonDetails(url){
+        return this.http.get(url);
+    }
     getPokemonByName(name): any {
         const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
         return this.http.get(url);

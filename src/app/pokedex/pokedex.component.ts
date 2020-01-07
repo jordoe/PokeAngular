@@ -37,7 +37,6 @@ export class PokedexComponent implements OnInit {
             .getPokemonByName(pokemon.name)
             .subscribe(pokeFull => {
                 this.pokemonSelected = pokeFull;
-                console.log(this.pokemonSelected);
             });
     }
 
