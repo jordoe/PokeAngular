@@ -43,19 +43,21 @@
 // 	border-spacing: 0;
 // }
 
-//--------------  VARAIBLES ----------------------//
+//--------------  VARIABLES ----------------------//
 
-$primary-backgroundColor:   #EA4747;
-$secundary-backgroundColor:  #81C8D8;
-$tertiary-backgroundColor: rgb(33, 107, 91);
-$quaternary-backgroundColor: #FFFFFF;
+// $primary-backgroundColor:   #EA4747;
+// $secundary-backgroundColor:  #81C8D8;
+// $tertiary-backgroundColor: rgb(33, 107, 91);
+// $quaternary-backgroundColor: #FFFFFF;
 
-$primary-textColor: rgb(42, 158, 143);
-$secundary-textColor:  #000000;
-$tertiary-textColor: #FFFFFF;
+// $primary-textColor: rgb(42, 158, 143);
+// $secundary-textColor:  #000000;
+// $tertiary-textColor: #FFFFFF;
 
-$borderColor: #FFFFFF;
-$buttonBackColor: #503737;
+// $borderColor: #FFFFFF;
+// $buttonBackColor: #503737;
+
+@import '../../variables.scss';
 
 //-------------- MAIN STYLES ----------------//
 
@@ -74,7 +76,7 @@ $buttonBackColor: #503737;
 .general {
   width: 90%;
   height: 75%;
-  background-color: $secundary-backgroundColor;
+  background-color: $secondary-backgroundColor;
   border: 1.3rem solid $borderColor;
   border-radius: 2rem;
   margin-top: 10px;
@@ -133,7 +135,7 @@ $buttonBackColor: #503737;
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    color: $secundary-textColor;
+    color: $secondary-textColor;
 
     &--position {
       width: 80%;
@@ -265,7 +267,7 @@ $buttonBackColor: #503737;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: $secundary-textColor;
+    color: $secondary-textColor;
     border-radius: 1.5rem;
     font-size: 2.5rem;
   }
