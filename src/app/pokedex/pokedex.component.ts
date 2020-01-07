@@ -33,10 +33,17 @@ export class PokedexComponent implements OnInit {
         });
     }
     pokemonSelect(pokemon) {
+        /*
         this.pokedexService
             .getPokemonByName(pokemon.name)
             .subscribe(pokeFull => {
                 this.pokemonSelected = pokeFull;
+            });
+        */
+        this.pokedexService
+            .getPokemonDetailsByName(pokemon.name)
+            .then(response => {
+                this.pokemonSelected = response;
             });
     }
 

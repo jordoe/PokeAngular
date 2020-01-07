@@ -243,7 +243,7 @@
         justify-content: center;
         align-items: center;
         flex-grow: 1;
-        width: 87%;
+        width: 60%;
         height: auto;
 
         @media only screen and (max-width: 800px) {
@@ -257,6 +257,18 @@
             // margin-top: 1rem;
             width: 160%;
             height: auto;
+        }
+    }
+
+    &__imageType {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-grow: 1;
+        width: 70%;
+        margin-bottom: 1rem;
+        img {
+            width: 40%;
         }
     }
 }
