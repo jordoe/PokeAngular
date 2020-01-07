@@ -75,8 +75,8 @@
             <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>
         </div>
         <div class="options">
-            <div><a class="btn" (click)="changeView()">Details</a></div>
-            <div><a href="#" class="btn" routerLink="/map">Location</a></div>
+            <div><a class="btn" routerLink="/detail/{{pokemonSelect.id}}">Details</a></div>
+            <div><a href="#" class="btn" routerLink="/map/{{pokemonSelect.id}}">Location</a></div>
         </div>
     </div>
 </div>
