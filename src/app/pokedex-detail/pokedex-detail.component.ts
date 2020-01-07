@@ -2,30 +2,33 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { PokedexComponent } from '../pokedex/pokedex.component';
 
+
 @Component({
-    selector: 'app-pokedex-detail',
-    templateUrl: './pokedex-detail.component.html',
-    styleUrls: ['./pokedex-detail.component.scss'],
+  selector: 'app-pokedex-detail',
+  templateUrl: './pokedex-detail.component.html',
+  styleUrls: ['./pokedex-detail.component.scss']
 })
 export class PokedexDetailComponent implements OnInit {
-    @Output() changeViewEvent = new EventEmitter<object>();
 
-    @Input() pokemonSelected: PokedexComponent;
+  @Output() changeViewEvent = new EventEmitter<object>();
 
-    // @Input() display: object;
+  @Input() pokemonSelected: PokedexComponent;
 
-    @Input() pokemonS; // TEST
-    pokemontest: object; // TEST
+  // @Input() display: object;
 
-    constructor() {}
 
-    ngOnInit() {
-        console.log(this.pokemonSelected);
-    }
+  constructor() {
+  }
 
-    changeView() {
-        if (this.pokemonSelected !== undefined) {
-            this.changeViewEvent.emit();
-        }
-    }
+  ngOnInit() {
+
+    console.log(this.pokemonSelected);
+
+  }
+
+  changeView() {
+    if(this.pokemonSelected !== undefined)
+      this.changeViewEvent.emit();
+  }
+
 }

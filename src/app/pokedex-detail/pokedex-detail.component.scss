@@ -1,448 +1,369 @@
 //--------------  RESET ----------------------//
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
 }
 body {
-    line-height: 1;
+	line-height: 1;
 }
-ol,
-ul {
-    list-style: none;
+ol, ul {
+	list-style: none;
 }
-blockquote,
-q {
-    quotes: none;
+blockquote, q {
+	quotes: none;
 }
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: '';
-    content: none;
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 //--------------  VARAIBLES ----------------------//
 
-$primary-backgroundColor: #ea4747;
-$secundary-backgroundColor: #81c8d8;
+$primary-backgroundColor:   #EA4747;
+$secundary-backgroundColor:  #81C8D8;
 $tertiary-backgroundColor: rgb(33, 107, 91);
-$quaternary-backgroundColor: #ffffff;
+$quaternary-backgroundColor: #FFFFFF;
 
 $primary-textColor: rgb(42, 158, 143);
-$secundary-textColor: #000000;
-$tertiary-textColor: #ffffff;
+$secundary-textColor:  #000000;
+$tertiary-textColor: #FFFFFF;
 
-$borderColor: #ffffff;
+$borderColor: #FFFFFF;
 $buttonBackColor: #503737;
 
 //-------------- MAIN STYLES ----------------//
 
 .container {
-    margin: 0 auto;
-    width: 80rem;
-    height: 40rem;
-    background-color: $primary-backgroundColor;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2rem;
+  margin: 0 auto;
+  width: 80rem;
+  height: 40rem;
+  background-color: $primary-backgroundColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
 }
 
 .general {
-    width: 90%;
-    height: 75%;
-    background-color: $secundary-backgroundColor;
-    border: 1.3rem solid $borderColor;
-    border-radius: 2rem;
-    margin-top: 10px;
-    display: flex;
+  width: 90%;
+  height: 75%;
+  background-color: $secundary-backgroundColor;
+  border: 1.3rem solid $borderColor;
+  border-radius: 2rem;
+  margin-top: 10px;
+  display: flex;
 }
 
 .left {
-    width: 40%;
-    height: 100%;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  &--title {
+    width: 85%;
+    height: 18%;
+    background-color: $quaternary-backgroundColor;
+    color: $primary-textColor;
+    border-radius: 1rem;
+    font-size: 1.5rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
+    text-transform: uppercase;
+  }
 
-    &--title {
-        width: 85%;
-        height: 18%;
-        background-color: $quaternary-backgroundColor;
-        color: $primary-textColor;
-        border-radius: 1rem;
-        font-size: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-transform: uppercase;
-    }
+  &--img {
+    width: 85%;
+    height: 70%;
+  }
 
-    &--img {
-        width: 85%;
-        height: 70%;
-    }
-
-    img {
-        object-fit: cover;
-        max-width: 100%;
-        max-height: 100%;
-    }
+  img {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 .right {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .details {
-    width: 100%;
-    height: 60%;
+  width: 100%;
+  height: 60%;
+  display: flex;
+
+  &__element1 {
+    width: 30%;
+    height: 100%;
     display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    color: $secundary-textColor;
 
-    &__element1 {
-        width: 30%;
-        height: 100%;
-        display: flex;
-        justify-content: space-around;
-        flex-direction: column;
-        align-items: center;
-        color: $secundary-textColor;
-
-        &--position {
-            width: 80%;
-            height: 30%;
-            font-size: 5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: $primary-textColor;
-        }
-
-        &--property1 {
-            width: 80%;
-            height: 20%;
-            background-color: yellow;
-            font-size: 2.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 1rem;
-        }
-
-        &--property2 {
-            width: 80%;
-            height: 20%;
-            background-color: $primary-backgroundColor;
-            font-size: 2.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 1rem;
-        }
+    &--position {
+      width: 80%;
+      height: 30%;
+      font-size: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $primary-textColor;
     }
 
-    &__element2 {
-        width: 70%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        color: rgb(42, 158, 143);
-
-        &--property1 {
-            width: 50%;
-            height: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        &--property2 {
-            width: 50%;
-            height: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        &--descriptionTitle {
-            width: 100%;
-            height: 50%;
-            font-size: 3rem;
-            text-transform: uppercase;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        &--units {
-            width: 60%;
-            height: 35%;
-            background-color: $tertiary-backgroundColor;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 1rem;
-            font-size: 2rem;
-            color: $tertiary-textColor;
-        }
+    &--property1 {
+      width: 80%;
+      height: 20%;
+      background-color: yellow;
+      font-size: 2.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
     }
 
-    &--description {
-        width: 100%;
-        height: 35%;
+    &--property2 {
+      width: 80%;
+      height: 20%;
+      background-color: $primary-backgroundColor;
+      font-size: 2.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
     }
+  }
+
+  &__element2 {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    color: rgb(42, 158, 143);
+
+    &--property1 {
+      width: 50%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    &--property2 {
+      width: 50%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    &--descriptionTitle {
+      width: 100%;
+      height: 50%;
+      font-size: 3rem;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    &--units {
+      width: 60%;
+      height: 35%;
+      background-color: $tertiary-backgroundColor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+      font-size: 2rem;
+      color: $tertiary-textColor;
+    }
+  }
+
+  &--description {
+    width: 100%;
+    height: 35%;
+  }
 }
 
 .description {
-    width: 100%;
-    height: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &--text {
-        width: 95%;
-        height: 80%;
-        border-radius: 1rem;
-        background-color: $tertiary-backgroundColor;
-        font-size: 1.8rem;
-        color: $tertiary-textColor;
-        padding: 1rem;
-    }
+  &--text {
+    width: 95%;
+    height: 80%;
+    border-radius: 1rem;
+    background-color: $tertiary-backgroundColor;
+    font-size: 1.8rem;
+    color: $tertiary-textColor;
+    padding: 1rem;
+  }
 }
 
 .buttons {
-    width: 90%;
-    height: 10%;
+  width: 90%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
+
+  i {
+    font-size: 6rem;
+    color: $buttonBackColor;
+  }
+
+  &--location {
+    width: 130px;
+    height: 40px;
+    margin-left: 2rem;
+    box-sizing: border-box;
+    background-color: $quaternary-backgroundColor;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
-
-    i {
-        font-size: 6rem;
-        color: $buttonBackColor;
-    }
-
-    &--location {
-        width: 130px;
-        height: 40px;
-        margin-left: 2rem;
-        box-sizing: border-box;
-        background-color: $quaternary-backgroundColor;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        color: $secundary-textColor;
-        border-radius: 1.5rem;
-        font-size: 2.5rem;
-    }
+    text-decoration: none;
+    color: $secundary-textColor;
+    border-radius: 1.5rem;
+    font-size: 2.5rem;
+  }
 }
+
 
 //-------------- REPONSIVE STYLES ----------------//
 
-@media screen and (max-width: 500px) {
-    .container {
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
+@media screen and (max-width:500px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .general {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    height: 20%;
+
+    &--title {
+      width: 70%;
+      height: 70%;
+      font-size: 3rem;
     }
 
-    .general {
-        flex-direction: column;
+    &--img {
+      display: none;
+    }
+  }
+
+  .details {
+    flex-direction: column;
+
+    &__element1 {
+      width: 100%;
+      height: 50%;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      &--property1 {
+        width: 40%;
+        height: 35%;
+      }
+
+      &--property2 {
+        width: 40%;
+        height: 35%;
+      }
     }
 
-    .left {
-        width: 100%;
-        height: 20%;
+    &__element2 {
+      width: 100%;
+      height: 50%;
 
-        &--title {
-            width: 70%;
-            height: 70%;
-            font-size: 3rem;
-        }
+      &--property1 {
+        height: 70%;
+      }
 
-        &--img {
-            display: none;
-        }
+      &--property2 {
+        height: 70%;
+      }
+
+      &--descriptionTitle {
+        margin-top: 15px;
+        font-size: 30px;
+        height: 30%;
+      }
+
+      &--units {
+        width: 75%;
+        height: 45%;
+      }
+    }
+  }
+  .description {
+
+    &--text {
+      font-size: 20px;
+      padding: 10px;
+    }
+  }
+
+  .buttons {
+    width: 90%;
+    height: 10%;
+    justify-content: center;
+
+    i {
+      font-size: 7.5rem;
     }
 
-    .details {
-        flex-direction: column;
-
-        &__element1 {
-            width: 100%;
-            height: 50%;
-            flex-direction: row;
-            flex-wrap: wrap;
-
-            &--property1 {
-                width: 40%;
-                height: 35%;
-            }
-
-            &--property2 {
-                width: 40%;
-                height: 35%;
-            }
-        }
-
-        &__element2 {
-            width: 100%;
-            height: 50%;
-
-            &--property1 {
-                height: 70%;
-            }
-
-            &--property2 {
-                height: 70%;
-            }
-
-            &--descriptionTitle {
-                margin-top: 15px;
-                font-size: 30px;
-                height: 30%;
-            }
-
-            &--units {
-                width: 75%;
-                height: 45%;
-            }
-        }
+    &--location {
+      width: 180px;
+      height: 60px ;
     }
-    .description {
-        &--text {
-            font-size: 20px;
-            padding: 10px;
-        }
-    }
-
-    .buttons {
-        width: 90%;
-        height: 10%;
-        justify-content: center;
-
-        i {
-            font-size: 7.5rem;
-        }
-
-        &--location {
-            width: 180px;
-            height: 60px;
-        }
-    }
+  }
 }

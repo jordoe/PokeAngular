@@ -12,6 +12,8 @@ export class PokedexListComponent implements OnInit {
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
 
+    @Output() changeViewEvent = new EventEmitter<object>();
+
     selectedOption = '';
     pokemonSearchInput = '';
     pokemonSelect: any = undefined;
@@ -49,5 +51,9 @@ export class PokedexListComponent implements OnInit {
         if (this.currentListIndex < this.pokemonList.length - 1) {
             this.choosePokemon(this.pokemonList[this.currentListIndex + 1]);
         }
+    }
+    changeView() {
+      if(this.pokemonSelect !== undefined)
+        this.changeViewEvent.emit();
     }
 }
