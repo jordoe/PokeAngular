@@ -13,7 +13,7 @@ export class PokedexMapComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.subscribe((params: ParamMap) => {
-            this.id = parseInt(params.get('id'));
+            this.id = parseInt(params.get('id'), null);
         });
     }
 }
