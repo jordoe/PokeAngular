@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Input } from '@angular/core';
 import * as L from 'leaflet';
+import { PokedexService } from '../pokedex.service';
 
 @Component({
     selector: 'app-map',
@@ -7,27 +8,29 @@ import * as L from 'leaflet';
     styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements AfterViewInit {
+    @Input() pokemonId: number;
+    pokemonSelected: any
     private map;
-    private myIcon = L.icon({
-        iconUrl: 'https://freepngimg.com/thumb/pokemon/6-2-pokemon-png-hd.png',
-        iconSize: [38, 38],
-    });
+    private myIcon;
 
     private randomLocation = [
-        Math.floor(Math.random() * (90 - -90 + 1) + -90),
-        Math.floor(Math.random() * (180 - -180 + 1) + -180),
+        Math.floor(Math.random() * (3900 - 4300 + 1) + 4300)/100,
+        Math.floor(Math.random() * (-1000 - 400 + 1) + 400)/100,
     ];
 
-    constructor() {}
+    constructor(private pokedexService: PokedexService) {}
 
     ngAfterViewInit(): void {
-        this.initMap();
+        this.pokedexService.getPokemonByName(this.pokemonId).subscribe(response => {
+            this.pokemonSelected = response            
+            this.initMap();
+        })
     }
 
     private initMap(): void {
         this.map = L.map('map', {
-            center: this.randomLocation,
-            zoom: 3,
+            center: [40.2085, -3.7130],
+            zoom: 5,
             attributionControl: false,
             maxBounds: L.latLngBounds(L.latLng(-90, -200), L.latLng(90, 200)),
             maxBoundsViscosity: 1.0,
@@ -42,6 +45,10 @@ export class MapComponent implements AfterViewInit {
             }
         );
         tiles.addTo(this.map);
+        this.myIcon = L.icon({
+            iconUrl: this.pokemonSelected["sprites"]["front_default"],
+            iconSize: [52, 52],
+        });
         L.marker(this.randomLocation, { icon: this.myIcon }).addTo(this.map);
     }
 }
