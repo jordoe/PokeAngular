@@ -18,8 +18,9 @@ export class PokedexService {
                 'pokemonFullList',
                 JSON.stringify(this.pokemonList)
             );
-        }
+        }    console.log("DOASFASF");
     }
+
     async getPokemonList() {
         const res = await fetch('http://pokeapi.co/api/v2/pokemon/?limit=811');
         const data = await res.json();
@@ -45,6 +46,7 @@ export class PokedexService {
         return pokemon;
     }
     async getPokemonDetailsByName(name) {
+      console.log("hola2")
         // Get pokemon object
         const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
         const res = await fetch(url);
@@ -61,7 +63,7 @@ export class PokedexService {
     }
 
     getPokemonDetails(url) {
-        return this.http.get(url);
+      return this.http.get(url);
     }
     getPokemonByName(name): any {
         const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
