@@ -9,27 +9,29 @@ import { PokedexService } from '../pokedex.service';
 })
 export class MapComponent implements AfterViewInit {
     @Input() pokemonId: number;
-    pokemonSelected: any
+    pokemonSelected: any;
     private map;
     private myIcon;
 
     private randomLocation = [
-        Math.floor(Math.random() * (3900 - 4300 + 1) + 4300)/100,
-        Math.floor(Math.random() * (-1000 - 400 + 1) + 400)/100,
+        Math.floor(Math.random() * (3900 - 4300 + 1) + 4300) / 100,
+        Math.floor(Math.random() * (-1000 - 400 + 1) + 400) / 100,
     ];
 
     constructor(private pokedexService: PokedexService) {}
 
     ngAfterViewInit(): void {
-        this.pokedexService.getPokemonByName(this.pokemonId).subscribe(response => {
-            this.pokemonSelected = response            
-            this.initMap();
-        })
+        this.pokedexService
+            .getPokemonByName(this.pokemonId)
+            .subscribe(response => {
+                this.pokemonSelected = response;
+                this.initMap();
+            });
     }
 
     private initMap(): void {
         this.map = L.map('map', {
-            center: [40.2085, -3.7130],
+            center: [40.2085, -3.713],
             zoom: 5,
             attributionControl: false,
             maxBounds: L.latLngBounds(L.latLng(-90, -200), L.latLng(90, 200)),
@@ -46,7 +48,7 @@ export class MapComponent implements AfterViewInit {
         );
         tiles.addTo(this.map);
         this.myIcon = L.icon({
-            iconUrl: this.pokemonSelected["sprites"]["front_default"],
+            iconUrl: this.pokemonSelected['sprites']['front_default'],
             iconSize: [52, 52],
         });
         L.marker(this.randomLocation, { icon: this.myIcon }).addTo(this.map);
