@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .container {
     margin: 0 auto;
     padding: 3rem;
@@ -7,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
 
-    background-color: #ea4747;
+    background-color: $primary-backgroundColor;
     width: 80rem;
     height: 40rem;
 
@@ -26,9 +28,9 @@
 .display {
     width: 100%;
     height: 90%;
-    background-color: #81c8d8;
+    background-color: $secondary-backgroundColor;
 
-    border: 1.3rem solid white;
+    border: 1.3rem solid $borderColor;
     border-radius: 2rem;
 
     display: flex;
@@ -37,7 +39,7 @@
     justify-content: center;
 
     @media only screen and (max-width: 800px) {
-        border: 1.3rem solid white;
+        border: 1.3rem solid $borderColor;
         border-radius: 2rem;
         flex-direction: column;
         width: 90%;
@@ -80,8 +82,8 @@
     &--name {
         width: 85%;
         height: 18%;
-        background-color: white;
-        color: black;
+        background-color: $quaternary-backgroundColor;
+        color: $secondary-textColor;
         border-radius: 8px;
         font-size: 3em;
         display: flex;
@@ -118,22 +120,6 @@
     width: 100%;
     @media only screen and (max-width: 800px) {
         justify-content: center;
-    }
-}
-
-.button {
-    height: 100%;
-    padding: 0 5px 0 5px;
-    background-color: white;
-    color: black;
-    border-radius: 8px;
-    font-size: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    &:hover {
-        cursor: pointer;
     }
 }
 

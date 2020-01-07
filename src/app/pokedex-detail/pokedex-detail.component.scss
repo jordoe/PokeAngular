@@ -1,161 +1,56 @@
-//--------------  RESET ----------------------//
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
-body {
-    line-height: 1;
-}
-ol,
-ul {
-    list-style: none;
-}
-blockquote,
-q {
-    quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-//--------------  VARAIBLES ----------------------//
-
-$primary-backgroundColor: #ea4747;
-$secundary-backgroundColor: #81c8d8;
-$tertiary-backgroundColor: rgb(33, 107, 91);
-$quaternary-backgroundColor: #ffffff;
-
-$primary-textColor: rgb(42, 158, 143);
-$secundary-textColor: #000000;
-$tertiary-textColor: #ffffff;
-
-$borderColor: #ffffff;
-$buttonBackColor: #503737;
+@import '../../variables.scss';
 
 //-------------- MAIN STYLES ----------------//
 
 .container {
-    margin: 0 auto;
-    width: 80rem;
-    height: 40rem;
-    background-color: $primary-backgroundColor;
+  margin: 0 auto;
+  width: 80rem;
+  height: 40rem;
+  background-color: $primary-backgroundColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+}
+
+.general {
+  width: 90%;
+  height: 75%;
+  background-color: $secondary-backgroundColor;
+  border: 1.3rem solid $borderColor;
+  border-radius: 2rem;
+  margin-top: 10px;
+  display: flex;
+}
+
+.left {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  &--title {
+    width: 85%;
+    height: 18%;
+    background-color: $quaternary-backgroundColor;
+    color: $primary-textColor;
+    border-radius: 1rem;
+    font-size: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 2rem;
 }
+}
 
 .general {
     width: 90%;
     height: 75%;
-    background-color: $secundary-backgroundColor;
+    background-color: $secondary-backgroundColor;
     border: 1.3rem solid $borderColor;
     border-radius: 2rem;
     margin-top: 10px;
@@ -181,6 +76,17 @@ $buttonBackColor: #503737;
         justify-content: center;
         align-items: center;
         text-transform: uppercase;
+        color: $secondary-textColor;
+    }
+
+    &--position {
+      width: 80%;
+      height: 30%;
+      font-size: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $primary-textColor;
     }
 
     &--img {
@@ -214,7 +120,7 @@ $buttonBackColor: #503737;
         justify-content: space-around;
         flex-direction: column;
         align-items: center;
-        color: $secundary-textColor;
+        color: $secondary-textColor;
 
         &--position {
             width: 80%;
@@ -324,32 +230,16 @@ $buttonBackColor: #503737;
 }
 
 .buttons {
-    width: 90%;
-    height: 10%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 1.5rem;
+  width: 90%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
 
-    i {
-        font-size: 6rem;
-        color: $buttonBackColor;
-    }
-
-    &--location {
-        width: 130px;
-        height: 40px;
-        margin-left: 2rem;
-        box-sizing: border-box;
-        background-color: $quaternary-backgroundColor;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        color: $secundary-textColor;
-        border-radius: 1.5rem;
-        font-size: 2.5rem;
-    }
+  i {
+    font-size: 8rem;
+  }
 }
 
 //-------------- REPONSIVE STYLES ----------------//
