@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
         );
         tiles.addTo(this.map);
         this.myIcon = L.icon({
-            iconUrl: this.pokemonSelected['sprites']['front_default'],
+            iconUrl: this.pokemonSelected.sprites.front_default,
             iconSize: [52, 52],
         });
         L.marker(this.randomLocation, { icon: this.myIcon }).addTo(this.map);
