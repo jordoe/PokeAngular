@@ -2,9 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { PokedexComponent } from '../pokedex/pokedex.component';
 
-
 import { PokedexService } from '../pokedex.service';
-
 
 @Component({
     selector: 'app-pokedex-detail',
@@ -16,8 +14,6 @@ export class PokedexDetailComponent implements OnInit {
 
     @Input() pokemonSelected: PokedexComponent;
 
-
-
     // @Input() getPokemonDetailsByName: PokedexService;
     // @Input() getPokemonDetails: PokedexService;
 
@@ -28,11 +24,10 @@ export class PokedexDetailComponent implements OnInit {
     constructor(private pokedexService: PokedexService) {}
 
     ngOnInit() {
-
-      this.pokedexService.getPokemonDetailsByName('ditto').then(response => {
-        console.log("hola1")
-        console.log(response);
-      });
+        this.pokedexService.getPokemonDetailsByName('ditto').then(response => {
+            console.log('hola1');
+            console.log(response);
+        });
     }
 
     changeView() {
