@@ -45,14 +45,14 @@ export class PokedexService {
         return pokemon;
     }
     async getPokemonDetailsByName(name) {
-        //Get pokemon object
+        // Get pokemon object
         const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
         const res = await fetch(url);
         const data = await res.json();
-        //Get pokemon deatils
+        // Get pokemon deatils
         const details = await fetch(data.species.url);
         const detailsData = await details.json();
-        //Creating new pokemon
+        // Creating new pokemon
         const pokemon = {
             pokemon: data,
             details: detailsData,
