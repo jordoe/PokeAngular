@@ -3,48 +3,48 @@
 //-------------- MAIN STYLES ----------------//
 
 .container {
-  margin: 0 auto;
-  width: 80rem;
-  height: 40rem;
-  background-color: $primary-backgroundColor;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2rem;
-}
-
-.general {
-  width: 90%;
-  height: 75%;
-  background-color: $secondary-backgroundColor;
-  border: 1.3rem solid $borderColor;
-  border-radius: 2rem;
-  margin-top: 10px;
-  display: flex;
-}
-
-.left {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-
-  &--title {
-    width: 85%;
-    height: 18%;
-    background-color: $quaternary-backgroundColor;
-    color: $primary-textColor;
-    border-radius: 1rem;
-    font-size: 1.5rem;
+    margin: 0 auto;
+    width: 80rem;
+    height: 40rem;
+    background-color: $primary-backgroundColor;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 2rem;
 }
+
+.general {
+    width: 90%;
+    height: 75%;
+    background-color: $secondary-backgroundColor;
+    border: 1.3rem solid $borderColor;
+    border-radius: 2rem;
+    margin-top: 10px;
+    display: flex;
+}
+
+.left {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &--title {
+        width: 85%;
+        height: 18%;
+        background-color: $quaternary-backgroundColor;
+        color: $primary-textColor;
+        border-radius: 1rem;
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2rem;
+    }
 }
 
 .general {
@@ -80,13 +80,13 @@
     }
 
     &--position {
-      width: 80%;
-      height: 30%;
-      font-size: 5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $primary-textColor;
+        width: 80%;
+        height: 30%;
+        font-size: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $primary-textColor;
     }
 
     &--img {
@@ -230,16 +230,16 @@
 }
 
 .buttons {
-  width: 90%;
-  height: 10%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 1.5rem;
+    width: 90%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
 
-  i {
-    font-size: 8rem;
-  }
+    i {
+        font-size: 8rem;
+    }
 }
 
 //-------------- REPONSIVE STYLES ----------------//
