@@ -1,65 +1,6 @@
 <div class="container">
     <div class="left">
         <form action="#" class="search">
-<<<<<<< HEAD
-            <select
-                class="search__select"
-                [(ngModel)]="selectType"
-                (change)="onChange($event.target.value)"
-            >
-                <option value="" selected style="display:none">Type</option>
-                <option value="any">Any</option>
-                <option value="normal" class="optionColor__normal"
-                    >Normal</option
-                >
-                <option value="fighting" class="optionColor__fighting"
-                    >Fighting</option
-                >
-                <option value="flying" class="optionColor__flying"
-                    >Flying</option
-                >
-                <option value="poison" class="optionColor__poison"
-                    >Poison</option
-                >
-                <option value="ground" class="optionColor__ground"
-                    >Ground</option
-                >
-                <option value="rock" class="optionColor__rock">Rock</option>
-                <option value="bug" class="optionColor__bug">Bug</option>
-                <option value="steel" class="optionColor__steel">Steel</option>
-                <option value="fire" class="optionColor__fire">Fire</option>
-                <option value="water" class="optionColor__water">Water</option>
-                <option value="grass" class="optionColor__grass">Grass</option>
-                <option value="electric" class="optionColor__electric"
-                    >Electric</option
-                >
-                <option value="psychic" class="optionColor__psychic"
-                    >Psychic</option
-                >
-                <option value="ice" class="optionColor__ice">Ice</option>
-                <option value="dark" class="optionColor__dark">Dark</option>
-                <option value="fairy" class="optionColor__fairy">Fairy</option>
-            </select>
-            <input
-                type="text"
-                class="search__input"
-                (input)="filterList($event.target.value)"
-                placeholder="Search Pokemon"
-                name="term"
-                [(ngModel)]="term"
-            />
-            <button class="search__button"></button>
-        </form>
-        <div class="pokemon-list">
-            <div
-                class="pokemon-list__item"
-                *ngFor="
-                    let pokemon of pokemonList | filterName: term;
-                    index as i
-                "
-                (click)="choosePokemon(pokemon, i)"
-            >
-=======
             <select class="search__select" [(ngModel)]="selectType" (change)="onChange($event.target.value)">
               <option value="" selected style="display:none">Type</option>
               <option value="any">Any</option>
@@ -94,7 +35,6 @@
             class="pokemon-list__item"
             *ngFor="let pokemon of pokemonList | filterName:term; index as i"
             (click)="choosePokemon(pokemon, i)">
->>>>>>> feature-detail-style
                 <div>
                     <span>{{ pokemon.id }}</span>
                     <span class="pokemon-list__name">{{
@@ -126,16 +66,10 @@
             <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>
         </div>
         <div class="options">
-<<<<<<< HEAD
-            <div>
-                <a href="#" class="btn" routerLink="/detail/{{ i }}">Details</a>
-            </div>
-=======
             <div><a
               class="btn"
               (click)="changeView()"
               >Details</a></div>
->>>>>>> feature-detail-style
             <div><a href="#" class="btn" routerLink="/map">Location</a></div>
         </div>
     </div>
