@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter,
+    OnChanges,
+} from '@angular/core';
 
 @Component({
     selector: 'app-pokedex-list',
