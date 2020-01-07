@@ -19,7 +19,6 @@ export class PokedexService {
                 JSON.stringify(this.pokemonList)
             );
         }
-        console.log('DOASFASF');
     }
 
     async getPokemonList() {
@@ -47,7 +46,6 @@ export class PokedexService {
         return pokemon;
     }
     async getPokemonDetailsByName(name) {
-        console.log('hola2');
         // Get pokemon object
         const url = 'http://pokeapi.co/api/v2/pokemon/' + name + '/';
         const res = await fetch(url);
