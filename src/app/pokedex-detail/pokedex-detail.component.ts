@@ -12,8 +12,6 @@ export class PokedexDetailComponent implements OnInit {
 
   @Output() changeViewEvent = new EventEmitter<object>();
 
-
-
   @Input() pokemonSelected: PokedexComponent;
 
   // @Input() display: object;

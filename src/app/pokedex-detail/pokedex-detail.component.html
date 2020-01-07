@@ -17,7 +17,7 @@
           <div class="details__element1--property1">
             {{ pokemonSelected.types[0].type.name }}
           </div>
-          <div class="details__element1--property2">
+          <div *ngIf="pokemonSelected.types[1]" class="details__element1--property2">
             {{ pokemonSelected.types[1].type.name }}
           </div>
         </div>
