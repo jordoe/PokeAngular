@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./pokedex-list.component.scss'],
 })
 export class PokedexListComponent implements OnInit {
+<<<<<<< HEAD
     @Input() pokemonList: object[];
     @Input() pokemonSelected;
 
@@ -50,4 +51,58 @@ export class PokedexListComponent implements OnInit {
             this.choosePokemon(this.pokemonList[this.currentListIndex + 1]);
         }
     }
+=======
+
+  @Input() pokemonList: object[];
+  @Input() pokemonSelected;
+
+
+  @Output() choosePokemonEvent = new EventEmitter<object>();
+  @Output() chooseTypeEvent = new EventEmitter<object>();
+
+  @Output() changeViewEvent = new EventEmitter<object>();
+
+
+  selectedOption: string = ""
+  pokemonSearchInput: String = ""
+  pokemonSelect: object = undefined
+
+  constructor() { }
+
+  ngOnInit() { }
+
+  choosePokemon(pokemon) {
+    this.pokemonSelect = pokemon;
+    this.choosePokemonEvent.emit(pokemon);
+  }
+
+  chooseType(type) {
+    this.chooseTypeEvent.emit(type)
+  }
+
+  onChange(type) {
+     this.pokemonSelect = undefined
+     this.chooseType(type)
+  }
+
+  changeView() {
+    if(this.pokemonSelect !== undefined)
+      this.changeViewEvent.emit();
+  }
+
+  /*Deprecated method, use if you need to cut array insted of filter it
+  filterList(inputValue) {
+    this.pokemonSearchInput = inputValue
+
+    let arr = this.pokemonList
+
+    let filteredArray = arr.filter((x) => {
+      return x.name.includes(inputValue)
+    })
+
+    console.log(filteredArray)
+
+  }
+  */
+>>>>>>> feature-detail-style
 }

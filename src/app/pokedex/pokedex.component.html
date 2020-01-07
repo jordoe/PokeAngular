@@ -1,8 +1,28 @@
+<<<<<<< HEAD
 <app-pokedex-detail *ngIf="displayNone" [pokemon]="prueba"></app-pokedex-detail>
 <app-pokedex-list
+=======
+<div *ngIf="showDetail">
+  <app-pokedex-detail
+
+    [pokemonSelected]="pokemonSelected"
+  >
+  </app-pokedex-detail>
+</div>
+<div *ngIf="showList">
+  <app-pokedex-list
+>>>>>>> feature-detail-style
     [pokemonList]="pokemonList"
     [pokemonSelected]="pokemonSelected"
     (choosePokemonEvent)="pokemonSelect($event)"
     (chooseTypeEvent)="typeSelect($event)"
+<<<<<<< HEAD
 >
 </app-pokedex-list>
+=======
+    (changeViewEvent)="changeView($event)">
+  </app-pokedex-list>
+</div>
+
+
+>>>>>>> feature-detail-style
