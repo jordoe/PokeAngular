@@ -11,7 +11,6 @@ export class PokedexListComponent implements OnInit {
 
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
-
     @Output() changeViewEvent = new EventEmitter<object>();
 
     selectedOption = '';
