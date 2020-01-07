@@ -32,17 +32,22 @@ export class PokedexService {
         return pokemon;
     }
     async getPokemonByType(type) {
-        const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
-        const res = await fetch(url);
-        const data = await res.json();
-        const pokemon = data.pokemon.map((result, index) => ({
-            name: result.pokemon.name,
-            id: result.pokemon.url.match(/\/([^\/]+)\/?$/)[1],
-            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                result.pokemon.url.match(/\/([^\/]+)\/?$/)[1]
-            }.png`,
-        }));
-        return pokemon;
+        if (type !== 'all') {
+            console.log('ENTRANDO1');
+            const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
+            const res = await fetch(url);
+            const data = await res.json();
+            const pokemon = data.pokemon.map((result, index) => ({
+                name: result.pokemon.name,
+                id: result.pokemon.url.match(/\/([^\/]+)\/?$/)[1],
+                image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                    result.pokemon.url.match(/\/([^\/]+)\/?$/)[1]
+                }.png`,
+            }));
+            return pokemon;
+        } else {
+            return this.getPokemonList();
+        }
     }
     async getPokemonDetailsByName(name) {
         // Get pokemon object
