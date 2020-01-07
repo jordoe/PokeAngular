@@ -14,7 +14,7 @@ export class PokedexListComponent implements OnInit {
 
     selectedOption = '';
     pokemonSearchInput = '';
-    pokemonSelect: object = undefined;
+    pokemonSelect: any = undefined;
     currentListIndex = 0;
 
     constructor() {}
@@ -24,7 +24,7 @@ export class PokedexListComponent implements OnInit {
     choosePokemon(pokemon) {
         this.pokemonSelect = pokemon;
         this.currentListIndex = this.pokemonList.findIndex(
-            x => x.id === this.pokemonSelect.id
+            (x:any) => x.id === this.pokemonSelect.id
         );
         this.choosePokemonEvent.emit(pokemon);
     }
