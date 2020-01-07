@@ -1,52 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { PokedexService } from'../pokedex.service'
+import { PokedexService } from '../pokedex.service';
 
 @Component({
-  selector: 'app-pokedex',
-  templateUrl: './pokedex.component.html',
-  styleUrls: ['./pokedex.component.scss']
+    selector: 'app-pokedex',
+    templateUrl: './pokedex.component.html',
+    styleUrls: ['./pokedex.component.scss'],
 })
 export class PokedexComponent implements OnInit {
-  pokemons = [];
-  pokemon = {};
-  ability = {};
+    pokemons = [];
+    pokemon = {};
+    ability = {};
 
-  pokemonList: object[];
-  pokemonSelected : object;
-  displayNone: boolean = false;
+    pokemonList: object[];
+    pokemonSelected;
+    displayNone = false;
 
-  constructor(private pokedexService: PokedexService) { }
+    constructor(private pokedexService: PokedexService) {}
 
-  pokemonSelect(pokemon:object){
-    this.pokemonSelected = pokemon;
-  }
+    ngOnInit() {
+        this.pokedexService.getPokemonList().then(response => {
+            this.pokemonList = response;
+            this.pokemonSelected = response[0];
+        });
+    }
 
-  ngOnInit() {
+    pokemonSelect(pokemon) {
+        this.pokedexService
+            .getPokemonByName(pokemon.name)
+            .subscribe(pokeFull => {
+                this.pokemonSelected = pokeFull;
+            });
+    }
 
-  	this.pokedexService.getPokemonList().then((pokemon:any) =>{
-  		 this.pokemonSelected = pokemon;
-  		 console.log(pokemon)
-  	})
-
-  	/*
-	this.pokedexService.getPokemonList().then((pokemons: string[]) => { 
-		this.pokemons = pokemons
-		console.log(this.pokemons)
-	})
-	
-	this.pokedexService.getPokemonByType("water").subscribe((pokemons: string[]) => { 
-		this.pokemons = pokemons
-		//console.log(this.pokemons)
-	})
-
-	this.pokedexService.getPokemonByName("arcanine").subscribe((pokemon: string[]) => { 
-		this.pokemon = pokemon
-		// console.log(this.pokemon)
-	})
-
-	this.pokedexService.getPokemonAbility("battle-armor").subscribe((ability: string[]) => { 
-		this.ability = ability
-		//console.log(this.ability)
-	})*/
-  }
+    typeSelect(type) {
+        this.pokedexService.getPokemonByType(type).then(response => {
+            this.pokemonList = response;
+            this.pokemonSelected = response[0];
+        });
+    }
 }

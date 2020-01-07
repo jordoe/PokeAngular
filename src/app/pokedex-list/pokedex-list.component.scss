@@ -1,49 +1,328 @@
+.prueba {
+    display: none;
+}
 .container {
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: 3rem;
+    padding-left: 5rem;
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 
-    background-color: red;
+    background-color: #ea4747;
     width: 80rem;
     height: 40rem;
 
     border-radius: 2rem;
-    
-    // overflow: auto;
+
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
 }
 
-// .container {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
+.left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-//     overflow: auto;
-//     background-color: yellow;
-//     width: 80%;
-//     height: auto;
+    @media only screen and (max-width: 800px) {
+        width: 80%;
+        height: 40%;
+    }
 
-//     margin: 0 auto;
-//     padding: 1.5rem;
-// }
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
 
-// .pokemon-list {
-//     width: 70%;
-//     display: flex;
-//     justify-content: space-around;
-//     padding: 20px;
-//     margin-top: 10px;
-//     background-color: white;
+    @media only screen and (max-width: 450px) {
+        display: none;
+    }
+}
 
-//     &__options {
-//         display: flex;
-//     }
-// }
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1rem;
 
-// .btn {
-//     margin-right: 10px;
-// }
+    &__select {
+        font-size: 2rem;
+        color: #b5b5b5;
+        background-color: #ffffff;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        width: 60%;
+        margin-right: 1rem;
+    }
+    &__input {
+        font-size: 2rem;
+        color: #b5b5b5;
+        background-color: #ffffff;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-webkit-input-placeholder {
+            color: #b5b5b5;
+        }
+    }
+
+    &__button {
+        border: none;
+        background-color: white;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.pokemon-list {
+    width: 100%;
+    height: 90%;
+    background-color: #81c8d8;
+
+    border: 1.3rem solid #ffffff;
+    border-radius: 2rem;
+    overflow: auto;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+
+        background-color: #358496;
+        border-radius: 0.5rem;
+        margin: 1rem 1rem;
+
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        font-size: 1.8rem;
+
+        &:hover {
+            background-color: #359999;
+            cursor: pointer;
+        }
+
+        // It doesn´t work. I don´t know the reason.
+        &:focus {
+            background-color: #359999;
+        }
+    }
+
+    &__name {
+        padding-left: 3rem;
+    }
+}
+
+// SCROLLBAR
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    margin: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 2px solid #358496;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #358496;
+    border-radius: 1rem;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        width: 80%;
+        height: 50%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 450px) {
+        height: 100vh;
+    }
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+
+    @media only screen and (max-width: 375px) {
+        height: 70%;
+    }
+}
+
+.arrow {
+    font-size: 10rem;
+    margin: 1rem;
+    color: #503737;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.pokemon-display {
+    width: 75%;
+    height: 85%;
+    background-color: #81c8d8;
+    border: 1.3rem solid #ffffff;
+    border-radius: 2rem;
+
+    @media only screen and (max-width: 450px) {
+        height: 70%;
+        width: 100%;
+    }
+
+    &__container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__name {
+        width: 90%;
+        height: 20%;
+        margin: 10px;
+
+        font-size: 20px;
+        color: #478390;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media only screen and (max-width: 450px) {
+            font-size: 2rem;
+        }
+
+        @media only screen and (max-width: 375px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        width: 87%;
+        img {
+            width: 160%;
+            height: auto;
+        }
+    }
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @media only screen and (max-width: 375px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.btn {
+    background-color: #e7f0f2;
+    text-decoration: none;
+    color: black;
+    padding: 1rem 3rem;
+    border-radius: 1.5rem;
+    font-size: 2.5rem;
+    margin: 1rem;
+    box-shadow: 0 1rem 0.8rem rgba(0, 0, 0, 0.2);
+
+    @media only screen and (max-width: 375px) {
+        padding: 1rem 3rem;
+        font-size: 2rem;
+        line-height: 3;
+        // margin: 1rem;
+    }
+}
+
+.optionColor {
+    &__normal {
+        color: rgb(180, 172, 146);
+    }
+    &__fighting {
+        color: rgb(196, 72, 72);
+    }
+    &__flying {
+        color: rgb(197, 170, 240);
+    }
+    &__poison {
+        color: rgb(179, 87, 187);
+    }
+    &__ground {
+        color: rgb(233, 210, 136);
+    }
+    &__rock {
+        color: rgb(206, 181, 113);
+    }
+    &__bug {
+        color: rgb(186, 218, 114);
+    }
+    &__steel {
+        color: rgb(204, 206, 216);
+    }
+    &__fire {
+        color: rgb(243, 160, 65);
+    }
+    &__water {
+        color: rgb(140, 176, 231);
+    }
+    &__grass {
+        color: rgb(143, 212, 111);
+    }
+    &__electric {
+        color: rgb(180, 172, 146);
+    }
+    &__psychic {
+        color: rgb(240, 118, 179);
+    }
+    &__ice {
+        color: rgb(156, 229, 235);
+    }
+    &__dark {
+        color: rgb(78, 73, 54);
+    }
+    &__fairy {
+        color: rgb(245, 181, 213);
+    }
+}

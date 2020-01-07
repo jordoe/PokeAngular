@@ -1,5 +1,14 @@
-.pokedex-title {
-    font-size: 10rem;
-    text-align: center;
-    color: white;
+body {
+    background-image: url('../assets/img/pokePattern.jpg');
+    background-repeat: repeat-y-x;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pokedex-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
