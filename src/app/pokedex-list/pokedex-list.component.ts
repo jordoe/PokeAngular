@@ -53,6 +53,8 @@ export class PokedexListComponent implements OnInit {
         }
     }
     changeView() {
-        if (this.pokemonSelect !== undefined) this.changeViewEvent.emit();
+        if (this.pokemonSelect !== undefined) {
+            this.changeViewEvent.emit();
+        }
     }
 }
