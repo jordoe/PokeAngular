@@ -43,3 +43,12 @@ body {
         // margin: 1rem;
     }
 }
+
+.arrow {
+    font-size: 10rem;
+    margin: 1rem;
+    color: $arrowColor;
+    &:hover {
+        cursor: pointer;
+    }
+}
