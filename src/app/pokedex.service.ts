@@ -32,8 +32,8 @@ export class PokedexService {
         return pokemon;
     }
     async getPokemonByType(type) {
-        if(type !== "all"){
-            console.log("ENTRANDO1")
+        if (type !== 'all') {
+            console.log('ENTRANDO1');
             const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
             const res = await fetch(url);
             const data = await res.json();
@@ -45,8 +45,8 @@ export class PokedexService {
                 }.png`,
             }));
             return pokemon;
-        } else{
-            return this.getPokemonList() 
+        } else {
+            return this.getPokemonList();
         }
     }
     async getPokemonDetailsByName(name) {
