@@ -70,6 +70,27 @@
                             alt="pokemonImage"
                         />
                     </div>
+                    <div class="pokemon-display__imageType">
+                        <img
+                            src="../../assets/img/types_icons_2/{{
+                                this.pokemonSelected.pokemon.types[0].type.name
+                            }}_icon.png"
+                            alt="{{
+                                this.pokemonSelected.pokemon.types[0].type.name
+                            }}"
+                        />
+                        <img
+                            *ngIf="
+                                this.pokemonSelected.pokemon.types.length > 1
+                            "
+                            src="../../assets/img/types_icons_2/{{
+                                this.pokemonSelected.pokemon.types[1].type.name
+                            }}_icon.png"
+                            alt="{{
+                                this.pokemonSelected.pokemon.types[1].type.name
+                            }}"
+                        />
+                    </div>
                 </div>
             </div>
             <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>

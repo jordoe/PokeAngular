@@ -32,6 +32,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
     ngOnChanges() {
         if (this.pokemonSelect === undefined) {
             this.pokemonSelect = this.pokemonList[0];
+            this.choosePokemon(this.pokemonList[0]);
         }
     }
 
