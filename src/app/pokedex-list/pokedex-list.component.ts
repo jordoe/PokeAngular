@@ -1,17 +1,23 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter,
+    OnChanges,
+} from '@angular/core';
 
 @Component({
     selector: 'app-pokedex-list',
     templateUrl: './pokedex-list.component.html',
     styleUrls: ['./pokedex-list.component.scss'],
 })
-export class PokedexListComponent implements OnInit {
+export class PokedexListComponent implements OnInit, OnChanges {
     @Input() pokemonList: object[];
     @Input() pokemonSelected;
 
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
-
     @Output() changeViewEvent = new EventEmitter<object>();
 
     selectedOption = '';
@@ -22,6 +28,12 @@ export class PokedexListComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    ngOnChanges() {
+        if (this.pokemonSelect === undefined) {
+            this.pokemonSelect = this.pokemonList[0];
+        }
+    }
 
     choosePokemon(pokemon) {
         this.pokemonSelect = pokemon;
@@ -53,7 +65,8 @@ export class PokedexListComponent implements OnInit {
         }
     }
     changeView() {
-      if(this.pokemonSelect !== undefined)
-        this.changeViewEvent.emit();
+        if (this.pokemonSelect !== undefined) {
+            this.changeViewEvent.emit();
+        }
     }
 }

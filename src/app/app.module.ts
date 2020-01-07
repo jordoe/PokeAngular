@@ -20,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'detail', component: PokedexComponent },
     { path: 'detail/:id', component: PokedexDetailComponent },
     { path: 'map', component: PokedexMapComponent },
+    { path: 'map/:id', component: PokedexMapComponent },
     { path: '', redirectTo: '/list', pathMatch: 'full' },
 ];
 
