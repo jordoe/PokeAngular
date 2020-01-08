@@ -24,6 +24,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
     pokemonSearchInput = '';
     pokemonSelect: any = undefined;
     currentListIndex = 0;
+    varPrueba: boolean = false;
 
     constructor() {}
 
@@ -34,6 +35,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
             this.pokemonSelect = this.pokemonList[0];
             this.choosePokemon(this.pokemonList[0]);
         }
+        this.varPrueba = true;
     }
 
     choosePokemon(pokemon) {
