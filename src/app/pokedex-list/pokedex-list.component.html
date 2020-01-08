@@ -66,8 +66,15 @@
                     </div>
                     <div class="pokemon-display__image">
                         <img
-                            src="{{ pokemonSelect.image }}"
+                            src="{{ currentSelectPokemonImage }}"
+                            class="pokemon-display__image--main"
                             alt="pokemonImage"
+                        />
+                        <img
+                            src="../../assets/img/shiny_pokemon.png"
+                            class="pokemon-display__image--shiny"
+                            alt="shinyPokemon"
+                            (click)="change_sprite()"
                         />
                     </div>
                     <div class="pokemon-display__imageType">
