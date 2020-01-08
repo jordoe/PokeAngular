@@ -28,13 +28,13 @@
                     <div class="details__element2--property1">
                         <p>Height</p>
                         <div class="details__element2--units">
-                            <p>{{ pokemonSelected.height }} cm</p>
+                            <p>{{ pokemonSelected.height/10 }} m</p>
                         </div>
                     </div>
                     <div class="details__element2--property2">
                         <p>Weight</p>
                         <div class="details__element2--units">
-                            <p>{{ pokemonSelected.weight }} Kg</p>
+                            <p>{{ pokemonSelected.weight/10 }} Kg</p>
                         </div>
                     </div>
                     <div class="details__element2--descriptionTitle">
@@ -44,9 +44,7 @@
             </div>
             <div class="description">
                 <div class="description--text">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Blanditiis inventore nostrum, provident quaerat pariatur
-                    quas autem consectetur animi aliquid
+                    {{ englishDescription.flavor_text }}
                 </div>
             </div>
         </div>

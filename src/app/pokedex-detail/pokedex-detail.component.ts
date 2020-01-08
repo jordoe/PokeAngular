@@ -13,6 +13,9 @@ export class PokedexDetailComponent implements OnInit {
 
     @Input() pokemonId: number;
     pokemonSelected: any;
+    pokemonDetails: any;
+    languageArray: any;
+    englishDescription: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -25,7 +28,9 @@ export class PokedexDetailComponent implements OnInit {
                 .getPokemonDetailsByName(params.get('id'))
                 .then(response => {
                     this.pokemonSelected = response.pokemon;
-                    console.log(this.pokemonSelected);
+                    this.pokemonDetails = response.details;
+                    this.languageArray = response.details.flavor_text_entries;
+                    this.englishDescription = this.languageArray.find(x => x.language.name === 'en');
                 });
         });
     }
