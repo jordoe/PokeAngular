@@ -26,6 +26,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
     currentListIndex = 0;
     currentSelectPokemonImage: any = undefined;
     currentImageIsShiny = false;
+    storagePokemonKey = 'pokemonSelect';
 
     constructor() {}
 
@@ -36,22 +37,22 @@ export class PokedexListComponent implements OnInit, OnChanges {
     }
 
     checkPokemonSelected() {
-        if (window.sessionStorage['pokemonSelect'] == undefined) {
+        if (window.sessionStorage[this.storagePokemonKey] === undefined) {
             this.pokemonSelect = this.pokemonList[0];
             this.choosePokemon(this.pokemonList[0]);
-            window.sessionStorage['pokemonSelect'] = JSON.stringify(
+            window.sessionStorage[this.storagePokemonKey] = JSON.stringify(
                 this.pokemonSelect
             );
         } else {
             this.pokemonSelect = JSON.parse(
-                window.sessionStorage['pokemonSelect']
+                window.sessionStorage[this.storagePokemonKey]
             );
             this.choosePokemon(this.pokemonSelect);
         }
     }
 
     updateStorage() {
-        window.sessionStorage['pokemonSelect'] = JSON.stringify(
+        window.sessionStorage[this.storagePokemonKey] = JSON.stringify(
             this.pokemonSelect
         );
     }
@@ -72,7 +73,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
     }
 
     onChange(type) {
-        this.pokemonSelect == undefined;
+        //this.pokemonSelect == undefined;
         this.updateStorage();
         this.chooseType(type);
     }
