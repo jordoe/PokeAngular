@@ -23,7 +23,6 @@ export class PokedexListComponent implements OnInit, OnChanges {
     selectedOption = '';
     pokemonSearchInput = '';
     pokemonSelect: any = undefined;
-    typeChange = false;
     currentListIndex = 0;
     currentSelectPokemonImage: any = undefined;
     currentImageIsShiny = false;
@@ -33,11 +32,11 @@ export class PokedexListComponent implements OnInit, OnChanges {
     ngOnInit() {}
 
     ngOnChanges() {
-        this.checkPokemonSelected();
-        if (this.typeChange) {
+        if (this.pokemonSelect == undefined) {
             this.pokemonSelect = this.pokemonList[0];
             this.choosePokemon(this.pokemonList[0]);
-            this.typeChange = false;
+        } else {
+            this.checkPokemonSelected();
         }
     }
 
@@ -78,7 +77,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
     }
 
     onChange(type) {
-        this.typeChange = true;
+        this.pokemonSelect == undefined;
         this.updateStorage();
         this.chooseType(type);
     }
