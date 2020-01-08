@@ -14,14 +14,24 @@
                     <div class="details__element1--position">
                         {{ pokemonSelected.id }}
                     </div>
-                    <div class="details__element1--property1">
-                        {{ pokemonSelected.types[0].type.name }}
+                    <div class="details__element1--img">
+                        <img
+                            src="../../assets/img/types_icons_2/{{
+                                pokemonSelected.types[0].type.name
+                            }}_icon.png"
+                            alt="{{ pokemonSelected.types[0].type.name }}"
+                        />
                     </div>
                     <div
                         *ngIf="pokemonSelected.types[1]"
-                        class="details__element1--property2"
+                        class="details__element1--img"
                     >
-                        {{ pokemonSelected.types[1].type.name }}
+                        <img
+                            src="../../assets/img/types_icons_2/{{
+                                pokemonSelected.types[1].type.name
+                            }}_icon.png"
+                            alt="{{ pokemonSelected.types[1].type.name }}"
+                        />
                     </div>
                 </div>
                 <div class="details__element2">
@@ -52,6 +62,6 @@
 
     <div class="buttons">
         <i class="arrow fas fa-caret-left" routerLink="/list"></i>
-        <a class="btn" routerLink="/map">Location</a>
+        <a class="btn" routerLink="/map/{{ pokemonSelected.id }}">Location</a>
     </div>
 </div>
