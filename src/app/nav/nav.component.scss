@@ -1,5 +1,7 @@
+@import '../../variables.scss';
+
 .nav {
-    background-color: #ea4747;
+    background-color: $primary-backgroundColor;
     height: 80px;
     box-shadow: 0 5px 16px rgb(187, 187, 187);
     display: flex;
@@ -27,7 +29,8 @@
 .title {
     color: white;
     font-family: 'Arial Black', Gadget, sans-serif;
-    text-shadow: -2px 0 #256b7a, 0 2px #256b7a, 2px 0 #256b7a, 0 -2px #256b7a;
+    text-shadow: -2px 0 $title-shadowColor, 0 2px $title-shadowColor,
+        2px 0 $title-shadowColor, 0 -2px $title-shadowColor;
     font-size: 28px;
     margin: 0 20px 0 20px;
     padding: 0 10px 0 10px;
@@ -76,7 +79,7 @@
     flex-direction: column;
     align-items: center;
     &--name {
-        color: #503737;
+        color: $secondary-textColor;
         display: flex;
         justify-content: center;
         align-items: center;
