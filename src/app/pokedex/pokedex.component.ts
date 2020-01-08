@@ -12,7 +12,7 @@ export class PokedexComponent implements OnInit {
     ability = {};
 
     pokemonList: object[];
-    pokemonSelected: any = undefined;
+    pokemonSelected: any;
 
     showList = true;
     showDetail = false;
