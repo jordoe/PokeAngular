@@ -269,6 +269,9 @@
             align-content: flex-end;
             width: 50%;
             height: 25%;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
