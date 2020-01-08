@@ -24,6 +24,8 @@ export class PokedexListComponent implements OnInit, OnChanges {
     pokemonSearchInput = '';
     pokemonSelect: any = undefined;
     currentListIndex = 0;
+    currentSelectPokemonImage: any = undefined;
+    currentImageIsShiny: boolean = false;
 
     constructor() {}
 
@@ -41,6 +43,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
         this.currentListIndex = this.pokemonList.findIndex(
             (x: any) => x.id === this.pokemonSelect.id
         );
+        this.currentSelectPokemonImage = pokemon.image;
         this.choosePokemonEvent.emit(pokemon);
     }
 
@@ -68,6 +71,15 @@ export class PokedexListComponent implements OnInit, OnChanges {
     changeView() {
         if (this.pokemonSelect !== undefined) {
             this.changeViewEvent.emit();
+        }
+    }
+    change_sprite() {
+        if (!this.currentImageIsShiny) {
+            this.currentImageIsShiny = !this.currentImageIsShiny;
+            this.currentSelectPokemonImage = this.pokemonSelected.pokemon.sprites.front_shiny;
+        } else {
+            this.currentImageIsShiny = !this.currentImageIsShiny;
+            this.currentSelectPokemonImage = this.pokemonSelected.pokemon.sprites.front_default;
         }
     }
 }

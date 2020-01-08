@@ -226,14 +226,18 @@
     &__image {
         display: flex;
         justify-content: center;
-        align-items: center;
-        flex-grow: 1;
-        width: 60%;
+        align-items: flex-end;
         height: auto;
-        img {
+        &--main {
             margin-top: 1rem;
             width: 160%;
             height: auto;
+        }
+        &--shiny {
+            display: flex;
+            align-content: flex-end;
+            width: 50%;
+            height: 25%;
         }
     }
 
