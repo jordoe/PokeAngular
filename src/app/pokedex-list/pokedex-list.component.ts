@@ -25,7 +25,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
     pokemonSelect: any = undefined;
     currentListIndex = 0;
     currentSelectPokemonImage: any = undefined;
-    currentImageIsShiny: boolean = false;
+    currentImageIsShiny = false;
 
     constructor() {}
 
