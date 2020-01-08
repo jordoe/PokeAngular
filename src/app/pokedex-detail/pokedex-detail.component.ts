@@ -30,7 +30,9 @@ export class PokedexDetailComponent implements OnInit {
                     this.pokemonSelected = response.pokemon;
                     this.pokemonDetails = response.details;
                     this.languageArray = response.details.flavor_text_entries;
-                    this.englishDescription = this.languageArray.find(x => x.language.name === 'en');
+                    this.englishDescription = this.languageArray.find(
+                        x => x.language.name === 'en'
+                    );
                 });
         });
     }
