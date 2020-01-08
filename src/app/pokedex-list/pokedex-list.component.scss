@@ -132,8 +132,17 @@
         font-size: 1.8rem;
 
         &:hover {
-            background-color: #359999;
+            background-color: #4694a5;
             cursor: pointer;
+        }
+
+        &--selected {
+            background-color: #bce5f0;
+            color: #358496;
+            &:hover {
+                background-color: #c9eaf3;
+                cursor: pointer;
+            }
         }
     }
 

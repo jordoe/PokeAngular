@@ -43,6 +43,9 @@
                     index as i
                 "
                 (click)="choosePokemon(pokemon, i)"
+                [class.pokemon-list__item--selected]="
+                    this.pokemonSelect.id == pokemon.id
+                "
             >
                 <div>
                     <span>{{ pokemon.id }}</span>
