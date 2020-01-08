@@ -20,6 +20,7 @@ export class PokedexService {
             );
         }
     }
+
     async getPokemonList() {
         const res = await fetch('http://pokeapi.co/api/v2/pokemon/?limit=811');
         const data = await res.json();
