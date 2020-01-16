@@ -15,13 +15,15 @@ export class PokedexPokeworldComponent implements OnInit {
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
 
+    public term: any;
+
     private fullPokemonList: Pokemon[];
     private currentPokemonList: Pokemon[];
 
     private map: any;
     private markers: any;
 
-    private pokemonTypes: string[] = [
+    public pokemonTypes: string[] = [
         'all',
         'normal',
         'fighting',

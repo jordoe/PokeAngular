@@ -22,12 +22,14 @@ export class PokedexListComponent implements OnInit, OnChanges {
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
 
-    private localPokemon: Pokemon;
+    public term: any;
+
+    public localPokemon: Pokemon;
     private currentListIndex = 0;
-    private currentSelectPokemonImage: string = undefined;
+    public currentSelectPokemonImage: string = undefined;
     private currentImageIsShiny = false;
     private storagePokemonKey = 'localPokemon';
-    private pokemonTypes: string[] = [
+    public pokemonTypes: string[] = [
         'all',
         'normal',
         'fighting',
@@ -54,7 +56,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
         footer: '',
         size: [],
     };
-    private displayModal = false;
+    public displayModal = false;
 
     constructor() {}
 

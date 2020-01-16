@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-    private showAbout: boolean = false;
+    public showAbout: boolean = false;
     public aboutUs: string[] = [
         'Jorge Domínguez',
         'Rubén Martín',

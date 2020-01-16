@@ -4,7 +4,6 @@
             <select
                 class="search__select"
                 name="search__select"
-                [(ngModel)]="selectType"
                 (change)="onChange($event.target.value)"
             >
                 <option value="" selected style="display:none">Type</option>
@@ -28,7 +27,7 @@
                     let pokemon of pokemonList | filterName: term;
                     index as i
                 "
-                (click)="choosePokemon(pokemon, i)"
+                (click)="choosePokemon(pokemon)"
                 [class.pokemon-list__item--selected]="
                     this.localPokemon.id == pokemon.id
                 "
@@ -108,6 +107,6 @@
 <app-modal
     *ngIf="displayModal"
     [content]="content"
-    (closeModalEvent)="hideModal($event)"
+    (closeModalEvent)="hideModal()"
 >
 </app-modal>
