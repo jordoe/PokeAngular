@@ -1,0 +1,40 @@
+<div class="pokedex">
+    <div class="pokedex__top">
+        <form action="#" class="search">
+            <select
+                class="search__select"
+                name="search__select"
+                [(ngModel)]="selectType"
+                (change)="onChange($event.target.value)"
+            >
+                <option value="" selected style="display:none">Type</option>
+                <option *ngFor="let type of pokemonTypes" value="{{ type }}">{{
+                    type.charAt(0).toUpperCase() + type.slice(1)
+                }}</option>
+            </select>
+            <div class="search__input-parent">
+                <input
+                    type="text"
+                    #inputtext
+                    class="search__input"
+                    placeholder="Search Pokemon"
+                    name="term"
+                    [(ngModel)]="term"
+                    (ngModelChange)="changeInput(inputtext.value)"
+                />
+                <a
+                    id="inputButton"
+                    class="btn"
+                    (click)="changeInput(inputtext.value)"
+                >
+                    Search
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="pokedex__display">
+        <div class="map">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>

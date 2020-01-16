@@ -1,0 +1,113 @@
+<div class="pokedex">
+    <div class="pokedex__left" *ngIf="pokemonList !== undefined">
+        <form action="#" class="search">
+            <select
+                class="search__select"
+                name="search__select"
+                [(ngModel)]="selectType"
+                (change)="onChange($event.target.value)"
+            >
+                <option value="" selected style="display:none">Type</option>
+                <option *ngFor="let type of pokemonTypes" value="{{ type }}">{{
+                    type.charAt(0).toUpperCase() + type.slice(1)
+                }}</option>
+            </select>
+            <input
+                type="text"
+                class="search__input"
+                placeholder="Search Pokemon"
+                name="term"
+                [(ngModel)]="term"
+            />
+            <button class="search__button"></button>
+        </form>
+        <div class="pokemon-list">
+            <div
+                class="pokemon-list__item"
+                *ngFor="
+                    let pokemon of pokemonList | filterName: term;
+                    index as i
+                "
+                (click)="choosePokemon(pokemon, i)"
+                [class.pokemon-list__item--selected]="
+                    this.localPokemon.id == pokemon.id
+                "
+            >
+                <div>
+                    <span>{{ pokemon.id }}</span>
+                    <span class="pokemon-list__name">{{
+                        pokemon.name | uppercase
+                    }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pokedex__right" *ngIf="pokemonList !== undefined">
+        <div class="inline">
+            <i class="arrow fas fa-caret-left" (click)="leftArrow()"></i>
+            <div
+                class="pokemon-display"
+                *ngIf="this.pokemonSelected !== undefined"
+            >
+                <div
+                    *ngIf="pokemonSelected !== undefined"
+                    class="pokemon-display__container"
+                >
+                    <div class="pokemon-display__name">
+                        {{ localPokemon.name | uppercase }}
+                    </div>
+                    <div class="pokemon-display__image" (click)="showModal()">
+                        <img
+                            src="{{ currentSelectPokemonImage }}"
+                            class="pokemon-display__image--main"
+                            alt="pokemonImage"
+                        />
+                        <img
+                            src="../../assets/img/shiny_pokemon.png"
+                            class="pokemon-display__image--shiny"
+                            alt="shinyPokemon"
+                            (click)="switchShiny()"
+                        />
+                    </div>
+                    <div
+                        *ngIf="this.pokemonSelected.types !== undefined"
+                        class="pokemon-display__imageType"
+                    >
+                        <img
+                            src="../../assets/img/types_icons_2/{{
+                                this.pokemonSelected.types[0].type.name
+                            }}_icon.png"
+                            alt="{{ this.pokemonSelected.types[0].type.name }}"
+                        />
+                        <img
+                            *ngIf="this.pokemonSelected.types.length > 1"
+                            src="../../assets/img/types_icons_2/{{
+                                this.pokemonSelected.types[1].type.name
+                            }}_icon.png"
+                            alt="{{ this.pokemonSelected.types[1].type.name }}"
+                        />
+                    </div>
+                </div>
+            </div>
+            <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>
+        </div>
+        <div class="options">
+            <div>
+                <a class="btn" routerLink="/detail/{{ localPokemon.id }}"
+                    >Details</a
+                >
+            </div>
+            <div>
+                <a href="#" class="btn" routerLink="/map/{{ localPokemon.id }}"
+                    >Locate</a
+                >
+            </div>
+        </div>
+    </div>
+</div>
+<app-modal
+    *ngIf="displayModal"
+    [content]="content"
+    (closeModalEvent)="hideModal($event)"
+>
+</app-modal>

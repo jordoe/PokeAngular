@@ -1,0 +1,50 @@
+<div class="display">
+    <div class="header">
+        <div class="header__title">
+            Moves
+        </div>
+    </div>
+    <div class="move_head">
+        <div class="movement__property movement__property--name">Name</div>
+        <div class="movement__property">Power</div>
+        <div class="movement__property optional">Accuracy</div>
+        <div class="movement__property optional">PP</div>
+        <div class="movement__property">Type</div>
+    </div>
+    <hr />
+    <div class="movement" *ngFor="let move of pokeMovesList">
+        <div class="movement__row">
+            <div
+                class="movement__property movement__property--name tooltipInfo"
+            >
+                {{ prettyString(move.name) }}
+                <div class="tooltipInfo__description">
+                    {{ move.description }}
+                </div>
+            </div>
+            <div *ngIf="move.power" class="movement__property">
+                {{ move.power }}
+            </div>
+            <div *ngIf="!move.power" class="movement__property">-</div>
+            <div *ngIf="move.accuracy" class="movement__property optional">
+                {{ move.accuracy }}
+            </div>
+            <div *ngIf="!move.accuracy" class="movement__property optional">
+                -
+            </div>
+            <div class="movement__property optional">{{ move.pp }}</div>
+            <div class="movement__property">
+                <img
+                    src="../../assets/img/types_icons_2/{{
+                        move.type1
+                    }}_icon.png"
+                    alt="{{ move.type1 }}"
+                />
+                <img
+                    src="../../assets/img/types_icons_2/{{ move.type2 }}.png"
+                    alt="{{ move.type2 }}"
+                />
+            </div>
+        </div>
+    </div>
+</div>

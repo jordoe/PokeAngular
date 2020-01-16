@@ -1,0 +1,158 @@
+<div class="pokedex">
+    <div class="pokedex__display">
+        <div class="pokedex__display__content">
+            <div class="details">
+                <div class="info-panel">
+                    <div class="general-info">
+                        <div class="general-info__header">
+                            <div class="general-info__header--number">
+                                Nº {{ pokemonSelected.id }}
+                            </div>
+                            <div class="general-info__header--name">
+                                {{ pokemonSelected.name }}
+                            </div>
+                            <div class="pokemon-types">
+                                <div>
+                                    <img
+                                        src="../../assets/img/types_icons_2/{{
+                                            pokemonSelected.types[0].type.name
+                                        }}_icon.png"
+                                        alt="{{
+                                            pokemonSelected.types[0].type.name
+                                        }}"
+                                    />
+                                </div>
+                                <div *ngIf="pokemonSelected.types[1]">
+                                    <img
+                                        src="../../assets/img/types_icons_2/{{
+                                            pokemonSelected.types[1].type.name
+                                        }}_icon.png"
+                                        alt="{{
+                                            pokemonSelected.types[1].type.name
+                                        }}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="general-info__image">
+                            <img
+                                src="{{ currentSelectPokemonImage }}"
+                                alt="Pokemon image"
+                                class="pointer"
+                                (click)="switchShiny()"
+                            />
+                        </div>
+                        <div class="general-info__dimension">
+                            <div class="general-info__dimension--height">
+                                <p>{{ pokemonSelected.height / 10 }} m</p>
+                            </div>
+                            <div class="general-info__dimension--weight">
+                                <p>{{ pokemonSelected.weight / 10 }} Kg</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="specific-info">
+                        <div class="pokemon-description">
+                            <div class="detail-title-panel">
+                                <span>Description:</span>
+                            </div>
+                            <div class="detail-panel">
+                                {{ englishDescription.flavor_text }}
+                            </div>
+                        </div>
+                        <div class="pokemon-evolution">
+                            <div class="detail-title-panel">
+                                <span>Evolution chain:</span>
+                            </div>
+                            <div class="detail-panel">
+                                EVOLUTION GOES HERE
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tecnic-info">
+                        <div class="tecnicInfo__stats">
+                            <div class="detail-title-panel">
+                                Stats:
+                            </div>
+                            <div class="detail-panel">
+                                <div *ngFor="let stat of pokemonSelected.stats">
+                                    {{ stat.name }}
+                                    <hr
+                                        *ngIf="stat.baseStat <= 35"
+                                        class="progressBar progressBar--red"
+                                        [ngStyle]="{
+                                            width: getPercentage(stat.baseStat)
+                                        }"
+                                    />
+                                    <hr
+                                        *ngIf="
+                                            stat.baseStat > 35 &&
+                                            stat.baseStat < 70
+                                        "
+                                        class="progressBar progressBar--yellow"
+                                        [ngStyle]="{
+                                            width: getPercentage(stat.baseStat)
+                                        }"
+                                    />
+                                    <hr
+                                        *ngIf="stat.baseStat >= 70"
+                                        class="progressBar progressBar--green"
+                                        [ngStyle]="{
+                                            width: getPercentage(stat.baseStat)
+                                        }"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tecnicInfo__abilities">
+                            <div class="detail-title-panel">
+                                Abilities:
+                            </div>
+                            <div class="detail-panel">
+                                <div
+                                    *ngFor="
+                                        let ability of pokemonSelected.abilities
+                                    "
+                                >
+                                    <div
+                                        *ngIf="ability.isHidden === false"
+                                        class="abilityType"
+                                    >
+                                        {{ ability.name | uppercase }}
+                                    </div>
+                                    <div
+                                        *ngIf="ability.isHidden === true"
+                                        class="abilityType abilityType--hidden"
+                                    >
+                                        {{ ability.name | uppercase }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="section-separation" />
+                <div class="pokemonMoves">
+                    <app-pokedex-detail-extend
+                        [pokemonSelectedId]="pokemonSelectedId"
+                    >
+                    </app-pokedex-detail-extend>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons" *ngIf="pokemonSelected !== undefined">
+        <a class="btn" routerLink="/list">Back</a>
+        <div class="buttons">
+            <i
+                class="arrow fas fa-caret-left"
+                routerLink="/detail/{{ pokemonSelected.id - 1 }}"
+            ></i>
+            <a class="btn" routerLink="/map/{{ pokemonSelected.id }}">Locate</a>
+            <i
+                class="arrow fas fa-caret-right"
+                routerLink="/detail/{{ pokemonSelected.id + 1 }}"
+            ></i>
+        </div>
+    </div>
+</div>

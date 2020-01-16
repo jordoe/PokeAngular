@@ -1,0 +1,28 @@
+<div class="nav">
+    <div class="elements-left">
+        <a class="logo-link" routerLink="/list">
+            <img
+                src="../../../assets/img/Logo.png"
+                class="logo"
+                alt="Pokemon logo"
+            />
+        </a>
+        <div class="option--noMargins" routerLink="/pokeworld">
+            Go to PokéWorld
+        </div>
+    </div>
+    <div class="elements-right">
+        <div class="title">PokeAngular</div>
+        <div class="option" (click)="clickAboutButton()">
+            About Us
+            <div class="about-container" *ngIf="showAbout">
+                <div class="about">
+                    <h3 *ngFor="let name of aboutUs" class="about--name">
+                        {{ name }}
+                    </h3>
+                </div>
+                <i class="arrow fas fa-caret-up"></i>
+            </div>
+        </div>
+    </div>
+</div>

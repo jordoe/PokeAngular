@@ -1,21 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~leaflet/dist/leaflet.css";
+@import '~leaflet/dist/leaflet.css';
+@import 'variables.scss';
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
 }
 
+@font-face {
+    font-family: pixelade;
+    src: url(./assets/fonts/pixelade.TTF);
+}
+
 html {
-    // This defines what 1rem is
-    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+    font-size: 62.5%; // This defines what 1rem is: 1 rem = 10px; 10px/16px = 62.5%
+    min-height: 100%;
+    font-family: 'pixelade';
 }
 
 body {
     box-sizing: border-box;
-    // background-color: red;
-    background: linear-gradient(rgba(255,255,255,0) 39%, rgba(226,223,223,0.5914740896358543) 100%);
+    width: auto;
+}
 
-    width: 100vw;
-    height: 100vh;
+.pokedex {
+    margin: 0 auto;
+    padding: 3rem;
+    padding-bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: $primary-backgroundColor;
+    box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+    width: 70vw;
+    height: 70vh;
+
+    &__display {
+        box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+        display: flex;
+        width: 100%;
+        height: auto;
+        border: 1.3rem solid $borderColor;
+        scroll-padding: 0.2rem 0 0.2rem 0;
+        background-color: $secondary-backgroundColor;
+        &__content {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        width: 100%;
+        padding-left: 0;
+        padding: 3rem;
+        height: calc(100vh - 80px);
+    }
+
+    @media only screen and (max-width: 320px) {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+.btn {
+    background-color: $button-backgroundColor;
+    text-decoration: none;
+    color: $secondary-textColor;
+    padding: 1rem 3rem;
+    font-size: 2.5rem;
+    margin: 1rem;
+    box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+
+    @media only screen and (max-width: 1030px) {
+        padding: 0.5rem 2rem;
+        font-size: 1.8rem;
+        margin: 0.5rem;
+        line-height: 3;
+    }
+
+    @media only screen and (max-width: 768px) {
+        padding: 1rem 3rem;
+        margin: 1rem;
+        font-size: 2rem;
+        line-height: 1;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.arrow {
+    font-size: 10rem;
+    margin: 1rem;
+    color: $arrowColor;
+    text-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+// SCROLLBAR
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+    margin: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $borderColor;
+    border: 2px solid $secondary-backgroundColor;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $tertiary-backgroundColor;
 }

@@ -1,41 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { PokedexComponent } from './pokedex/pokedex.component';
-import { PokedexListComponent } from './pokedex-list/pokedex-list.component';
-import { PokedexDetailComponent } from './pokedex-detail/pokedex-detail.component';
-import { PokedexMapComponent } from './pokedex-map/pokedex-map.component';
-import { MapComponent } from './map/map.component';
+import { PokedexComponent } from './Components/pokedex/pokedex.component';
+import { PokedexListComponent } from './Components/pokedex-list/pokedex-list.component';
+import { PokedexDetailComponent } from './Components/pokedex-detail/pokedex-detail.component';
+import { PokedexMapComponent } from './Components/pokedex-map/pokedex-map.component';
+import { NavComponent } from './Components/nav/nav.component';
+import { PokedexPokeworldComponent } from './Components/pokedex-pokeworld/pokedex-pokeworld.component';
+import { PokedexDetailExtendComponent } from './Components/pokedex-detail-extend/pokedex-detail-extend.component';
 
-const appRoutes: Routes = [
-  { path: 'list', component: PokedexComponent },
-  { path: 'detail', component: PokedexComponent },
-  { path: 'detail/:id', component: PokedexDetailComponent },
-  { path: 'map', component: PokedexMapComponent },
-  { path: '', redirectTo: '/list', pathMatch: 'full' }
-];
+import { ModalComponent } from './Components/_shared/modal/modal.component';
+
+import { FilterNamePipe } from './Utils/filter-name.pipe';
+import { Pipe, PipeTransform } from '@angular/core';
+
+import { AppRoutingModule } from './Configuration/app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PokedexComponent,
-    PokedexListComponent,
-    PokedexDetailComponent,
-    PokedexMapComponent,
-    MapComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: false}
-      )
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        PokedexComponent,
+        PokedexListComponent,
+        PokedexDetailComponent,
+        PokedexMapComponent,
+        FilterNamePipe,
+        NavComponent,
+        PokedexDetailExtendComponent,
+        PokedexPokeworldComponent,
+        ModalComponent,
+    ],
+    imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

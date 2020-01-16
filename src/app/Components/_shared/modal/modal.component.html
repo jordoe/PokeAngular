@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="modal" [style.height]="inputHeight" [style.width]="inputWidth">
+        <header class="modalHeader">
+            <div class="modalHeader__title">{{ content.header }}</div>
+            <div class="close" (click)="closeModal()">
+                <p>X</p>
+            </div>
+        </header>
+        <div class="modalBody">
+            <div class="modalBody__content">
+                {{ content.body }}
+            </div>
+        </div>
+        <div class="modalFooter">
+            <span (click)="closeModal()">Close</span>
+        </div>
+    </div>
+    <div class="container__bakcground" (click)="closeModal()"></div>
+</div>

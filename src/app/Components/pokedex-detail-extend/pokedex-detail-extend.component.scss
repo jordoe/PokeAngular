@@ -1,0 +1,118 @@
+@import '../../../variables.scss';
+
+hr {
+    border-top: 5px solid white;
+    margin: 5px 0px 5px 0px;
+}
+.display {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    display: flex;
+    width: 100%;
+    margin: 5px 0px 5px 0px;
+    justify-content: center;
+    &__title {
+        width: 60%;
+        height: 18%;
+        background-color: $quaternary-backgroundColor;
+        color: $primary-textColor;
+        border-radius: 1rem;
+        font-size: 2rem;
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+.move_head {
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+.movement {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    :hover {
+        background-color: $tertiary-backgroundColor;
+        div {
+            color: $tertiary-textColor;
+        }
+    }
+    &__row {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    &__property {
+        flex-grow: 1;
+        text-align: center;
+        color: $primary-textColor;
+        font-size: 1.9rem;
+        padding: 5px;
+        width: 100%;
+        &--name {
+            flex-grow: 6;
+        }
+        img {
+            margin-right: 5px;
+            width: 25%;
+        }
+        @media only screen and (max-width: 800px) {
+            width: 50%;
+            img {
+                width: 50%;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            width: 25%;
+            img {
+                width: 70%;
+            }
+        }
+    }
+}
+.tooltipInfo {
+    position: relative;
+    display: inline-block;
+    & &__description {
+        visibility: hidden;
+        width: 150%;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    & &__description::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 20%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+    &:hover &__description {
+        padding: 5px;
+        visibility: visible;
+        opacity: 0.9;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .optional {
+        display: none;
+    }
+}
