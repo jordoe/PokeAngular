@@ -23,6 +23,9 @@
     color: $quaternary-backgroundColor;
     background: $tertiary-backgroundColor;
     box-shadow: -0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.5);
+    @media only screen and (max-width: 800px) {
+        max-height: 100%;
+    }
     &__evolution {
         display: flex;
         flex-direction: column;
@@ -212,6 +215,9 @@
 .pokemon-evolution {
     height: 50%;
     width: 100%;
+    @media only screen and (max-width: 800px) {
+        margin-top: 1rem;
+    }
 }
 .specific-info {
     width: 100%;
@@ -245,6 +251,9 @@
     &__abilities {
         height: 34%;
         width: 100%;
+        @media only screen and (max-width: 800px) {
+            margin-top: 1rem;
+        }
     }
     @media only screen and (max-width: 375px) {
         margin-left: 0%;

@@ -10,6 +10,7 @@ export class FilterNamePipe implements PipeTransform {
             name = '';
         }
         if (pokemonList !== undefined) {
+            name = name.toLowerCase();
             result = pokemonList.filter(
                 pokemon => pokemon.name.indexOf(name) !== -1
             );
