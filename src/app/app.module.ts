@@ -25,6 +25,7 @@ import { AppRoutingModule } from './Configuration/app-routing.module';
 import { LoadingComponent } from './Components/_shared/loading/loading.component';
 
 import { TestComponentComponent } from './test-component/test-component.component';
+import { PokedexDetailSizeComponent } from './Components/pokedex-detail-size/pokedex-detail-size.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { TestComponentComponent } from './test-component/test-component.componen
         ModalHeaderComponent,
         ModalBodyComponent,
         ModalFooterComponent,
+        PokedexDetailSizeComponent,
     ],
     imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
     providers: [],

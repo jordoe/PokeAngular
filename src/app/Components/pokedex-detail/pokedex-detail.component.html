@@ -186,7 +186,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="pokemonMoves">
+                <div class="extra-option">
+                    <app-pokedex-detail-size
+                        [pokemonSelectedId]="pokemonSelectedId"
+                    >
+                    </app-pokedex-detail-size>
+                </div>
+                <div class="extra-option">
                     <app-pokedex-detail-extend
                         [pokemonSelectedId]="pokemonSelectedId"
                         (movesLoadedEvent)="movesHasLoaded()"
