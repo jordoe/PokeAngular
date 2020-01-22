@@ -29,7 +29,7 @@ export class PokedexDetailExtendComponent implements OnInit, OnChanges {
     public displayMoves = false;
     public displayMoveDesc = false;
     private selectedMoveId: string;
-    private visibleIndex = -1;
+    public visibleIndex = -1;
     public arr = [];
 
     constructor(private pokedexService: PokedexService) {}
