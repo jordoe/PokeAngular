@@ -37,6 +37,9 @@
         background: $tertiary-backgroundColor;
         box-shadow: -0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.5);
         align-items: center;
+        @media only screen and (max-width: 800px) {
+            height: auto;
+        }
         &__content {
             height: 100%;
             display: flex;
@@ -211,11 +214,15 @@
 .pokemon-description {
     height: 50%;
     width: 100%;
+    @media only screen and (max-width: 800px) {
+        height: auto;
+    }
 }
 .pokemon-evolution {
     height: 50%;
     width: 100%;
     @media only screen and (max-width: 800px) {
+        height: auto;
         margin-top: 1rem;
     }
 }
