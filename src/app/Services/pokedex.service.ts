@@ -37,7 +37,7 @@ export class PokedexService {
 
     private getPokemonListData() {
         if (this.data === undefined) {
-            const url = 'http://pokeapi.co/api/v2/pokemon/?limit=811';
+            const url = 'https://pokeapi.co/api/v2/pokemon/?limit=811';
             this.data = this.http.get(url);
             return this.data;
         } else {
@@ -66,7 +66,7 @@ export class PokedexService {
     }
     public getPokemonByType(type: string): Observable<any> {
         if (type !== 'all') {
-            const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
+            const url = 'https://pokeapi.co/api/v2/type/' + type + '/';
             const data = this.http.get(url);
             return data.pipe(
                 map((res: any) => {
@@ -101,7 +101,7 @@ export class PokedexService {
             abilities: [],
             stats: [],
         };
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
             this.http.get(url).subscribe((x: any) => {
                 pokemon.name = x.name;
@@ -132,7 +132,7 @@ export class PokedexService {
         return obs;
     }
     public getPokemonEvolutionChain(id: string | number): Observable<any> {
-        const url = 'http://pokeapi.co/api/v2/pokemon-species/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon-species/' + id + '/';
         const obs = new Observable(observer => {
             this.http.get(url).subscribe((x: any) => {
                 this.http
@@ -160,7 +160,7 @@ export class PokedexService {
                         for (const pokemon of chain) {
                             observablesArr.push(
                                 this.http.get(
-                                    'http://pokeapi.co/api/v2/pokemon/' +
+                                    'https://pokeapi.co/api/v2/pokemon/' +
                                         pokemon +
                                         '/'
                                 )
@@ -186,7 +186,7 @@ export class PokedexService {
     }
     public getPokemonMoves(id: string | number): Observable<any> {
         const pokemonMovesResult: object[] = [];
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
             this.http.get(url).subscribe((x: any) => {
                 const observablesArr = [];
@@ -216,7 +216,7 @@ export class PokedexService {
     }
     public getPokemonLearnLevel(id: string | number): Observable<any> {
         const movesLearnMethod: object[] = [];
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
             this.http.get(url).subscribe((data: any) => {
                 const observablesArr = [];
