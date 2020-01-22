@@ -26,7 +26,7 @@ export class PokedexService {
     public pokemonList: any[] = [];
     private data: Observable<any> = undefined;
 
-    constructor(private http: HttpClient) {
+    constructor(private https: HttpClient) {
         if (!window.localStorage.getItem('pokemonFullList')) {
             window.localStorage.setItem(
                 'pokemonFullList',
@@ -37,8 +37,8 @@ export class PokedexService {
 
     private getPokemonListData() {
         if (this.data === undefined) {
-            const url = 'http://pokeapi.co/api/v2/pokemon/?limit=811';
-            this.data = this.http.get(url);
+            const url = 'https://pokeapi.co/api/v2/pokemon/?limit=811';
+            this.data = this.https.get(url);
             return this.data;
         } else {
             return this.data;
@@ -66,8 +66,8 @@ export class PokedexService {
     }
     public getPokemonByType(type: string): Observable<any> {
         if (type !== 'all') {
-            const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
-            const data = this.http.get(url);
+            const url = 'https://pokeapi.co/api/v2/type/' + type + '/';
+            const data = this.https.get(url);
             return data.pipe(
                 map((res: any) => {
                     return res.pokemon.map((result, index) => ({
@@ -101,9 +101,9 @@ export class PokedexService {
             abilities: [],
             stats: [],
         };
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
-            this.http.get(url).subscribe((x: any) => {
+            this.https.get(url).subscribe((x: any) => {
                 pokemon.name = x.name;
                 pokemon.id = x.id;
                 pokemon.height = x.height;
@@ -123,7 +123,7 @@ export class PokedexService {
                         effort: elem.effort,
                     });
                 }
-                this.http.get(x.species.url).subscribe((y: any) => {
+                this.https.get(x.species.url).subscribe((y: any) => {
                     pokemon.description = y.flavor_text_entries;
                     observer.next(pokemon);
                 });
@@ -132,10 +132,10 @@ export class PokedexService {
         return obs;
     }
     public getPokemonEvolutionChain(id: string | number): Observable<any> {
-        const url = 'http://pokeapi.co/api/v2/pokemon-species/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon-species/' + id + '/';
         const obs = new Observable(observer => {
-            this.http.get(url).subscribe((x: any) => {
-                this.http
+            this.https.get(url).subscribe((x: any) => {
+                this.https
                     .get(x.evolution_chain.url)
                     .subscribe((response: any) => {
                         let chain = [];
@@ -159,8 +159,8 @@ export class PokedexService {
                         const observablesArr = [];
                         for (const pokemon of chain) {
                             observablesArr.push(
-                                this.http.get(
-                                    'http://pokeapi.co/api/v2/pokemon/' +
+                                this.https.get(
+                                    'https://pokeapi.co/api/v2/pokemon/' +
                                         pokemon +
                                         '/'
                                 )
@@ -186,13 +186,13 @@ export class PokedexService {
     }
     public getPokemonMoves(id: string | number): Observable<any> {
         const pokemonMovesResult: object[] = [];
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
-            this.http.get(url).subscribe((x: any) => {
+            this.https.get(url).subscribe((x: any) => {
                 const observablesArr = [];
                 let details: any = {};
                 for (const moves of x.moves) {
-                    observablesArr.push(this.http.get(moves.move.url));
+                    observablesArr.push(this.https.get(moves.move.url));
                 }
                 forkJoin(observablesArr).subscribe((result: any) => {
                     for (const [i, observable] of result.entries()) {
@@ -216,15 +216,15 @@ export class PokedexService {
     }
     public getPokemonLearnLevel(id: string | number): Observable<any> {
         const movesLearnMethod: object[] = [];
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
-            this.http.get(url).subscribe((data: any) => {
+            this.https.get(url).subscribe((data: any) => {
                 const observablesArr = [];
                 const levelArr = [];
                 let details: any = {};
                 for (const moves of data.moves) {
                     observablesArr.push(
-                        this.http.get(
+                        this.https.get(
                             moves.version_group_details[0].move_learn_method.url
                         )
                     );
