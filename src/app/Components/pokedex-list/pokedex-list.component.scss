@@ -290,4 +290,7 @@
 
 .loading-container {
     margin-left: -5rem;
+    @media only screen and (max-width: 800px) {
+        margin-left: 0;
+    }
 }
