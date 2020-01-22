@@ -48,7 +48,10 @@
     </div>
     <div class="pokedex__right" *ngIf="pokemonList !== undefined">
         <div class="inline">
-            <i class="arrow fas fa-caret-left" (click)="leftArrow()"></i>
+            <i
+                class="arrow arrow-left fas fa-caret-left"
+                (click)="leftArrow()"
+            ></i>
             <div class="pokemon-display">
                 <div
                     *ngIf="
@@ -98,7 +101,10 @@
                     </div>
                 </div>
             </div>
-            <i class="arrow fas fa-caret-right" (click)="rightArrow()"></i>
+            <i
+                class="arrow arrow-right fas fa-caret-right"
+                (click)="rightArrow()"
+            ></i>
         </div>
         <div class="options">
             <div>

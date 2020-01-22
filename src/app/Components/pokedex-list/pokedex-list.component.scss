@@ -8,8 +8,8 @@
     @media only screen and (max-width: 800px) {
         flex-direction: column;
         width: 100vw;
-        padding-left: 0;
         padding: 3rem;
+        padding-bottom: 0;
         height: calc(100vh - 80px);
     }
 
@@ -293,4 +293,12 @@
     @media only screen and (max-width: 800px) {
         margin-left: 0;
     }
+}
+
+.arrow-left {
+    margin-left: 0;
+}
+
+.arrow-right {
+    margin-right: 0;
 }
