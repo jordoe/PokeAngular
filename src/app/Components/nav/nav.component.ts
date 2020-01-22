@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
 
     public showModal() {
         this.displayModal = true;
-        this.content.size = [36, 25];
+        this.content.size = [32, 60];
         this.content.header = 'Develop team';
         this.content.body = `
             <div>Jorge Domínguez</div>
