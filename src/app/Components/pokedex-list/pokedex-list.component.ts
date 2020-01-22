@@ -54,6 +54,8 @@ export class PokedexListComponent implements OnInit, OnChanges {
         'fairy',
     ];
 
+    // tst
+
     constructor() {}
 
     ngOnInit() {
