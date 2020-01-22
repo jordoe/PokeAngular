@@ -2,7 +2,10 @@
     <div class="pokedex__display">
         <div class="pokemon" *ngIf="pokemonSelected !== undefined">
             <div class="pokemon--name">
-                {{ pokemonSelected.name }}
+                {{
+                    pokemonSelected.name.charAt(0).toUpperCase() +
+                        pokemonSelected.name.slice(1)
+                }}
             </div>
             <div class="pokemon--img">
                 <img src="{{ pokemonSelected.sprites.front_default }}" alt="" />
@@ -13,7 +16,7 @@
         </div>
     </div>
     <div class="buttons">
-        <i class="arrow fas fa-caret-left" routerLink="/list"></i>
+        <a class="btn__back" routerLink="/list">Exit</a>
         <div class="btn" routerLink="/detail/{{ pokemonId }}">
             Details
         </div>

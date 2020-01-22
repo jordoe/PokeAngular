@@ -48,12 +48,11 @@
         height: 18%;
         background-color: $button-backgroundColor;
         box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
-        color: $secondary-textColor;
-        font-size: 2rem;
+        color: $primary-textColor;
+        font-size: 3rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        text-transform: uppercase;
 
         @media only screen and (max-width: 800px) {
             height: 50%;
@@ -68,10 +67,13 @@
         width: 85%;
         height: 70%;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        background: $tertiary-backgroundColor;
+        box-shadow: -0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.5);
         img {
             width: 100%;
+            -webkit-filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.5));
         }
         @media only screen and (max-width: 800px) {
             display: none;
@@ -102,6 +104,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin: 1.5rem;
     @media only screen and (max-width: 800px) {
         justify-content: center;
     }
@@ -114,6 +117,15 @@
         margin: 1rem;
         box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
         line-height: 1;
+    }
+    &__back {
+        @media only screen and (max-width: 1030px) {
+            padding: 1rem 3rem;
+            font-size: 2.5rem;
+            margin: 1rem;
+            box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+            line-height: 1;
+        }
     }
 }
 

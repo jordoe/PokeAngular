@@ -1,19 +1,12 @@
 <div class="container">
     <div class="modal" [style.height]="inputHeight" [style.width]="inputWidth">
-        <header class="modalHeader">
-            <div class="modalHeader__title">{{ content.header }}</div>
-            <div class="close" (click)="closeModal()">
-                <p>X</p>
-            </div>
-        </header>
-        <div class="modalBody">
-            <div class="modalBody__content">
-                {{ content.body }}
-            </div>
-        </div>
-        <div class="modalFooter">
-            <span (click)="closeModal()">Close</span>
-        </div>
+        <app-modal-header
+            [dataHeader]="dataHeader"
+            (closeModalEvent)="closeModal()"
+        >
+        </app-modal-header>
+        <app-modal-body [dataBody]="dataBody"> </app-modal-body>
+        <app-modal-footer (closeModalEvent)="closeModal()"> </app-modal-footer>
     </div>
     <div class="container__bakcground" (click)="closeModal()"></div>
 </div>

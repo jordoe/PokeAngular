@@ -13,10 +13,11 @@
     </div>
     <div class="elements-right">
         <div class="title">PokeAngular</div>
-        <div class="option" (click)="clickAboutButton()">
+        <div class="option" (click)="showModal()">
             About Us
             <div class="about-container" *ngIf="showAbout">
                 <div class="about">
+                    <h3 class="about--title">Made by:</h3>
                     <h3 *ngFor="let name of aboutUs" class="about--name">
                         {{ name }}
                     </h3>
@@ -26,3 +27,9 @@
         </div>
     </div>
 </div>
+<app-modal
+    *ngIf="displayModal"
+    [content]="content"
+    (closeModalEvent)="hideModal()"
+>
+</app-modal>

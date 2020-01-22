@@ -1,9 +1,14 @@
 <div class="pokedex">
-    <div class="pokedex__left" *ngIf="pokemonList !== undefined">
+    <div class="loading-container" *ngIf="!isLoaded">
+        <app-loading></app-loading>
+        <div class="loading-text">Loading list...</div>
+    </div>
+    <div class="pokedex__left">
         <form action="#" class="search">
             <select
                 class="search__select"
                 name="search__select"
+                [(ngModel)]="selectType"
                 (change)="onChange($event.target.value)"
             >
                 <option value="" selected style="display:none">Type</option>
@@ -44,10 +49,15 @@
     <div class="pokedex__right" *ngIf="pokemonList !== undefined">
         <div class="inline">
             <i class="arrow fas fa-caret-left" (click)="leftArrow()"></i>
-            <div
-                class="pokemon-display"
-                *ngIf="this.pokemonSelected !== undefined"
-            >
+            <div class="pokemon-display">
+                <div
+                    *ngIf="
+                        pokemonList == undefined && pokemonSelected == undefined
+                    "
+                    class="loading"
+                >
+                    Loading...
+                </div>
                 <div
                     *ngIf="pokemonSelected !== undefined"
                     class="pokemon-display__container"
@@ -55,19 +65,19 @@
                     <div class="pokemon-display__name">
                         {{ localPokemon.name | uppercase }}
                     </div>
-                    <div class="pokemon-display__image" (click)="showModal()">
+                    <div class="pokemon-display__image">
                         <img
                             src="{{ currentSelectPokemonImage }}"
                             class="pokemon-display__image--main"
                             alt="pokemonImage"
                         />
-                        <img
-                            src="../../assets/img/shiny_pokemon.png"
-                            class="pokemon-display__image--shiny"
-                            alt="shinyPokemon"
-                            (click)="switchShiny()"
-                        />
                     </div>
+                    <img
+                        src="../../assets/img/shiny_pokemon.png"
+                        class="pokemon-display__image--shiny"
+                        alt="shinyPokemon"
+                        (click)="switchShiny()"
+                    />
                     <div
                         *ngIf="this.pokemonSelected.types !== undefined"
                         class="pokemon-display__imageType"
@@ -104,9 +114,3 @@
         </div>
     </div>
 </div>
-<app-modal
-    *ngIf="displayModal"
-    [content]="content"
-    (closeModalEvent)="hideModal()"
->
-</app-modal>

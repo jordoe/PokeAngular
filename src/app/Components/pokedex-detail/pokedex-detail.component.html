@@ -1,15 +1,35 @@
 <div class="pokedex">
+    <div class="loading-container" *ngIf="!isLoaded">
+        <app-loading></app-loading>
+        <div class="loading-text">Loading details...</div>
+    </div>
     <div class="pokedex__display">
-        <div class="pokedex__display__content">
+        <!-- <div
+            *ngIf="evolutionChain == undefined && pokemonSelected == undefined"
+            class="loading"
+        >
+            Loading...
+        </div> -->
+        <div
+            *ngIf="
+                evolutionChain !== undefined && pokemonSelected !== undefined
+            "
+            class="pokedex__display__content"
+        >
             <div class="details">
-                <div class="info-panel">
+                <div *ngIf="pokemonSelected !== undefined" class="info-panel">
                     <div class="general-info">
                         <div class="general-info__header">
                             <div class="general-info__header--number">
                                 Nº {{ pokemonSelected.id }}
                             </div>
                             <div class="general-info__header--name">
-                                {{ pokemonSelected.name }}
+                                {{
+                                    pokemonSelected.name
+                                        .charAt(0)
+                                        .toUpperCase() +
+                                        pokemonSelected.name.slice(1)
+                                }}
                             </div>
                             <div class="pokemon-types">
                                 <div>
@@ -38,15 +58,15 @@
                             <img
                                 src="{{ currentSelectPokemonImage }}"
                                 alt="Pokemon image"
-                                class="pointer"
+                                class="pointer shadowed"
                                 (click)="switchShiny()"
                             />
                         </div>
                         <div class="general-info__dimension">
-                            <div class="general-info__dimension--height">
+                            <div class="general-info__dimension--element">
                                 <p>{{ pokemonSelected.height / 10 }} m</p>
                             </div>
-                            <div class="general-info__dimension--weight">
+                            <div class="general-info__dimension--element">
                                 <p>{{ pokemonSelected.weight / 10 }} Kg</p>
                             </div>
                         </div>
@@ -64,18 +84,51 @@
                             <div class="detail-title-panel">
                                 <span>Evolution chain:</span>
                             </div>
-                            <div class="detail-panel">
-                                EVOLUTION GOES HERE
+                            <div
+                                *ngIf="evolutionChain !== undefined"
+                                class="detail-panel__evolution"
+                            >
+                                <div *ngIf="evolutionChain.length < 2">
+                                    This Pokémon has no evolution.
+                                </div>
+                                <div
+                                    *ngIf="evolutionChain.length > 1"
+                                    class="detail-panel__evolution__content"
+                                >
+                                    <i
+                                        class="arrow fas fa-caret-left"
+                                        (click)="pokemonEvolveLeft()"
+                                        [class.arrow--disabled]="canLeft()"
+                                    ></i>
+                                    <img
+                                        src="{{ pokemonEvolveImage }}"
+                                        (click)="cleanPokemonData(true, index)"
+                                        routerLink="/detail/{{
+                                            evolutionChain[index].id
+                                        }}"
+                                    />
+                                    <i
+                                        class="arrow fas fa-caret-right"
+                                        (click)="pokemonEvolveRight()"
+                                        [class.arrow--disabled]="canRight()"
+                                    ></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="tecnic-info">
-                        <div class="tecnicInfo__stats">
+                        <div class="tecnic-info__stats">
                             <div class="detail-title-panel">
                                 Stats:
                             </div>
-                            <div class="detail-panel">
-                                <div *ngFor="let stat of pokemonSelected.stats">
+                            <div class="detail-panel__stats">
+                                <div
+                                    *ngFor="
+                                        let stat of pokemonSelected.stats
+                                            .slice()
+                                            .reverse()
+                                    "
+                                >
                                     {{ stat.name }}
                                     <hr
                                         *ngIf="stat.baseStat <= 35"
@@ -104,14 +157,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tecnicInfo__abilities">
+                        <div class="tecnic-info__abilities">
                             <div class="detail-title-panel">
                                 Abilities:
                             </div>
-                            <div class="detail-panel">
+                            <div class="detail-panel__abilities">
                                 <div
                                     *ngFor="
                                         let ability of pokemonSelected.abilities
+                                            .slice()
+                                            .reverse()
                                     "
                                 >
                                     <div
@@ -131,10 +186,10 @@
                         </div>
                     </div>
                 </div>
-                <hr class="section-separation" />
                 <div class="pokemonMoves">
                     <app-pokedex-detail-extend
                         [pokemonSelectedId]="pokemonSelectedId"
+                        (movesLoadedEvent)="movesHasLoaded()"
                     >
                     </app-pokedex-detail-extend>
                 </div>
@@ -142,15 +197,17 @@
         </div>
     </div>
     <div class="buttons" *ngIf="pokemonSelected !== undefined">
-        <a class="btn" routerLink="/list">Back</a>
+        <a class="btn__back" routerLink="/list">Exit</a>
         <div class="buttons">
             <i
                 class="arrow fas fa-caret-left"
+                (click)="cleanPokemonData()"
                 routerLink="/detail/{{ pokemonSelected.id - 1 }}"
             ></i>
             <a class="btn" routerLink="/map/{{ pokemonSelected.id }}">Locate</a>
             <i
                 class="arrow fas fa-caret-right"
+                (click)="cleanPokemonData()"
                 routerLink="/detail/{{ pokemonSelected.id + 1 }}"
             ></i>
         </div>

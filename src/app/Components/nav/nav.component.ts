@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import myTemplate from 'asdfghjk.html';
 
 @Component({
     selector: 'app-nav',
@@ -13,6 +14,14 @@ export class NavComponent implements OnInit {
         'Jesús Puertas',
         'Eduardo Vela',
     ];
+    // modal controler
+    public content = {
+        header: '',
+        body: '',
+        footer: '',
+        size: [],
+    };
+    public displayModal = false;
 
     constructor() {}
 
@@ -24,5 +33,21 @@ export class NavComponent implements OnInit {
         } else {
             this.showAbout = true;
         }
+    }
+
+    public showModal() {
+        this.displayModal = true;
+        this.content.size = [36, 25];
+        this.content.header = 'Develop team';
+        this.content.body = `
+            <div>Jorge Domínguez</div>
+            <div>Rubén Martín</div>
+            <div>Jesús Puertas</div>
+            <div>Eduardo Vela</div>
+        `;
+        this.content.header = `<div> Develop team</div>`;
+    }
+    public hideModal() {
+        this.displayModal = false;
     }
 }

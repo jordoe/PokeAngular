@@ -98,11 +98,21 @@
 
 .about {
     height: 100%;
-    padding: 14px 0;
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    &--title {
+        color: $secondary-textColor;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
     &--name {
+        font-weight: normal;
         color: $secondary-textColor;
         display: flex;
         justify-content: center;
@@ -112,6 +122,7 @@
 }
 
 .arrow {
+    z-index: 1;
     position: absolute;
     font-size: 10rem;
     top: -72px;

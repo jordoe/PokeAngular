@@ -14,11 +14,17 @@ import { PokedexPokeworldComponent } from './Components/pokedex-pokeworld/pokede
 import { PokedexDetailExtendComponent } from './Components/pokedex-detail-extend/pokedex-detail-extend.component';
 
 import { ModalComponent } from './Components/_shared/modal/modal.component';
+import { ModalHeaderComponent } from './Components/_shared/modal-header/modal-header.component';
+import { ModalBodyComponent } from './Components/_shared/modal-body/modal-body.component';
+import { ModalFooterComponent } from './Components/_shared/modal-footer/modal-footer.component';
 
 import { FilterNamePipe } from './Utils/filter-name.pipe';
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { AppRoutingModule } from './Configuration/app-routing.module';
+import { LoadingComponent } from './Components/_shared/loading/loading.component';
+
+import { TestComponentComponent } from './test-component/test-component.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +38,11 @@ import { AppRoutingModule } from './Configuration/app-routing.module';
         PokedexDetailExtendComponent,
         PokedexPokeworldComponent,
         ModalComponent,
+        LoadingComponent,
+        TestComponentComponent,
+        ModalHeaderComponent,
+        ModalBodyComponent,
+        ModalFooterComponent,
     ],
     imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
     providers: [],

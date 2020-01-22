@@ -131,38 +131,6 @@ export class PokedexService {
         });
         return obs;
     }
-    public getPokemonLearnMethod(id: string | number): Observable<any> {
-        const movesLearnMethod: object[] = [];
-        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
-        const obs = new Observable(observer => {
-            this.http.get(url).subscribe((data: any) => {
-                const observablesArr = [];
-                const levelArr = [];
-                let details: any = {};
-                for (const moves of data.moves) {
-                    observablesArr.push(
-                        this.http.get(
-                            moves.version_group_details[0].move_learn_method.url
-                        )
-                    );
-                    levelArr.push(
-                        moves.version_group_details[0].level_learned_at
-                    );
-                }
-                forkJoin(observablesArr).subscribe((result: any) => {
-                    for (const [i, observable] of result.entries()) {
-                        details.name = observable.name;
-                        details.method = observable.descriptions[0].description;
-                        details.level = levelArr[i];
-                        movesLearnMethod.push(details);
-                        details = {};
-                    }
-                });
-                observer.next(movesLearnMethod);
-            });
-        });
-        return obs;
-    }
     public getPokemonEvolutionChain(id: string | number): Observable<any> {
         const url = 'http://pokeapi.co/api/v2/pokemon-species/' + id + '/';
         const obs = new Observable(observer => {
@@ -171,25 +139,46 @@ export class PokedexService {
                     .get(x.evolution_chain.url)
                     .subscribe((response: any) => {
                         let chain = [];
-                        chain.push([response.chain.species.name]);
+                        chain.push(response.chain.species.name);
                         function iterateEvolutions(
                             obj,
                             evChain
-                        ): Array<string> {
+                        ): Array<object> {
                             if (obj.evolves_to.length === 0) {
                                 return evChain;
                             } else {
-                                const arr = [];
-                                obj.evolves_to.forEach(evolution => {
-                                    arr.push(evolution.species.name);
-                                });
-                                chain.push(arr);
+                                obj.evolves_to.forEach(evolution =>
+                                    chain.push(evolution.species.name)
+                                );
                                 obj = obj.evolves_to[0];
                                 return iterateEvolutions(obj, evChain);
                             }
                         }
                         chain = iterateEvolutions(response.chain, chain);
-                        observer.next(chain);
+                        const chainResult: object[] = [];
+                        const observablesArr = [];
+                        for (const pokemon of chain) {
+                            observablesArr.push(
+                                this.http.get(
+                                    'http://pokeapi.co/api/v2/pokemon/' +
+                                        pokemon +
+                                        '/'
+                                )
+                            );
+                        }
+                        forkJoin(observablesArr).subscribe((result: any) => {
+                            for (const [i, observable] of result.entries()) {
+                                const details: any = {};
+                                details.id = observable.id;
+                                details.name = observable.name;
+                                details.image =
+                                    observable.sprites.front_default;
+                                details.image_shiny =
+                                    observable.sprites.front_shiny;
+                                chainResult[i] = details;
+                            }
+                            observer.next(chainResult);
+                        });
                     });
             });
         });
@@ -221,6 +210,38 @@ export class PokedexService {
                     }
                 });
                 observer.next(pokemonMovesResult);
+            });
+        });
+        return obs;
+    }
+    public getPokemonLearnLevel(id: string | number): Observable<any> {
+        const movesLearnMethod: object[] = [];
+        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const obs = new Observable(observer => {
+            this.http.get(url).subscribe((data: any) => {
+                const observablesArr = [];
+                const levelArr = [];
+                let details: any = {};
+                for (const moves of data.moves) {
+                    observablesArr.push(
+                        this.http.get(
+                            moves.version_group_details[0].move_learn_method.url
+                        )
+                    );
+                    levelArr.push(
+                        moves.version_group_details[0].level_learned_at
+                    );
+                }
+                forkJoin(observablesArr).subscribe((result: any) => {
+                    for (const [i, observable] of result.entries()) {
+                        details.name = observable.name;
+                        details.method = observable.descriptions[0].description;
+                        details.level = levelArr[i];
+                        movesLearnMethod.push(details);
+                        details = {};
+                    }
+                });
+                observer.next(movesLearnMethod);
             });
         });
         return obs;

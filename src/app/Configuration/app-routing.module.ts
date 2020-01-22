@@ -8,8 +8,12 @@ import { PokedexPokeworldComponent } from '../Components/pokedex-pokeworld/poked
 
 const appRoutes: Routes = [
     { path: 'list', component: PokedexComponent },
-    { path: 'detail', component: PokedexComponent },
-    { path: 'detail/:id', component: PokedexDetailComponent },
+    { path: 'detail', component: PokedexComponent, pathMatch: 'full' },
+    {
+        path: 'detail/:id',
+        component: PokedexDetailComponent,
+        pathMatch: 'full',
+    },
     { path: 'map', component: PokedexMapComponent },
     { path: 'map/:id', component: PokedexMapComponent },
     { path: 'pokeworld', component: PokedexPokeworldComponent },

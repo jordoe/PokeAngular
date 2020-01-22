@@ -15,10 +15,15 @@ import {
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements AfterViewInit {
+export class ModalComponent implements OnInit {
     @Input() content: any;
 
     @Output() closeModalEvent = new EventEmitter<object>();
+
+    // Data objects for childs
+    public dataHeader;
+    public dataBody;
+    public dataFooter;
 
     // Properties for modal size, by default 50% of window size
     public inputHeight = '50%';
@@ -26,9 +31,12 @@ export class ModalComponent implements AfterViewInit {
 
     constructor() {}
 
-    ngAfterViewInit() {
+    ngOnInit() {
         this.inputHeight = this.content.size[0] + '%';
         this.inputWidth = this.content.size[1] + '%';
+
+        this.dataHeader = this.content.header;
+        this.dataBody = this.content.body;
     }
 
     closeModal() {

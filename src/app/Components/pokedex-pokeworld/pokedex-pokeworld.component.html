@@ -4,6 +4,7 @@
             <select
                 class="search__select"
                 name="search__select"
+                [(ngModel)]="selectType"
                 (change)="onChange($event.target.value)"
             >
                 <option value="" selected style="display:none">Type</option>

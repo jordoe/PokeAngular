@@ -22,12 +22,16 @@ export class PokedexListComponent implements OnInit, OnChanges {
     @Output() choosePokemonEvent = new EventEmitter<object>();
     @Output() chooseTypeEvent = new EventEmitter<object>();
 
+    public selectType: any;
     public term: any;
+
+    private doOnce: boolean = false;
+    public isLoaded: boolean = false;
 
     public localPokemon: Pokemon;
     private currentListIndex = 0;
     public currentSelectPokemonImage: string = undefined;
-    private currentImageIsShiny = false;
+    private currentImageIsShiny = true;
     private storagePokemonKey = 'localPokemon';
     public pokemonTypes: string[] = [
         'all',
@@ -44,27 +48,41 @@ export class PokedexListComponent implements OnInit, OnChanges {
         'grass',
         'electric',
         'psychic',
+        'ghost',
         'ice',
         'dark',
         'fairy',
     ];
 
-    // modal controler
-    public content = {
-        header: '',
-        body: '',
-        footer: '',
-        size: [],
-    };
-    public displayModal = false;
-
     constructor() {}
 
     ngOnInit() {
         this.checkPokemonSelected();
+        this.checkIfLoaded();
     }
 
-    ngOnChanges() {}
+    ngOnChanges() {
+        if (!this.doOnce) {
+            this.doOnce = true;
+            this.checkPokemonSelected();
+        }
+    }
+
+    private checkIfLoaded(): void {
+        if (
+            this.pokemonList !== undefined &&
+            this.pokemonSelected !== undefined
+        ) {
+            setTimeout(() => {
+                this.isLoaded = true;
+            }, 200);
+            return;
+        } else {
+            setTimeout(() => {
+                this.checkIfLoaded();
+            }, 200);
+        }
+    }
 
     private checkPokemonSelected(): void {
         if (window.sessionStorage[this.storagePokemonKey] === undefined) {
@@ -129,15 +147,5 @@ export class PokedexListComponent implements OnInit, OnChanges {
             this.currentSelectPokemonImage = this.pokemonSelected.sprites.front_shiny;
         }
         this.currentImageIsShiny = !this.currentImageIsShiny;
-    }
-    public showModal() {
-        this.displayModal = true;
-        this.content.header = 'This is the title I sent from Title';
-        this.content.body =
-            'This is the body I want to insert into the modal body';
-        this.content.size = [60, 50];
-    }
-    public hideModal() {
-        this.displayModal = false;
     }
 }

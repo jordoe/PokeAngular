@@ -18,19 +18,6 @@ export class PokedexComponent implements OnInit {
             this.pokemonList = response;
             this.pokemonSelected = response[0];
         });
-        // this.pokedexService
-        //     .getPokemonDetailsByName(1)
-        //     .subscribe((response: any) => {
-        //         console.log(response);
-        //     });
-        // this.pokedexService.getPokemonMoves(1).subscribe((response: any) => {
-        //     console.log(response);
-        // });
-        this.pokedexService
-            .getPokemonLearnMethod(1)
-            .subscribe((response: any) => {
-                console.log(response);
-            });
     }
     public typeSelect(type: string): void {
         if (type !== '') {
