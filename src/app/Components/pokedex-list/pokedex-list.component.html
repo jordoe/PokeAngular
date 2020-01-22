@@ -73,7 +73,7 @@
                         />
                     </div>
                     <img
-                        src="assets/shiny_pokemon.png"
+                        src="assets/img/shiny_pokemon.png"
                         class="pokemon-display__image--shiny"
                         alt="shinyPokemon"
                         (click)="switchShiny()"
@@ -83,14 +83,14 @@
                         class="pokemon-display__imageType"
                     >
                         <img
-                            src="assets/types_icons_2/{{
+                            src="assets/img/types_icons_2/{{
                                 this.pokemonSelected.types[0].type.name
                             }}_icon.png"
                             alt="{{ this.pokemonSelected.types[0].type.name }}"
                         />
                         <img
                             *ngIf="this.pokemonSelected.types.length > 1"
-                            src="assets/types_icons_2/{{
+                            src="assets/img/types_icons_2/{{
                                 this.pokemonSelected.types[1].type.name
                             }}_icon.png"
                             alt="{{ this.pokemonSelected.types[1].type.name }}"
