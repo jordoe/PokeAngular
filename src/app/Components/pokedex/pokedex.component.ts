@@ -18,6 +18,9 @@ export class PokedexComponent implements OnInit {
             this.pokemonList = response;
             this.pokemonSelected = response[0];
         });
+        this.pokedexService.getTopTenPokemon().subscribe((response: any) => {
+            console.log(response);
+        });
     }
     public typeSelect(type: string): void {
         if (type !== '') {

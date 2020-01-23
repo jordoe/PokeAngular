@@ -9,7 +9,7 @@ import { PokedexService } from 'src/app/Services/pokedex.service';
 export class PokedexDetailSizeComponent implements OnInit {
     @Input() pokemonSelectedId;
     private pokemonImageSrc: string;
-    public pokemonHeight: number;
+    private pokemonHeight: number;
     private trainerHeight = 1.75;
 
     public displaySize: boolean = false;

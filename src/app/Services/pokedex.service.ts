@@ -17,6 +17,7 @@ import {
     filter,
     scan,
     tap,
+    windowWhen,
 } from 'rxjs/operators';
 
 @Injectable({
@@ -26,7 +27,9 @@ export class PokedexService {
     public pokemonList: any[] = [];
     private data: Observable<any> = undefined;
 
-    constructor(private https: HttpClient) {
+    public topPokemonList: any[] = [];
+
+    constructor(private http: HttpClient) {
         if (!window.localStorage.getItem('pokemonFullList')) {
             window.localStorage.setItem(
                 'pokemonFullList',
@@ -37,8 +40,8 @@ export class PokedexService {
 
     private getPokemonListData() {
         if (this.data === undefined) {
-            const url = 'https://pokeapi.co/api/v2/pokemon/?limit=811';
-            this.data = this.https.get(url);
+            const url = 'http://pokeapi.co/api/v2/pokemon/?limit=811';
+            this.data = this.http.get(url);
             return this.data;
         } else {
             return this.data;
@@ -66,8 +69,8 @@ export class PokedexService {
     }
     public getPokemonByType(type: string): Observable<any> {
         if (type !== 'all') {
-            const url = 'https://pokeapi.co/api/v2/type/' + type + '/';
-            const data = this.https.get(url);
+            const url = 'http://pokeapi.co/api/v2/type/' + type + '/';
+            const data = this.http.get(url);
             return data.pipe(
                 map((res: any) => {
                     return res.pokemon.map((result, index) => ({
@@ -101,9 +104,9 @@ export class PokedexService {
             abilities: [],
             stats: [],
         };
-        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
-            this.https.get(url).subscribe((x: any) => {
+            this.http.get(url).subscribe((x: any) => {
                 pokemon.name = x.name;
                 pokemon.id = x.id;
                 pokemon.height = x.height;
@@ -123,7 +126,7 @@ export class PokedexService {
                         effort: elem.effort,
                     });
                 }
-                this.https.get(x.species.url).subscribe((y: any) => {
+                this.http.get(x.species.url).subscribe((y: any) => {
                     pokemon.description = y.flavor_text_entries;
                     observer.next(pokemon);
                 });
@@ -132,10 +135,10 @@ export class PokedexService {
         return obs;
     }
     public getPokemonEvolutionChain(id: string | number): Observable<any> {
-        const url = 'https://pokeapi.co/api/v2/pokemon-species/' + id + '/';
+        const url = 'http://pokeapi.co/api/v2/pokemon-species/' + id + '/';
         const obs = new Observable(observer => {
-            this.https.get(url).subscribe((x: any) => {
-                this.https
+            this.http.get(url).subscribe((x: any) => {
+                this.http
                     .get(x.evolution_chain.url)
                     .subscribe((response: any) => {
                         let chain = [];
@@ -159,8 +162,8 @@ export class PokedexService {
                         const observablesArr = [];
                         for (const pokemon of chain) {
                             observablesArr.push(
-                                this.https.get(
-                                    'https://pokeapi.co/api/v2/pokemon/' +
+                                this.http.get(
+                                    'http://pokeapi.co/api/v2/pokemon/' +
                                         pokemon +
                                         '/'
                                 )
@@ -184,15 +187,124 @@ export class PokedexService {
         });
         return obs;
     }
+    public getTopTenPokemon(): Observable<any> {
+        const storageName = 'topPokemonList';
+        if (window.localStorage[storageName] !== undefined) {
+            this.topPokemonList = JSON.parse(window.localStorage[storageName]);
+            return new Observable(observer => {
+                observer.next(this.topPokemonList);
+            });
+        } else {
+            return new Observable(observer => {
+                this.initTopTenPokemon().subscribe((result: any) => {
+                    this.topPokemonList = result;
+                    localStorage.clear();
+                    window.localStorage[storageName] = JSON.stringify(
+                        this.topPokemonList
+                    );
+                    observer.next(this.topPokemonList);
+                });
+            });
+        }
+    }
+    public initTopTenPokemon(): Observable<any> {
+        let topHp: any[] = [];
+        let topAttack: any[] = [];
+        let topDefense: any[] = [];
+        let topSAttack: any[] = [];
+        let topSDefense: any[] = [];
+        let topSpeed: any[] = [];
+        let topAverage: any[] = [];
+        const data = this.getPokemonListData();
+        const obs = new Observable(observer => {
+            data.subscribe((x: any) => {
+                const obsArr: Observable<any>[] = [];
+                x.results.forEach(pokemon => {
+                    obsArr.push(this.http.get(pokemon.url));
+                });
+                forkJoin(obsArr).subscribe((result: any) => {
+                    const resultArr: any[] = [];
+                    for (const [i, pokemon] of result.entries()) {
+                        resultArr.push(pokemon);
+                    }
+                    function getTopTen(arr, statIndex) {
+                        let myArr = arr;
+                        let myResultArr = [];
+                        myArr = arr
+                            .sort(
+                                (a, b) =>
+                                    b.stats[statIndex].base_stat -
+                                    a.stats[statIndex].base_stat
+                            )
+                            .filter(x => x.sprites.front_default !== null)
+                            .slice(0, 10);
+                        myResultArr = parseArr(myArr, statIndex);
+                        return myResultArr;
+                    }
+                    function parseArr(arr, statIndex) {
+                        const myResultArr = [];
+                        for (const pokemon of arr) {
+                            const obj: any = {};
+                            obj.id = pokemon.id;
+                            obj.name = pokemon.name;
+                            obj.image = pokemon.sprites.front_default;
+                            const statArr: any = [];
+                            for (const elem of pokemon.stats) {
+                                statArr.push({
+                                    name: elem.stat.name,
+                                    baseStat: elem.base_stat,
+                                    effort: elem.effort,
+                                });
+                            }
+                            obj.stats = statArr;
+                            myResultArr.push(obj);
+                        }
+                        return myResultArr;
+                    }
+                    function getAverage(obj) {
+                        return (
+                            (obj.stats[0].base_stat +
+                                obj.stats[1].base_stat +
+                                obj.stats[2].base_stat +
+                                obj.stats[3].base_stat +
+                                obj.stats[4].base_stat +
+                                obj.stats[5].base_stat) /
+                            6
+                        );
+                    }
+                    topHp = getTopTen(resultArr, 5);
+                    topAttack = getTopTen(resultArr, 4);
+                    topDefense = getTopTen(resultArr, 3);
+                    topSAttack = getTopTen(resultArr, 2);
+                    topSDefense = getTopTen(resultArr, 1);
+                    topSpeed = getTopTen(resultArr, 0);
+                    topAverage = resultArr
+                        .sort((a, b) => getAverage(b) - getAverage(a))
+                        .slice(0, 10);
+                    topAverage = parseArr(topAverage, null);
+                    observer.next([
+                        topSpeed,
+                        topSDefense,
+                        topSAttack,
+                        topDefense,
+                        topAttack,
+                        topHp,
+                        topAverage,
+                    ]);
+                });
+            });
+        });
+        return obs;
+    }
     public getPokemonMoves(id: string | number): Observable<any> {
         const pokemonMovesResult: object[] = [];
-        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
-            this.https.get(url).subscribe((x: any) => {
+            this.http.get(url).subscribe((x: any) => {
                 const observablesArr = [];
                 let details: any = {};
                 for (const moves of x.moves) {
-                    observablesArr.push(this.https.get(moves.move.url));
+                    observablesArr.push(this.http.get(moves.move.url));
                 }
                 forkJoin(observablesArr).subscribe((result: any) => {
                     for (const [i, observable] of result.entries()) {
@@ -216,15 +328,15 @@ export class PokedexService {
     }
     public getPokemonLearnLevel(id: string | number): Observable<any> {
         const movesLearnMethod: object[] = [];
-        const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
+        const url = 'http://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
-            this.https.get(url).subscribe((data: any) => {
+            this.http.get(url).subscribe((data: any) => {
                 const observablesArr = [];
                 const levelArr = [];
                 let details: any = {};
                 for (const moves of data.moves) {
                     observablesArr.push(
-                        this.https.get(
+                        this.http.get(
                             moves.version_group_details[0].move_learn_method.url
                         )
                     );
