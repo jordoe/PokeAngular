@@ -12,12 +12,18 @@
 .elements-left {
     height: 100%;
     display: flex;
+    @media only screen and (max-width: 800px) {
+        width: 75%;
+    }
 }
 
 .elements-right {
     height: 100%;
     margin-left: auto;
     display: flex;
+    @media only screen and (max-width: 800px) {
+        width: 25%;
+    }
 }
 
 .logo-link {
@@ -58,6 +64,11 @@
     padding: 0 10px 0 10px;
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 800px) {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+    }
 
     @media only screen and (max-width: 320px) {
         margin: 0;
@@ -79,9 +90,18 @@
             background-color: rgb(247, 97, 97);
             cursor: pointer;
         }
-        @media only screen and (max-width: 600px) {
-            margin: 0 20px 0 20px;
+        @media only screen and (max-width: 800px) {
+            text-align: center;
         }
+    }
+}
+
+.showOnMobile {
+    display: none;
+    @media only screen and (max-width: 600px) {
+        display: flex;
+        justify-content: center;
+        width: 33.3%;
     }
 }
 
