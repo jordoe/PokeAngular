@@ -31,10 +31,6 @@ import { TestComponentComponent } from './test-component/test-component.componen
 import { PokedexDetailSizeComponent } from './Components/pokedex-detail-size/pokedex-detail-size.component';
 import { PokedexTopPokemonComponent } from './Components/pokedex-top-pokemon/pokedex-top-pokemon.component';
 
-export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, 'PokeAngular/assets/i18n/', '.json');
-}
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -64,7 +60,11 @@ export function HttpLoaderFactory(http: HttpClient) {
             loader: {
                 provide: TranslateLoader,
                 useFactory: (http: HttpClient) => {
-                    return new TranslateHttpLoader(http);
+                    return new TranslateHttpLoader(
+                        http,
+                        './PokeAngular/assets/i18n/',
+                        '.json'
+                    );
                 },
                 deps: [HttpClient],
             },
