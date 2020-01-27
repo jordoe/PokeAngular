@@ -32,7 +32,7 @@ import { PokedexDetailSizeComponent } from './Components/pokedex-detail-size/pok
 import { PokedexTopPokemonComponent } from './Components/pokedex-top-pokemon/pokedex-top-pokemon.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, 'PokeAngular/assets/i18n/', '.json');
 }
 
 @NgModule({
