@@ -16,18 +16,30 @@
                     aria-hidden="true"
                 ></i>
             </span>
-            <span>Pokémon Moves</span>
+            <span>{{ 'details.movements' | translate }}</span>
         </div>
     </div>
-    <div [ngClass]="{ hideMoves: !displayMoves }">
-        <div class="move_head">
-            <div class="movement__property">Name</div>
-            <div class="movement__property">Power</div>
-            <div class="movement__property optional">Accuracy</div>
-            <div class="movement__property optional">PP</div>
-            <div class="movement__property">Type</div>
+    <div [ngClass]="{ hideMoves: !displayMoves }" class="moves-container">
+        <div class="moves-header">
+            <div class="move_head">
+                <div class="movement__property">
+                    {{ 'details.moves.name' | translate }}
+                </div>
+                <div class="movement__property">
+                    {{ 'details.moves.power' | translate }}
+                </div>
+                <div class="movement__property optional">
+                    {{ 'details.moves.accuarcy' | translate }}
+                </div>
+                <div class="movement__property optional">
+                    {{ 'details.moves.pp' | translate }}
+                </div>
+                <div class="movement__property">
+                    {{ 'details.moves.type' | translate }}
+                </div>
+            </div>
+            <hr />
         </div>
-        <hr />
         <div
             class="movement collapsible"
             *ngFor="let move of pokeMovesList; let index = index"
@@ -77,15 +89,21 @@
             </div>
             <div class="movement__extra-row" *ngIf="visibleIndex === index">
                 <div class="description-row">
-                    <span class="row-title">Description: </span>
+                    <span class="row-title"
+                        >{{ 'details.moves.description' | translate }}:
+                    </span>
                     <span>{{ move.description }}</span>
                 </div>
                 <div class="learninfo-row">
                     <div *ngIf="arr[index]">
-                        <span class="row-title">Learn by: </span>
+                        <span class="row-title"
+                            >{{ 'details.moves.learnby' | translate }}
+                        </span>
                         {{ arr[index].name }}
-                        <span *ngIf="arr[index].name === 'level-up'">
-                            <span class="row-title">at level</span>
+                        <span *ngIf="arr[index].level !== 0">
+                            <span class="row-title">{{
+                                'details.moves.atlevel' | translate
+                            }}</span>
                             {{ arr[index].level }}
                         </span>
                     </div>

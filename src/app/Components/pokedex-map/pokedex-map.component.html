@@ -16,9 +16,11 @@
         </div>
     </div>
     <div class="buttons">
-        <a class="btn__back" routerLink="/list">Exit</a>
+        <a class="btn__back" routerLink="/list">{{
+            'buttons.exit' | translate
+        }}</a>
         <div class="btn" routerLink="/detail/{{ pokemonId }}">
-            Details
+            {{ 'buttons.details' | translate }}
         </div>
     </div>
 </div>

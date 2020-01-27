@@ -24,6 +24,8 @@ export class PokedexPokeworldComponent implements OnInit {
     private map: any;
     private markers: any;
 
+    public isLoaded: boolean = false;
+
     public pokemonTypes: string[] = [
         'all',
         'normal',
@@ -50,11 +52,28 @@ export class PokedexPokeworldComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.checkIfLoaded();
         this.pokedexService.getPokemonList().subscribe((response: any) => {
             this.currentPokemonList = response;
             this.fullPokemonList = response;
             this.initMap(this.currentPokemonList);
         });
+    }
+
+    private checkIfLoaded(): void {
+        if (
+            this.currentPokemonList !== undefined &&
+            this.fullPokemonList !== undefined
+        ) {
+            setTimeout(() => {
+                this.isLoaded = true;
+            }, 10);
+            return;
+        } else {
+            setTimeout(() => {
+                this.checkIfLoaded();
+            }, 10);
+        }
     }
 
     public onChange(type: string): void {

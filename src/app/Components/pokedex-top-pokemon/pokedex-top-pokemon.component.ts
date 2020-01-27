@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PokedexService } from 'src/app/Services/pokedex.service';
 
 @Component({
@@ -8,24 +8,39 @@ import { PokedexService } from 'src/app/Services/pokedex.service';
 })
 export class PokedexTopPokemonComponent implements OnInit {
     public statsButtons: string[] = [
-        'Speed',
-        'S. Defense',
-        'S. Attack',
-        'Defense',
-        'Attack',
-        'HP',
-        'Average',
+        'speed',
+        'sdefense',
+        'sattack',
+        'defense',
+        'attack',
+        'hp',
+        'average',
     ];
     public topArr: any[] = [];
     public selectedStat = 6;
 
+    public isLoaded: boolean = false;
+
     constructor(private pokedexService: PokedexService) {}
 
     ngOnInit() {
+        this.checkIfLoaded();
         this.pokedexService.getTopTenPokemon().subscribe((response: any) => {
             this.topArr = response;
-            console.log(this.topArr[0]);
         });
+    }
+
+    private checkIfLoaded(): void {
+        if (this.topArr.length !== 0) {
+            setTimeout(() => {
+                this.isLoaded = true;
+            }, 100);
+            return;
+        } else {
+            setTimeout(() => {
+                this.checkIfLoaded();
+            }, 10);
+        }
     }
 
     public getPercentage(numb: number): string {

@@ -20,6 +20,7 @@
 .elements-right {
     height: 100%;
     margin-left: auto;
+    margin-right: 1rem;
     display: flex;
     @media only screen and (max-width: 800px) {
         width: 25%;
@@ -58,9 +59,9 @@
 }
 
 .option {
+    position: relative;
     color: white;
     font-size: 18px;
-    margin: 0 20px 0 20px;
     padding: 0 10px 0 10px;
     display: flex;
     align-items: center;
@@ -77,6 +78,10 @@
     &:hover {
         background-color: rgb(247, 97, 97);
         cursor: pointer;
+    }
+
+    &__selected {
+        background-color: rgb(247, 97, 97);
     }
 
     &--noMargins {
@@ -107,26 +112,39 @@
     }
 }
 
-.about-container {
+.lang-container {
+    cursor: default;
     position: absolute;
-    top: 100px;
-    right: 26px;
-    height: 200px;
-    width: 200px;
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    bottom: -12rem;
+    right: 0;
+    height: 12rem;
+    width: 10rem;
+    background-color: rgb(247, 97, 97);
     box-shadow: -0.5rem 0.5rem rgba(0, 0, 0, 0.2);
     z-index: 3;
+    @media only screen and (max-width: 800px) {
+        bottom: 0;
+        top: -12rem;
+        box-shadow: -0.5rem -0.5rem rgba(0, 0, 0, 0.2);
+    }
 }
 
-.about {
-    height: 100%;
-    padding: 1rem 0;
+.lang {
+    width: 85%;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
     display: flex;
+    background-color: #ea4747;
     flex-direction: column;
     align-items: center;
     position: relative;
     z-index: 2;
-    background-color: white;
+    box-shadow: -0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.2);
     &--title {
         color: $secondary-textColor;
         flex-grow: 1;
@@ -140,6 +158,9 @@
         justify-content: center;
         align-items: center;
         flex-grow: 1;
+    }
+    &__selected {
+        background-color: $secondary-backgroundColor;
     }
 }
 

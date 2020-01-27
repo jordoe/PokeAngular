@@ -1,7 +1,7 @@
 <div class="pokedex">
     <div class="loading-container" *ngIf="!isLoaded">
         <app-loading></app-loading>
-        <div class="loading-text">Loading list...</div>
+        <div class="loading-text">{{ 'loading.list' | translate }}</div>
     </div>
     <div class="pokedex__left">
         <form action="#" class="search">
@@ -13,13 +13,13 @@
             >
                 <option value="" selected style="display:none">Type</option>
                 <option *ngFor="let type of pokemonTypes" value="{{ type }}">{{
-                    type.charAt(0).toUpperCase() + type.slice(1)
+                    'list.types.' + type | translate
                 }}</option>
             </select>
             <input
                 type="text"
                 class="search__input"
-                placeholder="Search Pokemon"
+                placeholder="{{ 'buttons.searchph' | translate }}"
                 name="term"
                 [(ngModel)]="term"
             />
@@ -108,13 +108,16 @@
         </div>
         <div class="options">
             <div>
-                <a class="btn" routerLink="/detail/{{ localPokemon.id }}"
-                    >Details</a
-                >
+                <a class="btn" routerLink="/detail/{{ localPokemon.id }}">{{
+                    'buttons.details' | translate
+                }}</a>
             </div>
             <div>
-                <a href="#" class="btn" routerLink="/map/{{ localPokemon.id }}"
-                    >Locate</a
+                <a
+                    href="#"
+                    class="btn"
+                    routerLink="/map/{{ localPokemon.id }}"
+                    >{{ 'buttons.locate' | translate }}</a
                 >
             </div>
         </div>

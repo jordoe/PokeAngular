@@ -10,7 +10,7 @@ export interface PokemonDetails {
     height: number;
     weight: number;
     types: any[];
-    description: string[];
+    description: string;
     sprites: {
         front_default: string | null;
         front_shiny: string | null;

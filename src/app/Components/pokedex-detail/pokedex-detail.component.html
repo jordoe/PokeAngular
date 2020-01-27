@@ -1,15 +1,9 @@
 <div class="pokedex">
     <div class="loading-container" *ngIf="!isLoaded">
         <app-loading></app-loading>
-        <div class="loading-text">Loading details...</div>
+        <div class="loading-text">{{ 'loading.details' | translate }}</div>
     </div>
     <div class="pokedex__display">
-        <!-- <div
-            *ngIf="evolutionChain == undefined && pokemonSelected == undefined"
-            class="loading"
-        >
-            Loading...
-        </div> -->
         <div
             *ngIf="
                 evolutionChain !== undefined && pokemonSelected !== undefined
@@ -74,22 +68,30 @@
                     <div class="specific-info">
                         <div class="pokemon-description">
                             <div class="detail-title-panel">
-                                <span>Description:</span>
+                                <span
+                                    >{{
+                                        'details.description' | translate
+                                    }}:</span
+                                >
                             </div>
                             <div class="detail-panel">
-                                {{ englishDescription.flavor_text }}
+                                {{ pokemonSelected.description }}
                             </div>
                         </div>
                         <div class="pokemon-evolution">
                             <div class="detail-title-panel">
-                                <span>Evolution chain:</span>
+                                <span
+                                    >{{
+                                        'details.evolutionchain' | translate
+                                    }}:</span
+                                >
                             </div>
                             <div
                                 *ngIf="evolutionChain !== undefined"
                                 class="detail-panel__evolution"
                             >
                                 <div *ngIf="evolutionChain.length < 2">
-                                    This Pokémon has no evolution.
+                                    {{ 'details.noevolution' | translate }}
                                 </div>
                                 <div
                                     *ngIf="evolutionChain.length > 1"
@@ -119,7 +121,7 @@
                     <div class="tecnic-info">
                         <div class="tecnic-info__stats">
                             <div class="detail-title-panel">
-                                Stats:
+                                {{ 'details.stats' | translate }}:
                             </div>
                             <div class="detail-panel__stats">
                                 <div
@@ -129,7 +131,7 @@
                                             .reverse()
                                     "
                                 >
-                                    {{ stat.name }}
+                                    {{ 'statistics.' + stat.name | translate }}
                                     <hr
                                         *ngIf="stat.baseStat <= 35"
                                         class="progressBar progressBar--red"
@@ -159,7 +161,7 @@
                         </div>
                         <div class="tecnic-info__abilities">
                             <div class="detail-title-panel">
-                                Abilities:
+                                {{ 'details.abilities' | translate }}:
                             </div>
                             <div class="detail-panel__abilities">
                                 <div
@@ -203,14 +205,18 @@
         </div>
     </div>
     <div class="buttons" *ngIf="pokemonSelected !== undefined">
-        <a class="btn__back" routerLink="/list">Exit</a>
+        <a class="btn__back" routerLink="/list">{{
+            'buttons.exit' | translate
+        }}</a>
         <div class="buttons">
             <i
                 class="arrow fas fa-caret-left"
                 (click)="cleanPokemonData()"
                 routerLink="/detail/{{ pokemonSelected.id - 1 }}"
             ></i>
-            <a class="btn" routerLink="/map/{{ pokemonSelected.id }}">Locate</a>
+            <a class="btn" routerLink="/map/{{ pokemonSelected.id }}">{{
+                'buttons.locate' | translate
+            }}</a>
             <i
                 class="arrow fas fa-caret-right"
                 (click)="cleanPokemonData()"

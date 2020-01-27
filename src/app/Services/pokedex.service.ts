@@ -19,6 +19,7 @@ import {
     tap,
     windowWhen,
 } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root',
@@ -29,13 +30,39 @@ export class PokedexService {
 
     public topPokemonList: any[] = [];
 
-    constructor(private https: HttpClient) {
+    public language = '';
+    private defaultLang = 'en';
+
+    constructor(
+        private https: HttpClient,
+        private translate: TranslateService
+    ) {
+        this.initLanguage();
         if (!window.localStorage.getItem('pokemonFullList')) {
             window.localStorage.setItem(
                 'pokemonFullList',
                 JSON.stringify(this.pokemonList)
             );
         }
+    }
+
+    private initLanguage(): void {
+        const storageName = 'language';
+        if (window.localStorage[storageName] !== undefined) {
+            this.language = window.localStorage[storageName];
+        } else {
+            this.language = this.defaultLang;
+            window.localStorage[storageName] = this.defaultLang;
+        }
+        this.changeLang(this.language);
+        this.translate.setDefaultLang(this.language);
+    }
+
+    public changeLang(lang: string): void {
+        this.language = lang;
+        const storageName = 'language';
+        window.localStorage[storageName] = this.language;
+        this.translate.use(lang);
     }
 
     private getPokemonListData() {
@@ -96,7 +123,7 @@ export class PokedexService {
             height: 0,
             weight: 0,
             types: [],
-            description: [],
+            description: '',
             sprites: {
                 front_default: '',
                 front_shiny: '',
@@ -107,27 +134,52 @@ export class PokedexService {
         const url = 'https://pokeapi.co/api/v2/pokemon/' + id + '/';
         const obs = new Observable(observer => {
             this.https.get(url).subscribe((x: any) => {
-                pokemon.name = x.name;
                 pokemon.id = x.id;
+                pokemon.name = x.name;
                 pokemon.height = x.height;
                 pokemon.weight = x.weight;
                 pokemon.types = x.types;
                 pokemon.sprites = x.sprites;
+                pokemon.abilities = [];
                 for (const elem of x.abilities) {
-                    pokemon.abilities.push({
-                        name: elem.ability.name,
-                        isHidden: elem.is_hidden,
-                    });
+                    const obj = { name: '', isHidden: '' };
+                    obj.isHidden = elem.is_hidden;
+                    this.https
+                        .get(elem.ability.url)
+                        .subscribe((abilityLanguage: any) => {
+                            for (const abilityChooseLanguage of abilityLanguage.names) {
+                                if (
+                                    abilityChooseLanguage.language.name ===
+                                    this.language
+                                ) {
+                                    obj.name = abilityChooseLanguage.name;
+                                    pokemon.abilities.push(obj);
+                                    break;
+                                }
+                            }
+                        });
                 }
+                pokemon.stats = [];
                 for (const elem of x.stats) {
-                    pokemon.stats.push({
-                        name: elem.stat.name,
-                        baseStat: elem.base_stat,
-                        effort: elem.effort,
-                    });
+                    const obj = { name: '', baseStat: '', effort: '' };
+                    obj.baseStat = elem.base_stat;
+                    obj.effort = elem.effort;
+                    obj.name = elem.stat.name;
+                    pokemon.stats.push(obj);
                 }
                 this.https.get(x.species.url).subscribe((y: any) => {
-                    pokemon.description = y.flavor_text_entries;
+                    for (const language of y.flavor_text_entries) {
+                        if (language.language.name === this.language) {
+                            pokemon.description = language.flavor_text;
+                            break;
+                        }
+                    }
+                    // for (const elem of y.names) {
+                    //     if (elem.language.name === this.language) {
+                    //         pokemon.name = elem.name;
+                    //         break;
+                    //     }
+                    // }
                     observer.next(pokemon);
                 });
             });
@@ -308,20 +360,27 @@ export class PokedexService {
                 }
                 forkJoin(observablesArr).subscribe((result: any) => {
                     for (const [i, observable] of result.entries()) {
-                        details.name = observable.name;
+                        for (const n of observable.names) {
+                            if (n.language.name === this.language) {
+                                details.name = n.name;
+                            }
+                        }
                         details.power = observable.power;
                         details.accuracy = observable.accuracy;
                         details.pp = observable.pp;
-                        details.description =
-                            observable.effect_entries[0].effect;
+                        for (const d of observable.flavor_text_entries) {
+                            if (d.language.name === this.language) {
+                                details.description = d.flavor_text;
+                            }
+                        }
                         details.type1 = observable.type.name;
                         details.type2 = observable.damage_class.name;
                         details.drain = observable.meta.drain;
                         pokemonMovesResult[i] = details;
                         details = {};
                     }
+                    observer.next(pokemonMovesResult);
                 });
-                observer.next(pokemonMovesResult);
             });
         });
         return obs;
@@ -346,7 +405,14 @@ export class PokedexService {
                 }
                 forkJoin(observablesArr).subscribe((result: any) => {
                     for (const [i, observable] of result.entries()) {
-                        details.name = observable.name;
+                        for (const n of observable.names) {
+                            if (n.language.name === this.language) {
+                                details.name = n.name;
+                            }
+                        }
+                        if (this.language === 'ja') {
+                            details.name = observable.name;
+                        }
                         details.method = observable.descriptions[0].description;
                         details.level = levelArr[i];
                         movesLearnMethod.push(details);

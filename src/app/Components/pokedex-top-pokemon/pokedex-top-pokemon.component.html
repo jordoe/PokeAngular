@@ -1,4 +1,8 @@
 <div class="pokedex">
+    <div class="loading-container" *ngIf="!isLoaded">
+        <app-loading></app-loading>
+        <div class="loading-text">{{ 'loading.top' | translate }}</div>
+    </div>
     <div class="pokedex__top">
         <div class="buttons">
             <a
@@ -8,7 +12,7 @@
                 (click)="selectStat(i)"
                 [class.btn--selectedStat]="i == selectedStat"
             >
-                {{ stat }}
+                {{ 'top.' + stat | translate }}
             </a>
         </div>
     </div>
@@ -36,7 +40,7 @@
                     </div>
                     <div class="pokemon__stats" *ngIf="poke !== undefined">
                         <div *ngFor="let stat of poke.stats.slice().reverse()">
-                            {{ stat.name }}
+                            {{ 'statistics.' + stat.name | translate }}
                             <hr
                                 *ngIf="stat.baseStat <= 35"
                                 class="progressBar progressBar--red"

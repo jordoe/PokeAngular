@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import myTemplate from 'asdfghjk.html';
+import { PokedexService } from 'src/app/Services/pokedex.service';
 
 @Component({
     selector: 'app-nav',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-    public showAbout: boolean = false;
+    public showLang: boolean = false;
     public aboutUs: string[] = [
         'Jorge Domínguez',
         'Rubén Martín',
@@ -23,16 +23,22 @@ export class NavComponent implements OnInit {
     };
     public displayModal = false;
 
-    constructor() {}
+    public selectedLang = '';
 
-    ngOnInit() {}
+    constructor(private pokedexService: PokedexService) {}
 
-    public clickAboutButton(): void {
-        if (this.showAbout) {
-            this.showAbout = false;
-        } else {
-            this.showAbout = true;
-        }
+    ngOnInit() {
+        this.selectedLang = this.pokedexService.language;
+    }
+
+    public clickLangButton(): void {
+        this.showLang = !this.showLang;
+    }
+
+    public changeLang(lang: string): void {
+        this.pokedexService.changeLang(lang);
+        this.selectedLang = this.pokedexService.language;
+        window.location.reload();
     }
 
     public showModal() {

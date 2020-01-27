@@ -4,28 +4,49 @@
             <img src="assets/img/Logo.png" class="logo" alt="Pokemon logo" />
         </a>
         <div class="option--noMargins" routerLink="/list">
-            Pokédex
+            {{ 'nav.pokedex' | translate }}
         </div>
         <div class="option--noMargins" routerLink="/pokeworld">
-            PokéWorld
+            {{ 'nav.pokeworld' | translate }}
         </div>
         <div class="option--noMargins" routerLink="/top">
-            Top Pokémon
+            {{ 'nav.top' | translate }}
         </div>
     </div>
     <div class="elements-right">
-        <div class="title">PokeAngular</div>
-        <div class="option" (click)="showModal()">
-            About Us
-            <div class="about-container" *ngIf="showAbout">
-                <div class="about">
-                    <h3 class="about--title">Made by:</h3>
-                    <h3 *ngFor="let name of aboutUs" class="about--name">
-                        {{ name }}
-                    </h3>
+        <div class="title">PokéAngular</div>
+        <div
+            class="option"
+            (click)="clickLangButton()"
+            [class.option__selected]="showLang"
+        >
+            {{ 'nav.lang' | translate }}
+            <div class="lang-container" *ngIf="showLang">
+                <div
+                    class="lang"
+                    (click)="changeLang('en')"
+                    [class.lang__selected]="selectedLang == 'en'"
+                >
+                    {{ 'nav.language.en' | translate }}
                 </div>
-                <i class="arrow fas fa-caret-up"></i>
+                <div
+                    class="lang"
+                    (click)="changeLang('es')"
+                    [class.lang__selected]="selectedLang == 'es'"
+                >
+                    {{ 'nav.language.es' | translate }}
+                </div>
+                <div
+                    class="lang"
+                    (click)="changeLang('ja')"
+                    [class.lang__selected]="selectedLang == 'ja'"
+                >
+                    {{ 'nav.language.ja' | translate }}
+                </div>
             </div>
+        </div>
+        <div class="option" (click)="showModal()">
+            {{ 'nav.about' | translate }}
         </div>
     </div>
 </div>

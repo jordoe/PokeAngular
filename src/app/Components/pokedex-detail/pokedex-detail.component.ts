@@ -19,7 +19,6 @@ import { PokedexService } from '../../Services/pokedex.service';
 export class PokedexDetailComponent implements OnInit {
     public pokemonSelected: any = undefined;
     public pokemonSelectedId: string;
-    public englishDescription: any;
     public currentSelectPokemonImage: string | null;
     public currentImageIsShiny: boolean = false;
 
@@ -46,11 +45,6 @@ export class PokedexDetailComponent implements OnInit {
                 .getPokemonDetailsByName(this.pokemonSelectedId)
                 .subscribe(response => {
                     this.pokemonSelected = response;
-                    if (response.description[1].language.name === 'ja') {
-                        this.englishDescription = response.description[2];
-                    } else {
-                        this.englishDescription = response.description[1];
-                    }
                     this.currentSelectPokemonImage =
                         response.sprites.front_default;
                     this.pokemonEvolveImage = response.sprites.front_default;
@@ -69,11 +63,7 @@ export class PokedexDetailComponent implements OnInit {
     }
 
     private checkIfLoaded(): void {
-        if (
-            this.englishDescription !== undefined &&
-            this.pokemonSelected !== undefined &&
-            this.movesLoaded
-        ) {
+        if (this.pokemonSelected !== undefined && this.movesLoaded) {
             setTimeout(() => {
                 this.isLoaded = true;
                 this.movesLoaded = false;

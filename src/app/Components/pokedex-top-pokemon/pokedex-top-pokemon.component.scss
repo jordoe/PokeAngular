@@ -1,6 +1,7 @@
 @import '../../../variables.scss';
 
 .pokedex {
+    position: relative;
     padding-bottom: 3rem;
     &__display {
         height: 90%;
@@ -112,6 +113,9 @@
             background: $tertiary-backgroundColor;
             border: 2px solid #225a66;
         }
+        &::-webkit-scrollbar-corner {
+            background: #1f444d;
+        }
     }
 }
 
@@ -125,4 +129,8 @@
     &--green {
         background-color: #5fe688;
     }
+}
+
+.loading-container {
+    margin-top: -3rem;
 }

@@ -5,9 +5,6 @@ hr {
     border-top: 3px solid #358496;
     margin: 5px 0px 5px 0px;
 }
-.hideMoves {
-    display: none;
-}
 .display {
     width: 100%;
     display: flex;
@@ -26,7 +23,6 @@ hr {
         color: $primary-textColor;
         box-shadow: -0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.2);
         font-size: 2.7rem;
-        text-transform: uppercase;
     }
     &:hover {
         cursor: pointer;
@@ -42,6 +38,26 @@ hr {
     justify-content: space-between;
     color: $primary-textColor;
     font-size: 2.3rem;
+}
+.moves-header {
+    background-color: $secondary-backgroundColor;
+    z-index: 10;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding-bottom: 0.6rem;
+    width: 101%;
+    @media only screen and (max-width: 800px) {
+        width: 104%;
+    }
+}
+.moves-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hideMoves {
+    display: none;
 }
 .row-title {
     color: #2d6e7c;

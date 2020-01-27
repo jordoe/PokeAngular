@@ -1,4 +1,8 @@
 <div class="pokedex">
+    <div class="loading-container" *ngIf="!isLoaded">
+        <app-loading></app-loading>
+        <div class="loading-text">{{ 'loading.pokeworld' | translate }}</div>
+    </div>
     <div class="pokedex__top">
         <form action="#" class="search">
             <select
@@ -9,7 +13,7 @@
             >
                 <option value="" selected style="display:none">Type</option>
                 <option *ngFor="let type of pokemonTypes" value="{{ type }}">{{
-                    type.charAt(0).toUpperCase() + type.slice(1)
+                    'list.types.' + type | translate
                 }}</option>
             </select>
             <div class="search__input-parent">
@@ -17,7 +21,7 @@
                     type="text"
                     #inputtext
                     class="search__input"
-                    placeholder="Search Pokemon"
+                    placeholder="{{ 'buttons.searchph' | translate }}"
                     name="term"
                     [(ngModel)]="term"
                     (ngModelChange)="changeInput(inputtext.value)"
@@ -27,7 +31,7 @@
                     class="btn"
                     (click)="changeInput(inputtext.value)"
                 >
-                    Search
+                    {{ 'buttons.search' | translate }}
                 </a>
             </div>
         </form>

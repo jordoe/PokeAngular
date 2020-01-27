@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -23,6 +22,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { AppRoutingModule } from './Configuration/app-routing.module';
 import { LoadingComponent } from './Components/_shared/loading/loading.component';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { TestComponentComponent } from './test-component/test-component.component';
 import { PokedexDetailSizeComponent } from './Components/pokedex-detail-size/pokedex-detail-size.component';
@@ -48,7 +51,21 @@ import { PokedexTopPokemonComponent } from './Components/pokedex-top-pokemon/pok
         PokedexDetailSizeComponent,
         PokedexTopPokemonComponent,
     ],
-    imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (http: HttpClient) => {
+                    return new TranslateHttpLoader(http);
+                },
+                deps: [HttpClient],
+            },
+        }),
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
