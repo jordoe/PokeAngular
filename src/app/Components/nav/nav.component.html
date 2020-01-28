@@ -14,6 +14,11 @@
         </div>
     </div>
     <div class="elements-right">
+        <div
+            class="lang-background"
+            *ngIf="showLang"
+            (click)="clickLangButton()"
+        ></div>
         <div class="title">PokéAngular</div>
         <div
             class="option"
