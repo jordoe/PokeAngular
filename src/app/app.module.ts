@@ -62,7 +62,7 @@ import { PokedexTopPokemonComponent } from './Components/pokedex-top-pokemon/pok
                 useFactory: (http: HttpClient) => {
                     return new TranslateHttpLoader(
                         http,
-                        '../assets/i18n/',
+                        '/PokeAngular/assets/i18n/',
                         '.json'
                     );
                 },
