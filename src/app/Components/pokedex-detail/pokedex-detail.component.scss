@@ -145,7 +145,7 @@
         align-items: center;
         justify-content: space-between;
         height: 30%;
-        width: 50%;
+        width: 90%;
         &--number {
             font-size: 2rem;
             color: $primary-textColor;
@@ -154,7 +154,7 @@
             background-color: $button-backgroundColor;
             color: $primary-textColor;
             box-shadow: -0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.2);
-            padding: 1% 8%;
+            padding: 0 1rem;
             font-size: 3rem;
         }
         @media only screen and (max-width: 800px) {
@@ -214,8 +214,8 @@
     }
 }
 .pokemon-types {
-    width: 62%;
-    margin-top: 5%;
+    width: 40%;
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-around;

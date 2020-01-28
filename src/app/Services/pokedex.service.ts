@@ -187,55 +187,112 @@ export class PokedexService {
         return obs;
     }
     public getPokemonEvolutionChain(id: string | number): Observable<any> {
-        const url = 'https://pokeapi.co/api/v2/pokemon-species/' + id + '/';
         const obs = new Observable(observer => {
-            this.https.get(url).subscribe((x: any) => {
-                this.https
-                    .get(x.evolution_chain.url)
-                    .subscribe((response: any) => {
-                        let chain = [];
-                        chain.push(response.chain.species.name);
-                        function iterateEvolutions(
-                            obj,
-                            evChain
-                        ): Array<object> {
-                            if (obj.evolves_to.length === 0) {
-                                return evChain;
-                            } else {
-                                obj.evolves_to.forEach(evolution =>
-                                    chain.push(evolution.species.name)
-                                );
-                                obj = obj.evolves_to[0];
-                                return iterateEvolutions(obj, evChain);
-                            }
-                        }
-                        chain = iterateEvolutions(response.chain, chain);
-                        const chainResult: object[] = [];
-                        const observablesArr = [];
-                        for (const pokemon of chain) {
-                            observablesArr.push(
-                                this.https.get(
-                                    'https://pokeapi.co/api/v2/pokemon/' +
-                                        pokemon +
-                                        '/'
-                                )
-                            );
-                        }
-                        forkJoin(observablesArr).subscribe((result: any) => {
-                            for (const [i, observable] of result.entries()) {
-                                const details: any = {};
-                                details.id = observable.id;
-                                details.name = observable.name;
-                                details.image =
-                                    observable.sprites.front_default;
-                                details.image_shiny =
-                                    observable.sprites.front_shiny;
-                                chainResult[i] = details;
-                            }
-                            observer.next(chainResult);
+            this.https
+                .get('https://pokeapi.co/api/v2/pokemon/' + id + '/')
+                .subscribe((res: any) => {
+                    if (res.name.includes('-mega')) {
+                        id = res.species.name;
+                    }
+                    const url =
+                        'https://pokeapi.co/api/v2/pokemon-species/' + id + '/';
+                    this.https
+                        .get(url)
+                        .pipe(
+                            catchError(err => {
+                                observer.next([]);
+                                return throwError(err);
+                            })
+                        )
+                        .subscribe((x: any) => {
+                            let lastEvolutionUrl: string;
+                            const megaEvolutions: string[] = [];
+                            this.https
+                                .get(x.evolution_chain.url)
+                                .subscribe((response: any) => {
+                                    let chain = [];
+                                    chain.push(response.chain.species.name);
+                                    function iterateEvolutions(
+                                        obj,
+                                        evChain
+                                    ): Array<object> {
+                                        if (obj.evolves_to.length === 0) {
+                                            lastEvolutionUrl = obj.species.url;
+                                            return evChain;
+                                        } else {
+                                            obj.evolves_to.forEach(evolution =>
+                                                chain.push(
+                                                    evolution.species.name
+                                                )
+                                            );
+                                            obj = obj.evolves_to[0];
+                                            return iterateEvolutions(
+                                                obj,
+                                                evChain
+                                            );
+                                        }
+                                    }
+                                    const chainResult: object[] = [];
+                                    const observablesArr = [];
+                                    chain = iterateEvolutions(
+                                        response.chain,
+                                        chain
+                                    );
+                                    this.https
+                                        .get(lastEvolutionUrl)
+                                        .subscribe((y: any) => {
+                                            if (y.varieties.length > 1) {
+                                                for (const poke of y.varieties) {
+                                                    console.log(poke);
+                                                    if (
+                                                        poke.pokemon.name.includes(
+                                                            '-mega'
+                                                        )
+                                                    ) {
+                                                        megaEvolutions.push(
+                                                            poke.pokemon.name
+                                                        );
+                                                    }
+                                                }
+                                                for (const mega of megaEvolutions) {
+                                                    chain.push(mega);
+                                                }
+                                            }
+                                            returnResult.call(this);
+                                        });
+                                    function returnResult(): void {
+                                        for (const pokemon of chain) {
+                                            observablesArr.push(
+                                                this.https.get(
+                                                    'https://pokeapi.co/api/v2/pokemon/' +
+                                                        pokemon +
+                                                        '/'
+                                                )
+                                            );
+                                        }
+                                        forkJoin(observablesArr).subscribe(
+                                            (result: any) => {
+                                                for (const [
+                                                    i,
+                                                    observable,
+                                                ] of result.entries()) {
+                                                    const details: any = {};
+                                                    details.id = observable.id;
+                                                    details.name =
+                                                        observable.name;
+                                                    details.image =
+                                                        observable.sprites.front_default;
+                                                    details.image_shiny =
+                                                        observable.sprites.front_shiny;
+                                                    chainResult[i] = details;
+                                                }
+                                                observer.next(chainResult);
+                                            }
+                                        );
+                                    }
+                                });
                         });
-                    });
-            });
+                });
         });
         return obs;
     }
