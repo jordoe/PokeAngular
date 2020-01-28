@@ -1,4 +1,5 @@
 import { Pokemon, PokemonDetails } from '../../Utils/interfaces';
+import { Router, Event, NavigationEnd } from '@angular/router';
 
 import {
     Component,
@@ -54,26 +55,38 @@ export class PokedexListComponent implements OnInit, OnChanges {
         'fairy',
     ];
 
-    constructor() {}
+    constructor(private router: Router) {}
 
     ngOnInit() {
-        this.checkPokemonSelected();
         this.checkIfLoaded();
     }
 
     ngOnChanges() {
-        if (!this.doOnce) {
-            this.doOnce = true;
-            this.checkPokemonSelected();
+        // if (!this.doOnce) {
+        //     this.doOnce = true;
+        //     this.checkPokemonSelected();
+        // }
+    }
+
+    private isScrolledIntoView(elem) {
+        const rect = elem.getBoundingClientRect();
+        console.log(rect);
+        return rect.top >= 260 && rect.bottom <= 460;
+    }
+
+    private scrollIntoListElem() {
+        const elemNode = document.getElementsByClassName(
+            'pokemon-list__item--selected'
+        )[0];
+        if (!this.isScrolledIntoView(elemNode)) {
+            elemNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
     private checkIfLoaded(): void {
-        if (
-            this.pokemonList !== undefined &&
-            this.pokemonSelected !== undefined
-        ) {
+        if (this.pokemonList !== undefined) {
             setTimeout(() => {
+                this.checkPokemonSelected();
                 this.isLoaded = true;
             }, 200);
             return;
@@ -131,12 +144,14 @@ export class PokedexListComponent implements OnInit, OnChanges {
     public leftArrow(): void {
         if (this.currentListIndex > 0) {
             this.choosePokemon(this.pokemonList[this.currentListIndex - 1]);
+            this.scrollIntoListElem();
         }
     }
 
     public rightArrow(): void {
         if (this.currentListIndex < this.pokemonList.length - 1) {
             this.choosePokemon(this.pokemonList[this.currentListIndex + 1]);
+            this.scrollIntoListElem();
         }
     }
 

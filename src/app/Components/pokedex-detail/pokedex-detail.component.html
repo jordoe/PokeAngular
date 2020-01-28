@@ -15,7 +15,7 @@
                     <div class="general-info">
                         <div class="general-info__header">
                             <div class="general-info__header--number">
-                                Nº {{ pokemonSelected.id }}
+                                N. {{ pokemonSelected.id }}
                             </div>
                             <div class="general-info__header--name">
                                 {{
@@ -48,12 +48,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="general-info__image">
+                        <div class="general-info__image-container">
+                            <i
+                                class="fas fa-sync-alt turn-icon pointer"
+                                (click)="switchBack()"
+                            ></i>
+                            <i
+                                class="fas fa-star shiny-icon pointer"
+                                (click)="switchShiny()"
+                            ></i>
                             <img
+                                [class.general-info__image--start-flip]="
+                                    startFlip
+                                "
+                                [class.general-info__image--end-flip]="endFlip"
                                 src="{{ currentSelectPokemonImage }}"
                                 alt="Pokemon image"
-                                class="pointer shadowed"
-                                (click)="switchShiny()"
+                                class="general-info__image shadowed"
                             />
                         </div>
                         <div class="general-info__dimension">

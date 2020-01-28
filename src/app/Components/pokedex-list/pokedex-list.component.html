@@ -37,8 +37,11 @@
                     this.localPokemon.id == pokemon.id
                 "
             >
-                <div>
-                    <span>{{ pokemon.id }}</span>
+                <div class="pokemon-list__item-container">
+                    <span class="pokemon-list__number">N.{{ pokemon.id }}</span>
+                    <span class="pokemon-list__image"
+                        ><div><img src="{{ pokemon.image }}" /></div
+                    ></span>
                     <span class="pokemon-list__name">{{
                         pokemon.name | uppercase
                     }}</span>
@@ -75,12 +78,6 @@
                             alt="pokemonImage"
                         />
                     </div>
-                    <img
-                        src="assets/img/shiny_pokemon.png"
-                        class="pokemon-display__image--shiny"
-                        alt="shinyPokemon"
-                        (click)="switchShiny()"
-                    />
                     <div
                         *ngIf="this.pokemonSelected.types !== undefined"
                         class="pokemon-display__imageType"

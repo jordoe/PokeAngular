@@ -21,6 +21,7 @@ export class PokedexDetailComponent implements OnInit {
     public pokemonSelectedId: string;
     public currentSelectPokemonImage: string | null;
     public currentImageIsShiny: boolean = false;
+    public currentImageIsBack: boolean = false;
 
     public isLoaded: boolean = false;
     public movesLoaded: boolean = false;
@@ -29,6 +30,9 @@ export class PokedexDetailComponent implements OnInit {
     public pokemonEvolveImage: string | null;
     public pokemonEvolveSelected: any;
     public index: number;
+
+    public startFlip: boolean = false;
+    public endFlip: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -128,10 +132,45 @@ export class PokedexDetailComponent implements OnInit {
     public switchShiny(): void {
         this.currentImageIsShiny = !this.currentImageIsShiny;
         if (this.currentImageIsShiny === false) {
-            this.currentSelectPokemonImage = this.pokemonSelected.sprites.front_default;
+            if (this.currentImageIsBack === false) {
+                this.currentSelectPokemonImage = this.pokemonSelected.sprites.front_default;
+            } else {
+                this.currentSelectPokemonImage = this.pokemonSelected.sprites.back_default;
+            }
         } else {
-            this.currentSelectPokemonImage = this.pokemonSelected.sprites.front_shiny;
+            if (this.currentImageIsBack === false) {
+                this.currentSelectPokemonImage = this.pokemonSelected.sprites.front_shiny;
+            } else {
+                this.currentSelectPokemonImage = this.pokemonSelected.sprites.back_shiny;
+            }
         }
+    }
+
+    public switchBack(): void {
+        this.currentImageIsBack = !this.currentImageIsBack;
+        let finalImage;
+        if (this.currentImageIsBack === false) {
+            if (this.currentImageIsShiny === false) {
+                finalImage = this.pokemonSelected.sprites.front_default;
+            } else {
+                finalImage = this.pokemonSelected.sprites.front_shiny;
+            }
+        } else {
+            if (this.currentImageIsShiny === false) {
+                finalImage = this.pokemonSelected.sprites.back_default;
+            } else {
+                finalImage = this.pokemonSelected.sprites.back_shiny;
+            }
+        }
+        this.startFlip = true;
+        setTimeout(() => {
+            this.startFlip = false;
+            this.endFlip = true;
+            this.currentSelectPokemonImage = finalImage;
+            setTimeout(() => {
+                this.endFlip = false;
+            }, 200);
+        }, 200);
     }
 
     public goBack(): void {

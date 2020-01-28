@@ -28,7 +28,6 @@ export class NavComponent implements OnInit {
     constructor(private pokedexService: PokedexService) {}
 
     ngOnInit() {
-        // Comment
         this.selectedLang = this.pokedexService.language;
     }
 
