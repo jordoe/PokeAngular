@@ -3,7 +3,8 @@
         "list": "Loading Pokédex...",
         "details": "Loading Details...",
         "pokeworld": "Loading PokéWorld...",
-        "top": "Loading Top Pokémon..."
+        "top": "Loading Top Stats Pokémon...",
+        "topheight": "Loading Top Height Pokémon..."
     },
     "buttons": {
         "details": "Details",
@@ -44,8 +45,9 @@
     },
     "nav": {
         "pokedex": "Pokédex",
-        "pokeworld": "Pokéworld",
-        "top": "Top Pokémon",
+        "pokeworld": "Poké World",
+        "top": "Top Stats Pokémon",
+        "topheight": "Top Height Pokémon",
         "lang": "Lang.",
         "about": "About Us",
         "language": {
@@ -81,5 +83,9 @@
         "attack": "Attack",
         "hp": "HP",
         "average": "Average"
+    },
+    "topheight": {
+        "biggest": "Biggest",
+        "smallest": "Smallest"
     }
 }

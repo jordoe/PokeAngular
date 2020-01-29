@@ -3,7 +3,8 @@
         "list": "ポケデックスの読み込み...",
         "details": "読み込みの詳細...",
         "pokeworld": "ポケモンの世界の読み込み...",
-        "top": "トップポケモンの読み込み..."
+        "top": "トップポケモンの読み込み...",
+        "topheight": "トップポケモンの読み込み..."
     },
     "buttons": {
         "details": "詳細",
@@ -46,6 +47,7 @@
         "pokedex": "ポケデックス",
         "pokeworld": "ポケモンの世界",
         "top": "トップポケモン",
+        "topheight": "トップハイト",
         "lang": "言語",
         "about": "私たちに関しては",
         "language": {
@@ -81,5 +83,9 @@
         "attack": "攻撃",
         "hp": "馬力",
         "average": "平均"
+    },
+    "topheight": {
+        "biggest": "高い",
+        "smallest": "小さい"
     }
 }

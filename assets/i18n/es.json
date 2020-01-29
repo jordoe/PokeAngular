@@ -3,7 +3,8 @@
         "list": "Cargando Pokédex...",
         "details": "Cargando Detalles...",
         "pokeworld": "Cargando Mundo Pokémon...",
-        "top": "Cargando Ranking Pokémon..."
+        "top": "Cargando Ranking de Stats...",
+        "topheight": "Cargando Ranking de Altura..."
     },
     "buttons": {
         "details": "Detalles",
@@ -45,7 +46,8 @@
     "nav": {
         "pokedex": "Pokédex",
         "pokeworld": "Mundo Pokémon",
-        "top": "Ranking",
+        "top": "Ranking de Stats",
+        "topheight": "Ranking de Altura",
         "lang": "Leng.",
         "about": "Info.",
         "language": {
@@ -79,7 +81,11 @@
         "sattack": "At. Esp.",
         "defense": "Defensa",
         "attack": "Ataque",
-        "hp": "PV",
+        "hp": "PS",
         "average": "Media"
+    },
+    "topheight": {
+        "biggest": "Grandes",
+        "smallest": "Pequeños"
     }
 }
