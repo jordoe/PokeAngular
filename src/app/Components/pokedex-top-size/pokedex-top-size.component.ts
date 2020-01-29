@@ -27,7 +27,7 @@ export class PokedexTopSizeComponent implements OnInit {
     maxHeightRemDesktop = 20;
     maxHeightRemMobile = 14;
 
-    private currentPokemon = 0;
+    public currentPokemon = 0;
 
     constructor(private pokedexService: PokedexService, private router: Router, private route: ActivatedRoute) {}
 
