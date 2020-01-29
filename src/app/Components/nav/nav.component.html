@@ -12,40 +12,23 @@
         <div class="option--noMargins" routerLink="/top">
             {{ 'nav.top' | translate }}
         </div>
+        <div class="option--noMargins" routerLink="/topheight">
+            {{ 'nav.topheight' | translate }}
+        </div>
     </div>
     <div class="elements-right">
-        <div
-            class="lang-background"
-            *ngIf="showLang"
-            (click)="clickLangButton()"
-        ></div>
+        <div class="lang-background" *ngIf="showLang" (click)="clickLangButton()"></div>
         <div class="title">PokéAngular</div>
-        <div
-            class="option"
-            (click)="clickLangButton()"
-            [class.option__selected]="showLang"
-        >
+        <div class="option" (click)="clickLangButton()" [class.option__selected]="showLang">
             {{ 'nav.lang' | translate }}
             <div class="lang-container" *ngIf="showLang">
-                <div
-                    class="lang"
-                    (click)="changeLang('en')"
-                    [class.lang__selected]="selectedLang == 'en'"
-                >
+                <div class="lang" (click)="changeLang('en')" [class.lang__selected]="selectedLang == 'en'">
                     {{ 'nav.language.en' | translate }}
                 </div>
-                <div
-                    class="lang"
-                    (click)="changeLang('es')"
-                    [class.lang__selected]="selectedLang == 'es'"
-                >
+                <div class="lang" (click)="changeLang('es')" [class.lang__selected]="selectedLang == 'es'">
                     {{ 'nav.language.es' | translate }}
                 </div>
-                <div
-                    class="lang"
-                    (click)="changeLang('ja')"
-                    [class.lang__selected]="selectedLang == 'ja'"
-                >
+                <div class="lang" (click)="changeLang('ja')" [class.lang__selected]="selectedLang == 'ja'">
                     {{ 'nav.language.ja' | translate }}
                 </div>
             </div>
@@ -55,9 +38,4 @@
         </div>
     </div>
 </div>
-<app-modal
-    *ngIf="displayModal"
-    [content]="content"
-    (closeModalEvent)="hideModal()"
->
-</app-modal>
+<app-modal *ngIf="displayModal" [content]="content" (closeModalEvent)="hideModal()"> </app-modal>

@@ -6,6 +6,7 @@ import { PokedexDetailComponent } from '../Components/pokedex-detail/pokedex-det
 import { PokedexMapComponent } from '../Components/pokedex-map/pokedex-map.component';
 import { PokedexPokeworldComponent } from '../Components/pokedex-pokeworld/pokedex-pokeworld.component';
 import { PokedexTopPokemonComponent } from '../Components/pokedex-top-pokemon/pokedex-top-pokemon.component';
+import { PokedexTopSizeComponent } from '../Components/pokedex-top-size/pokedex-top-size.component';
 
 const appRoutes: Routes = [
     { path: 'list', component: PokedexComponent },
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'map/:id', component: PokedexMapComponent },
     { path: 'pokeworld', component: PokedexPokeworldComponent },
     { path: 'top', component: PokedexTopPokemonComponent },
+    { path: 'topheight', component: PokedexTopSizeComponent },
     { path: '', redirectTo: '/list', pathMatch: 'full' },
 ];
 

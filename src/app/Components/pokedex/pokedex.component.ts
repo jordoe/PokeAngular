@@ -18,7 +18,7 @@ export class PokedexComponent implements OnInit {
             this.pokemonList = response;
             this.pokemonSelected = response[0];
         });
-        this.pokedexService.getTopTenPokemon().subscribe((response: any) => {});
+        this.pokedexService.getTopHeightPokemon().subscribe((response: any) => {});
     }
     public typeSelect(type: string): void {
         if (type !== '') {
@@ -30,11 +30,9 @@ export class PokedexComponent implements OnInit {
     }
     public pokemonSelect(pokemon): void {
         if (pokemon.name !== '') {
-            this.pokedexService
-                .getPokemonDetailsByName(pokemon.name)
-                .subscribe(response => {
-                    this.pokemonSelected = response;
-                });
+            this.pokedexService.getPokemonDetailsByName(pokemon.name).subscribe(response => {
+                this.pokemonSelected = response;
+            });
         }
     }
 }
