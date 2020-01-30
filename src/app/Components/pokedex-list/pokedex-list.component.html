@@ -25,7 +25,7 @@
             />
             <button class="search__button"></button>
         </form>
-        <div class="pokemon-list">
+        <div class="pokemon-list" *ngIf="this.localPokemon !== undefined">
             <div
                 class="pokemon-list__item"
                 *ngFor="let pokemon of pokemonList | filterName: term; index as i"
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="pokedex__right" *ngIf="pokemonList !== undefined">
+    <div class="pokedex__right" *ngIf="pokemonList !== undefined && this.localPokemon !== undefined">
         <div class="inline">
             <i class="arrow arrow-left fas fa-caret-left" (click)="leftArrow()"></i>
             <div class="pokemon-display">
