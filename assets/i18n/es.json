@@ -46,8 +46,10 @@
     "nav": {
         "pokedex": "Pokédex",
         "pokeworld": "Mundo Pokémon",
+        "more": "Más",
         "top": "Ranking de Stats",
         "topheight": "Ranking de Altura",
+        "guess": "Adivina el Pokémon",
         "lang": "Leng.",
         "about": "Info.",
         "language": {

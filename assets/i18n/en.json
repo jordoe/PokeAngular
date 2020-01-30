@@ -46,8 +46,10 @@
     "nav": {
         "pokedex": "Pokédex",
         "pokeworld": "Poké World",
+        "more": "More",
         "top": "Top Stats Pokémon",
         "topheight": "Top Height Pokémon",
+        "guess": "Guess the Pokémon",
         "lang": "Lang.",
         "about": "About Us",
         "language": {

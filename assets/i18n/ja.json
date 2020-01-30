@@ -46,8 +46,10 @@
     "nav": {
         "pokedex": "ポケデックス",
         "pokeworld": "ポケモンの世界",
+        "more": "もっと",
         "top": "トップポケモン",
         "topheight": "トップハイト",
+        "guess": "ポケモンを推測する",
         "lang": "言語",
         "about": "私たちに関しては",
         "language": {
