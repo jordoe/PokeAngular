@@ -24,18 +24,18 @@ export class PokedexService {
 
     constructor(private https: HttpClient, private translate: TranslateService) {
         this.initLanguage();
-        if (!window.localStorage.getItem('pokemonFullList')) {
-            window.localStorage.setItem('pokemonFullList', JSON.stringify(this.pokemonList));
+        if (!window.sessionStorage.getItem('pokemonFullList')) {
+            window.sessionStorage.setItem('pokemonFullList', JSON.stringify(this.pokemonList));
         }
     }
 
     private initLanguage(): void {
         const storageName = 'language';
-        if (window.localStorage[storageName] !== undefined) {
-            this.language = window.localStorage[storageName];
+        if (window.sessionStorage[storageName] !== undefined) {
+            this.language = window.sessionStorage[storageName];
         } else {
             this.language = this.defaultLang;
-            window.localStorage[storageName] = this.defaultLang;
+            window.sessionStorage[storageName] = this.defaultLang;
         }
         this.changeLang(this.language);
         this.translate.setDefaultLang(this.language);
@@ -44,7 +44,7 @@ export class PokedexService {
     public changeLang(lang: string): void {
         this.language = lang;
         const storageName = 'language';
-        window.localStorage[storageName] = this.language;
+        window.sessionStorage[storageName] = this.language;
         this.translate.use(lang);
     }
 
@@ -266,27 +266,20 @@ export class PokedexService {
     }
     public getTopTenPokemon(): Observable<any> {
         const storageName = 'topPokemonList';
-        return new Observable(observer => {
-            this.initTopTenPokemon().subscribe((result: any) => {
-                this.topPokemonList = result;
-                window.localStorage[storageName] = JSON.stringify(this.topPokemonList);
+        if (window.sessionStorage[storageName] !== undefined) {
+            this.topPokemonList = JSON.parse(window.sessionStorage[storageName]);
+            return new Observable(observer => {
                 observer.next(this.topPokemonList);
             });
-        });
-        // if (window.localStorage[storageName] !== undefined) {
-        //     this.topPokemonList = JSON.parse(window.localStorage[storageName]);
-        //     return new Observable(observer => {
-        //         observer.next(this.topPokemonList);
-        //     });
-        // } else {
-        //     return new Observable(observer => {
-        //         this.initTopTenPokemon().subscribe((result: any) => {
-        //             this.topPokemonList = result;
-        //             window.localStorage[storageName] = JSON.stringify(this.topPokemonList);
-        //             observer.next(this.topPokemonList);
-        //         });
-        //     });
-        // }
+        } else {
+            return new Observable(observer => {
+                this.initTopTenPokemon().subscribe((result: any) => {
+                    this.topPokemonList = result;
+                    window.sessionStorage[storageName] = JSON.stringify(this.topPokemonList);
+                    observer.next(this.topPokemonList);
+                });
+            });
+        }
     }
     public initTopTenPokemon(): Observable<any> {
         let topHp: any[] = [];
@@ -356,27 +349,20 @@ export class PokedexService {
     }
     public getTopHeightPokemon(): Observable<any> {
         const storageName = 'topHeightPokemonList';
-        return new Observable(observer => {
-            this.initTopHeightPokemon().subscribe((result: any) => {
-                this.topHeightPokemonList = result;
-                window.localStorage[storageName] = JSON.stringify(this.topHeightPokemonList);
+        if (window.sessionStorage[storageName] !== undefined) {
+            this.topHeightPokemonList = JSON.parse(window.sessionStorage[storageName]);
+            return new Observable(observer => {
                 observer.next(this.topHeightPokemonList);
             });
-        });
-        // if (window.localStorage[storageName] !== undefined) {
-        //     this.topHeightPokemonList = JSON.parse(window.localStorage[storageName]);
-        //     return new Observable(observer => {
-        //         observer.next(this.topHeightPokemonList);
-        //     });
-        // } else {
-        //     return new Observable(observer => {
-        //         this.initTopHeightPokemon().subscribe((result: any) => {
-        //             this.topHeightPokemonList = result;
-        //             window.localStorage[storageName] = JSON.stringify(this.topHeightPokemonList);
-        //             observer.next(this.topHeightPokemonList);
-        //         });
-        //     });
-        // }
+        } else {
+            return new Observable(observer => {
+                this.initTopHeightPokemon().subscribe((result: any) => {
+                    this.topHeightPokemonList = result;
+                    window.sessionStorage[storageName] = JSON.stringify(this.topHeightPokemonList);
+                    observer.next(this.topHeightPokemonList);
+                });
+            });
+        }
     }
     public initTopHeightPokemon(): Observable<any> {
         const data = this.getAllPokemonDetails(false);
