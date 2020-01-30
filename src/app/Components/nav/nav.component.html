@@ -1,5 +1,6 @@
 <div class="nav">
     <div class="elements-left">
+        <div class="submenu-background" *ngIf="showMore" (click)="clickMoreButton()"></div>
         <a class="logo-link" routerLink="/list">
             <img src="assets/img/Logo.png" class="logo" alt="Pokemon logo" />
         </a>
@@ -9,15 +10,23 @@
         <div class="option--noMargins" routerLink="/pokeworld">
             {{ 'nav.pokeworld' | translate }}
         </div>
-        <div class="option--noMargins" routerLink="/top">
-            {{ 'nav.top' | translate }}
-        </div>
-        <div class="option--noMargins" routerLink="/topheight">
-            {{ 'nav.topheight' | translate }}
+        <div class="option" (click)="clickMoreButton()" [class.option__selected]="showMore">
+            Más
+            <div class="more-container" *ngIf="showMore">
+                <div class="more-option" routerLink="/top">
+                    Ranking de Stats
+                </div>
+                <div class="more-option" routerLink="/topheight">
+                    Ranking de Altura
+                </div>
+                <div class="more-option">
+                    Adivina el Pokémon
+                </div>
+            </div>
         </div>
     </div>
     <div class="elements-right">
-        <div class="lang-background" *ngIf="showLang" (click)="clickLangButton()"></div>
+        <div class="submenu-background" *ngIf="showLang" (click)="clickLangButton()"></div>
         <div class="title">PokéAngular</div>
         <div class="option" (click)="clickLangButton()" [class.option__selected]="showLang">
             {{ 'nav.lang' | translate }}

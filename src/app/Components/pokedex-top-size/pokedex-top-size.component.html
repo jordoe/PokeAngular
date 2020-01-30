@@ -1,11 +1,16 @@
 <div class="pokedex">
-    <div class="buttons">
-        <a class="btn" [class.btn--selected]="selectedTop === 0" (click)="selectTop(0)">
-            {{ 'topheight.biggest' | translate }}
-        </a>
-        <a class="btn" [class.btn--selected]="selectedTop === 1" (click)="selectTop(1)">
-            {{ 'topheight.smallest' | translate }}
-        </a>
+    <div class="left-container">
+        <div class="pokemon-name" (click)="goToPokemonDetail()">
+            {{ currentPokemonName() }}
+        </div>
+        <div class="buttons">
+            <a class="btn" [class.btn--selected]="selectedTop === 0" (click)="selectTop(0)">
+                {{ 'topheight.biggest' | translate }}
+            </a>
+            <a class="btn" [class.btn--selected]="selectedTop === 1" (click)="selectTop(1)">
+                {{ 'topheight.smallest' | translate }}
+            </a>
+        </div>
     </div>
     <div class="loading-container" *ngIf="!isLoaded">
         <app-loading></app-loading>
@@ -21,7 +26,7 @@
             <div class="pokemon__number">
                 {{ currentPokemon + 1 }}
             </div>
-            <div class="trainer-container" [class.trainer-container--smallTop]="selectedTop === 1">
+            <div class="trainer-container">
                 <div class="elem-container">
                     <div id="trainer-canvas-container" class="elem-image-container">
                         <img id="trainer-img" src="assets/img/trainer.png" class="elem-image" />
@@ -42,6 +47,9 @@
     ></i>
     <div class="mobile-buttons">
         <i class="arrow fas fa-caret-left" (click)="pressArrowLeft()" [class.arrow--disabled]="!canLeft()"></i>
+        <div class="pokemon-name--mobile" (click)="goToPokemonDetail()">
+            {{ currentPokemonName() }}
+        </div>
         <i class="arrow fas fa-caret-right" (click)="pressArrowRight()" [class.arrow--disabled]="!canRight()"></i>
     </div>
 </div>

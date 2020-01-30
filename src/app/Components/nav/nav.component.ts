@@ -7,13 +7,9 @@ import { PokedexService } from 'src/app/Services/pokedex.service';
     styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+    public showMore: boolean = false;
     public showLang: boolean = false;
-    public aboutUs: string[] = [
-        'Jorge Domínguez',
-        'Rubén Martín',
-        'Jesús Puertas',
-        'Eduardo Vela',
-    ];
+    public aboutUs: string[] = ['Jorge Domínguez', 'Rubén Martín', 'Jesús Puertas', 'Eduardo Vela'];
     // modal controler
     public content = {
         header: '',
@@ -33,6 +29,10 @@ export class NavComponent implements OnInit {
 
     public clickLangButton(): void {
         this.showLang = !this.showLang;
+    }
+
+    public clickMoreButton(): void {
+        this.showMore = !this.showMore;
     }
 
     public changeLang(lang: string): void {

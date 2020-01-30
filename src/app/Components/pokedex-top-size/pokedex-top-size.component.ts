@@ -24,17 +24,24 @@ export class PokedexTopSizeComponent implements OnInit {
     public trainerHeight = 1.7;
     public currentHeight: number;
     private maxHeightRem: number;
-    maxHeightRemDesktop = 20;
-    maxHeightRemMobile = 14;
+    private maxTrainerHeightRem: number;
+    private maxHeightRemDesktop = 20;
+    private maxHeightRemMobile = 14;
+    private maxTrainerHeightRemDesktop = 22;
+    private maxTrainerHeightRemMobile = 18;
 
     public currentPokemon = 0;
 
     constructor(private pokedexService: PokedexService, private router: Router, private route: ActivatedRoute) {}
 
     ngOnInit() {
-        screen.width > 800
-            ? (this.maxHeightRem = this.maxHeightRemDesktop)
-            : (this.maxHeightRem = this.maxHeightRemMobile);
+        if (screen.width > 800) {
+            this.maxHeightRem = this.maxHeightRemDesktop;
+            this.maxTrainerHeightRem = this.maxTrainerHeightRemDesktop;
+        } else {
+            this.maxHeightRem = this.maxHeightRemMobile;
+            this.maxTrainerHeightRem = this.maxTrainerHeightRemMobile;
+        }
         this.selectedTop = 0;
         this.checkIfLoaded();
         this.pokedexService.getTopHeightPokemon().subscribe((response: any) => {
@@ -61,6 +68,22 @@ export class PokedexTopSizeComponent implements OnInit {
             setTimeout(() => {
                 this.checkIfLoaded();
             }, 10);
+        }
+    }
+
+    public currentPokemonName(): string {
+        const name =
+            this.selectedTop === 0
+                ? this.topBigArr[this.currentPokemon].name
+                : this.topSmallArr[this.currentPokemon].name;
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    }
+
+    public goToPokemonDetail(): void {
+        if (this.selectedTop === 0) {
+            this.router.navigate(['/detail/' + this.topBigArr[this.currentPokemon].id]);
+        } else if (this.selectedTop === 1) {
+            this.router.navigate(['/detail/' + this.topSmallArr[this.currentPokemon].id]);
         }
     }
 
@@ -106,7 +129,7 @@ export class PokedexTopSizeComponent implements OnInit {
             document.getElementById('pokemon-canvas-container').appendChild(canvasArr[this.currentPokemon]);
             if (this.selectedTop === 0) {
                 document.getElementById('trainer-img').style.height =
-                    (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
+                    (this.trainerHeight * this.maxTrainerHeightRem) / this.currentHeight + 'rem';
             }
         }
     }
@@ -129,7 +152,7 @@ export class PokedexTopSizeComponent implements OnInit {
             document.getElementById('pokemon-canvas-container').appendChild(canvasArr[this.currentPokemon]);
             if (this.selectedTop === 0) {
                 document.getElementById('trainer-img').style.height =
-                    (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
+                    (this.trainerHeight * this.maxTrainerHeightRem) / this.currentHeight + 'rem';
             }
         }
     }
@@ -150,10 +173,10 @@ export class PokedexTopSizeComponent implements OnInit {
         if (this.selectedTop === 0) {
             this.currentHeight = this.topBigArr[0].height;
             document.getElementById('trainer-img').style.height =
-                (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
+                (this.trainerHeight * this.maxTrainerHeightRem) / this.currentHeight + 'rem';
             document.getElementById('pokemon-canvas-container').appendChild(this.canvasBigArr[0]);
         } else if (this.selectedTop === 1) {
-            document.getElementById('trainer-img').style.height = this.maxHeightRem + 'rem';
+            document.getElementById('trainer-img').style.height = this.maxTrainerHeightRem + 'rem';
             document.getElementById('pokemon-canvas-container').appendChild(this.canvasSmallArr[0]);
         }
     }
@@ -199,7 +222,8 @@ export class PokedexTopSizeComponent implements OnInit {
                 trimmedCanvas.style.height = this.maxHeightRem + 'rem';
             } else if (selectedTop === 1) {
                 trimmedCanvas.style.height =
-                    (this.topSmallArr[index].height * this.maxHeightRem) / this.trainerHeight + 'rem';
+                    (this.topSmallArr[index].height * this.maxTrainerHeightRem) / this.trainerHeight + 'rem';
+                console.log(this.maxTrainerHeightRem);
             }
             trimmedCanvas.style.cursor = 'pointer';
             trimmedCanvas.id = 'pokemon-img-' + index;
