@@ -7,20 +7,20 @@
         <div class="option--noMargins" routerLink="/list">
             {{ 'nav.pokedex' | translate }}
         </div>
-        <div class="option--noMargins" routerLink="/pokeworld">
-            {{ 'nav.pokeworld' | translate }}
-        </div>
         <div class="option" (click)="clickMoreButton()" [class.option__selected]="showMore">
-            Más
+            {{ 'nav.more' | translate }}
             <div class="more-container" *ngIf="showMore">
+                <div class="more-option" routerLink="/pokeworld">
+                    {{ 'nav.pokeworld' | translate }}
+                </div>
                 <div class="more-option" routerLink="/top">
-                    Ranking de Stats
+                    {{ 'nav.top' | translate }}
                 </div>
                 <div class="more-option" routerLink="/topheight">
-                    Ranking de Altura
+                    {{ 'nav.topheight' | translate }}
                 </div>
                 <div class="more-option">
-                    Adivina el Pokémon
+                    {{ 'nav.guess' | translate }}
                 </div>
             </div>
         </div>

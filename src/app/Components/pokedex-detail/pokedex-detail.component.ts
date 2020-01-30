@@ -1,11 +1,6 @@
 import { Pokemon, PokemonDetails } from '../../Utils/interfaces';
 
-import {
-    Component,
-    OnInit,
-    AfterViewInit,
-    AfterContentInit,
-} from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -23,6 +18,9 @@ export class PokedexDetailComponent implements OnInit {
     public currentImageIsShiny: boolean = false;
     public currentImageIsBack: boolean = false;
 
+    public hasBack: boolean = false;
+    public hasShiny: boolean = false;
+
     public isLoaded: boolean = false;
     public movesLoaded: boolean = false;
 
@@ -34,32 +32,34 @@ export class PokedexDetailComponent implements OnInit {
     public startFlip: boolean = false;
     public endFlip: boolean = false;
 
-    constructor(
-        private route: ActivatedRoute,
-        private location: Location,
-        private pokedexService: PokedexService
-    ) {}
+    constructor(private route: ActivatedRoute, private location: Location, private pokedexService: PokedexService) {}
 
     ngOnInit() {
+        this.pokemonSelected = undefined;
         this.checkIfLoaded();
         this.route.paramMap.subscribe((params: ParamMap) => {
             this.pokemonSelectedId = params.get('id');
             this.index = Number(this.pokemonSelectedId);
-            this.pokedexService
-                .getPokemonDetailsByName(this.pokemonSelectedId)
-                .subscribe(response => {
-                    this.pokemonSelected = response;
-                    this.currentSelectPokemonImage =
-                        response.sprites.front_default;
-                    this.pokemonEvolveImage = response.sprites.front_default;
-                });
-            this.pokedexService
-                .getPokemonEvolutionChain(this.pokemonSelectedId)
-                .subscribe(response => {
-                    this.evolutionChain = response;
-                    this.pokemonEvolutionSelected();
-                });
+            this.pokedexService.getPokemonDetailsByName(this.pokemonSelectedId).subscribe(response => {
+                this.pokemonSelected = response;
+                this.checkIfHasBackAndShiny();
+                this.currentSelectPokemonImage = response.sprites.front_default;
+                this.pokemonEvolveImage = response.sprites.front_default;
+            });
+            this.pokedexService.getPokemonEvolutionChain(this.pokemonSelectedId).subscribe(response => {
+                this.evolutionChain = response;
+                this.pokemonEvolutionSelected();
+            });
         });
+    }
+
+    private checkIfHasBackAndShiny() {
+        if (this.pokemonSelected.sprites.back_default !== null) {
+            this.hasBack = true;
+        }
+        if (this.pokemonSelected.sprites.front_shiny !== null) {
+            this.hasShiny = true;
+        }
     }
 
     public movesHasLoaded() {
@@ -85,9 +85,7 @@ export class PokedexDetailComponent implements OnInit {
             const pokemonValues = Object.values(pokemon);
             if (pokemonValues[0] === Number(this.pokemonSelectedId)) {
                 this.pokemonEvolveSelected = pokemon;
-                this.index = this.evolutionChain.indexOf(
-                    this.pokemonEvolveSelected
-                );
+                this.index = this.evolutionChain.indexOf(this.pokemonEvolveSelected);
                 break;
             }
         }
@@ -184,16 +182,17 @@ export class PokedexDetailComponent implements OnInit {
             this.checkIfLoaded();
             this.pokemonSelected = undefined;
             this.evolutionChain = undefined;
+            this.hasBack = false;
+            this.hasShiny = false;
         }
-        if (
-            evolution &&
-            this.evolutionChain[index].id !== this.pokemonSelected.id
-        ) {
+        if (evolution && this.evolutionChain[index].id !== this.pokemonSelected.id) {
             this.isLoaded = false;
             this.movesLoaded = false;
             this.checkIfLoaded();
             this.pokemonSelected = undefined;
             this.evolutionChain = undefined;
+            this.hasBack = false;
+            this.hasShiny = false;
         }
     }
 }

@@ -48,9 +48,14 @@ export class PokedexService {
         this.translate.use(lang);
     }
 
-    private getPokemonListData() {
+    private getPokemonListData(limit: boolean = true) {
+        const limitStr = limit ? '?limit=807' : '?limit=12000';
         if (this.data === undefined) {
-            const url = 'https://pokeapi.co/api/v2/pokemon/?limit=811';
+            const url = 'https://pokeapi.co/api/v2/pokemon/' + limitStr;
+            this.data = this.https.get(url);
+            return this.data;
+        } else if (this.data !== undefined && limit === false) {
+            const url = 'https://pokeapi.co/api/v2/pokemon/' + limitStr;
             this.data = this.https.get(url);
             return this.data;
         } else {
@@ -58,8 +63,8 @@ export class PokedexService {
         }
     }
 
-    public getPokemonList(): Observable<any> {
-        const data = this.getPokemonListData();
+    public getPokemonList(limit: boolean = true): Observable<any> {
+        const data = this.getPokemonListData(limit);
         return data.pipe(
             map((res: any) => {
                 return res.results.reduce((result, element, index) => {
@@ -201,7 +206,6 @@ export class PokedexService {
                             this.https.get(lastEvolutionUrl).subscribe((y: any) => {
                                 if (y.varieties.length > 1) {
                                     for (const poke of y.varieties) {
-                                        console.log(poke);
                                         if (poke.pokemon.name.includes('-mega')) {
                                             megaEvolutions.push(poke.pokemon.name);
                                         }
@@ -236,13 +240,13 @@ export class PokedexService {
         });
         return obs;
     }
-    private getAllPokemonDetails(): Observable<any> {
+    private getAllPokemonDetails(limit: boolean = true): Observable<any> {
         if (this.allPokemonDetails.length > 0) {
             return new Observable(observer => {
                 observer.next(this.allPokemonDetails);
             });
         } else {
-            const data = this.getPokemonListData();
+            const data = this.getPokemonListData(limit);
             const obs = new Observable(observer => {
                 data.subscribe((x: any) => {
                     const obsArr: Observable<any>[] = [];
@@ -285,7 +289,7 @@ export class PokedexService {
         let topSDefense: any[] = [];
         let topSpeed: any[] = [];
         let topAverage: any[] = [];
-        const data = this.getAllPokemonDetails();
+        const data = this.getAllPokemonDetails(false);
         const obs = new Observable(observer => {
             data.subscribe((result: any) => {
                 const resultArr = result;
@@ -361,7 +365,7 @@ export class PokedexService {
         }
     }
     public initTopHeightPokemon(): Observable<any> {
-        const data = this.getAllPokemonDetails();
+        const data = this.getAllPokemonDetails(false);
         const obs = new Observable(observer => {
             data.subscribe((result: any) => {
                 const resultArr = [];

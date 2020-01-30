@@ -1,14 +1,7 @@
 import { Pokemon, PokemonDetails } from '../../Utils/interfaces';
 import { Router, Event, NavigationEnd } from '@angular/router';
 
-import {
-    Component,
-    OnInit,
-    Input,
-    Output,
-    EventEmitter,
-    OnChanges,
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { PokedexDetailComponent } from '../pokedex-detail/pokedex-detail.component';
 
 @Component({
@@ -70,14 +63,11 @@ export class PokedexListComponent implements OnInit, OnChanges {
 
     private isScrolledIntoView(elem) {
         const rect = elem.getBoundingClientRect();
-        console.log(rect);
         return rect.top >= 260 && rect.bottom <= 460;
     }
 
     private scrollIntoListElem() {
-        const elemNode = document.getElementsByClassName(
-            'pokemon-list__item--selected'
-        )[0];
+        const elemNode = document.getElementsByClassName('pokemon-list__item--selected')[0];
         if (!this.isScrolledIntoView(elemNode)) {
             elemNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -101,21 +91,15 @@ export class PokedexListComponent implements OnInit, OnChanges {
         if (window.sessionStorage[this.storagePokemonKey] === undefined) {
             this.localPokemon = this.pokemonList[0];
             this.choosePokemon(this.pokemonList[0]);
-            window.sessionStorage[this.storagePokemonKey] = JSON.stringify(
-                this.localPokemon
-            );
+            window.sessionStorage[this.storagePokemonKey] = JSON.stringify(this.localPokemon);
         } else {
-            this.localPokemon = JSON.parse(
-                window.sessionStorage[this.storagePokemonKey]
-            );
+            this.localPokemon = JSON.parse(window.sessionStorage[this.storagePokemonKey]);
             this.choosePokemon(this.localPokemon);
         }
     }
 
     private updateStorage(): void {
-        window.sessionStorage[this.storagePokemonKey] = JSON.stringify(
-            this.localPokemon
-        );
+        window.sessionStorage[this.storagePokemonKey] = JSON.stringify(this.localPokemon);
     }
 
     public choosePokemon(pokemon: Pokemon): void {
@@ -123,9 +107,7 @@ export class PokedexListComponent implements OnInit, OnChanges {
         this.localPokemon = pokemon;
         this.updateStorage();
         if (this.pokemonList !== undefined) {
-            this.currentListIndex = this.pokemonList.findIndex(
-                (x: any) => x.id === this.localPokemon.id
-            );
+            this.currentListIndex = this.pokemonList.findIndex((x: any) => x.id === this.localPokemon.id);
         }
         this.choosePokemonEvent.emit(pokemon);
     }

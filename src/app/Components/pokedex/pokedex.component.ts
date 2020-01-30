@@ -18,7 +18,6 @@ export class PokedexComponent implements OnInit {
             this.pokemonList = response;
             this.pokemonSelected = response[0];
         });
-        this.pokedexService.getTopHeightPokemon().subscribe((response: any) => {});
     }
     public typeSelect(type: string): void {
         if (type !== '') {

@@ -48,17 +48,17 @@ export class PokedexTopSizeComponent implements OnInit {
             this.topBigArr = response[0];
             this.topSmallArr = response[1];
             this.initializeAllCanvas(0);
+            this.initializeAllCanvas(1);
         });
     }
 
     private checkIfLoaded(): void {
-        if (this.topBigArr.length !== 0 && this.selectedTop === 0 && this.canvasBigAreLoaded) {
-            setTimeout(() => {
-                this.isLoaded = true;
-                this.setInitialPokemonAndTrainer();
-            }, 100);
-            return;
-        } else if (this.topBigArr.length !== 0 && this.selectedTop === 1 && this.canvasSmallAreLoaded) {
+        if (
+            this.topBigArr.length !== 0 &&
+            this.topSmallArr.length !== 0 &&
+            this.canvasBigAreLoaded &&
+            this.canvasSmallAreLoaded
+        ) {
             setTimeout(() => {
                 this.isLoaded = true;
                 this.setInitialPokemonAndTrainer();
@@ -129,7 +129,7 @@ export class PokedexTopSizeComponent implements OnInit {
             document.getElementById('pokemon-canvas-container').appendChild(canvasArr[this.currentPokemon]);
             if (this.selectedTop === 0) {
                 document.getElementById('trainer-img').style.height =
-                    (this.trainerHeight * this.maxTrainerHeightRem) / this.currentHeight + 'rem';
+                    (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
             }
         }
     }
@@ -152,7 +152,7 @@ export class PokedexTopSizeComponent implements OnInit {
             document.getElementById('pokemon-canvas-container').appendChild(canvasArr[this.currentPokemon]);
             if (this.selectedTop === 0) {
                 document.getElementById('trainer-img').style.height =
-                    (this.trainerHeight * this.maxTrainerHeightRem) / this.currentHeight + 'rem';
+                    (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
             }
         }
     }
@@ -164,7 +164,7 @@ export class PokedexTopSizeComponent implements OnInit {
     public canRight(): boolean {
         if (this.selectedTop === 0) {
             return !(this.currentPokemon === this.topBigArr.length - 1);
-        } else {
+        } else if (this.selectedTop === 1) {
             return !(this.currentPokemon === this.topSmallArr.length - 1);
         }
     }
@@ -223,7 +223,6 @@ export class PokedexTopSizeComponent implements OnInit {
             } else if (selectedTop === 1) {
                 trimmedCanvas.style.height =
                     (this.topSmallArr[index].height * this.maxTrainerHeightRem) / this.trainerHeight + 'rem';
-                console.log(this.maxTrainerHeightRem);
             }
             trimmedCanvas.style.cursor = 'pointer';
             trimmedCanvas.id = 'pokemon-img-' + index;

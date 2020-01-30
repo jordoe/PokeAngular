@@ -27,7 +27,7 @@
 
         @media only screen and (max-width: 800px) {
             width: 80%;
-            height: 40%;
+            height: 50%;
         }
 
         @media only screen and (max-width: 600px) {
@@ -70,7 +70,7 @@
     margin-bottom: 1rem;
 
     @media only screen and (max-width: 375px) {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     &__select {
@@ -84,7 +84,7 @@
         margin-right: 1rem;
 
         @media only screen and (max-width: 375px) {
-            display: none;
+            width: 40%;
         }
     }
     &__input {
@@ -322,6 +322,12 @@
     @media only screen and (max-width: 800px) {
         margin-left: 0;
         margin-top: -3rem;
+    }
+}
+
+.btn {
+    @media only screen and (max-width: 768px) {
+        margin: 0 1rem;
     }
 }
 
