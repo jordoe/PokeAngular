@@ -16,8 +16,7 @@ export class PokedexService {
 
     private allPokemonDetails: any[] = [];
 
-    public topPokemonList: any[] = [];
-    public topHeightPokemonList: any[] = [];
+    public topLists: any[] = [];
 
     public language = '';
     private defaultLang = 'en';
@@ -31,11 +30,11 @@ export class PokedexService {
 
     private initLanguage(): void {
         const storageName = 'language';
-        if (window.sessionStorage[storageName] !== undefined) {
-            this.language = window.sessionStorage[storageName];
+        if (window.localStorage[storageName] !== undefined) {
+            this.language = window.localStorage[storageName];
         } else {
             this.language = this.defaultLang;
-            window.sessionStorage[storageName] = this.defaultLang;
+            window.localStorage[storageName] = this.defaultLang;
         }
         this.changeLang(this.language);
         this.translate.setDefaultLang(this.language);
@@ -44,17 +43,17 @@ export class PokedexService {
     public changeLang(lang: string): void {
         this.language = lang;
         const storageName = 'language';
-        window.sessionStorage[storageName] = this.language;
+        window.localStorage[storageName] = this.language;
         this.translate.use(lang);
     }
 
     private getPokemonListData(limit: boolean = true) {
-        const limitStr = limit ? '?limit=807' : '?limit=12000';
+        const limitStr = limit ? '?limit=721' : '?limit=12000';
         if (this.data === undefined) {
             const url = 'https://pokeapi.co/api/v2/pokemon/' + limitStr;
             this.data = this.https.get(url);
             return this.data;
-        } else if (this.data !== undefined && limit === false) {
+        } else if (limit === false) {
             const url = 'https://pokeapi.co/api/v2/pokemon/' + limitStr;
             this.data = this.https.get(url);
             return this.data;
@@ -70,10 +69,9 @@ export class PokedexService {
                 return res.results.reduce((result, element, index) => {
                     if (element) {
                         const newPokemon: Pokemon = {
-                            name: element.name,
+                            name: element.name.includes('-') ? this.parseName(element.name) : element.name,
                             id: index + 1,
-                            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index +
-                                1}.png`,
+                            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
                         };
                         result.push(newPokemon);
                     }
@@ -91,9 +89,7 @@ export class PokedexService {
                     return res.pokemon.map((result, index) => ({
                         name: result.pokemon.name,
                         id: result.pokemon.url.match(/\/([^\/]+)\/?$/)[1],
-                        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                            result.pokemon.url.match(/\/([^\/]+)\/?$/)[1]
-                        }.png`,
+                        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result.pokemon.url.match(/\/([^\/]+)\/?$/)[1]}.png`,
                     }));
                 })
             );
@@ -103,8 +99,9 @@ export class PokedexService {
     }
     /*
         id parameter can be the name or the id number of pokemon
-     */
+    */
     public getPokemonDetailsByName(id: string | number): Observable<any> {
+        const cntxt = this;
         const pokemon: PokemonDetails = {
             id: 0,
             name: '',
@@ -123,7 +120,7 @@ export class PokedexService {
         const obs = new Observable(observer => {
             this.https.get(url).subscribe((x: any) => {
                 pokemon.id = x.id;
-                pokemon.name = x.name;
+                x.name.includes('-') ? (pokemon.name = cntxt.parseName(x.name)) : (pokemon.name = x.name);
                 pokemon.height = x.height;
                 pokemon.weight = x.weight;
                 pokemon.types = x.types;
@@ -157,12 +154,6 @@ export class PokedexService {
                             break;
                         }
                     }
-                    // for (const elem of y.names) {
-                    //     if (elem.language.name === this.language) {
-                    //         pokemon.name = elem.name;
-                    //         break;
-                    //     }
-                    // }
                     observer.next(pokemon);
                 });
             });
@@ -218,9 +209,7 @@ export class PokedexService {
                             });
                             function returnResult(): void {
                                 for (const pokemon of chain) {
-                                    observablesArr.push(
-                                        this.https.get('https://pokeapi.co/api/v2/pokemon/' + pokemon + '/')
-                                    );
+                                    observablesArr.push(this.https.get('https://pokeapi.co/api/v2/pokemon/' + pokemon + '/'));
                                 }
                                 forkJoin(observablesArr).subscribe((result: any) => {
                                     for (const [i, observable] of result.entries()) {
@@ -264,146 +253,132 @@ export class PokedexService {
             return obs;
         }
     }
-    public getTopTenPokemon(): Observable<any> {
-        const storageName = 'topPokemonList';
-        if (window.sessionStorage[storageName] !== undefined) {
-            this.topPokemonList = JSON.parse(window.sessionStorage[storageName]);
+    private parseTopArr(arr: any[], topType: string): any[] {
+        const myResultArr = [];
+        switch (topType) {
+            case 'stats':
+                for (const pokemon of arr) {
+                    const obj: any = {};
+                    obj.id = pokemon.id;
+                    pokemon.name.includes('-') ? (obj.name = this.parseName(pokemon.name)) : (obj.name = pokemon.name);
+                    obj.image = pokemon.sprites.front_default;
+                    const statArr: any = [];
+                    for (const elem of pokemon.stats) {
+                        statArr.push({
+                            name: elem.stat.name,
+                            baseStat: elem.base_stat,
+                            effort: elem.effort,
+                        });
+                    }
+                    obj.stats = statArr;
+                    myResultArr.push(obj);
+                }
+                return myResultArr;
+                break;
+
+            case 'height':
+                for (const pokemon of arr) {
+                    const obj: any = {};
+                    obj.id = pokemon.id;
+                    pokemon.name.includes('-') ? (obj.name = this.parseName(pokemon.name)) : (obj.name = pokemon.name);
+                    obj.image = pokemon.sprites.front_default;
+                    obj.height = pokemon.height / 10;
+                    myResultArr.push(obj);
+                }
+                return myResultArr;
+                break;
+
+            default:
+                return [];
+                break;
+        }
+    }
+    private filterTopArr(arr: any[], type: string = null, onlyDefault: boolean = false): any[] {
+        arr = arr.filter(y => y.sprites.front_default !== null);
+        if (onlyDefault) {
+            arr = arr.filter(y => y.is_default);
+        }
+        if (type !== null) {
+            arr = arr.filter(y => y.types[0].type.name === type || (y.types.length > 1 && y.types[1].type.name === type));
+        }
+        return arr;
+    }
+    private sliceTopArr(arr: any[], pokemonNum): any[] {
+        return arr.slice(0, pokemonNum);
+    }
+    private getStatAverage(obj): number {
+        let total = 0;
+        for (let i = 0; i <= 5; i++) {
+            total += obj.stats[i].base_stat;
+        }
+        return total / 6;
+    }
+    private getTopPokemonArr(topType: string, pokemonNum, arr, func): any[] {
+        let myResultArr = [];
+        myResultArr = arr.sort(func);
+        myResultArr = this.sliceTopArr(myResultArr, pokemonNum);
+        myResultArr = this.parseTopArr(myResultArr, topType);
+        return myResultArr;
+    }
+    public getTopPokemon(topType: string, pokemonNum: number, type: string = null, refresh: boolean = false, onlyDefault: boolean = false): Observable<any> {
+        let storageName = '';
+        let listNumber = 0;
+        switch (topType) {
+            case 'stats':
+                storageName = 'topStatsList';
+                listNumber = 0;
+                break;
+
+            case 'height':
+                storageName = 'topHeightList';
+                listNumber = 1;
+                break;
+            default:
+                break;
+        }
+        if (window.sessionStorage[storageName] !== undefined && !refresh) {
+            this.topLists[listNumber] = JSON.parse(window.sessionStorage[storageName]);
             return new Observable(observer => {
-                observer.next(this.topPokemonList);
+                observer.next(this.topLists[listNumber]);
             });
         } else {
             return new Observable(observer => {
-                this.initTopTenPokemon().subscribe((result: any) => {
-                    this.topPokemonList = result;
-                    window.sessionStorage[storageName] = JSON.stringify(this.topPokemonList);
-                    observer.next(this.topPokemonList);
+                this.initTopPokemon(topType, pokemonNum, type, onlyDefault).subscribe((result: any) => {
+                    this.topLists[listNumber] = result;
+                    window.sessionStorage[storageName] = JSON.stringify(this.topLists[listNumber]);
+                    observer.next(this.topLists[listNumber]);
                 });
             });
         }
     }
-    public initTopTenPokemon(): Observable<any> {
-        let topHp: any[] = [];
-        let topAttack: any[] = [];
-        let topDefense: any[] = [];
-        let topSAttack: any[] = [];
-        let topSDefense: any[] = [];
-        let topSpeed: any[] = [];
-        let topAverage: any[] = [];
+    public initTopPokemon(topType: string, pokemonNum: number, type: string = null, onlyDefault: boolean = false): Observable<any> {
+        const cntxt = this;
         const data = this.getAllPokemonDetails(false);
         const obs = new Observable(observer => {
             data.subscribe((result: any) => {
-                const resultArr = result;
-                function getTopTen(arr, statIndex) {
-                    let myArr = arr;
-                    let myResultArr = [];
-                    myArr = arr
-                        .sort((a, b) => b.stats[statIndex].base_stat - a.stats[statIndex].base_stat)
-                        .filter(y => y.sprites.front_default !== null)
-                        .slice(0, 20);
-                    myResultArr = parseArr(myArr, statIndex);
-                    return myResultArr;
-                }
-                function parseArr(arr, statIndex) {
-                    const myResultArr = [];
-                    for (const pokemon of arr) {
-                        const obj: any = {};
-                        obj.id = pokemon.id;
-                        obj.name = pokemon.name;
-                        obj.image = pokemon.sprites.front_default;
-                        const statArr: any = [];
-                        for (const elem of pokemon.stats) {
-                            statArr.push({
-                                name: elem.stat.name,
-                                baseStat: elem.base_stat,
-                                effort: elem.effort,
-                            });
+                let filteredResult = [];
+                filteredResult = cntxt.filterTopArr(result, type, onlyDefault);
+                const res = [];
+                switch (topType) {
+                    case 'stats':
+                        for (let i = 0; i <= 5; i++) {
+                            res.push(cntxt.getTopPokemonArr(topType, pokemonNum, filteredResult, (a, b) => b.stats[i].base_stat - a.stats[i].base_stat));
                         }
-                        obj.stats = statArr;
-                        myResultArr.push(obj);
-                    }
-                    return myResultArr;
+                        res.push(cntxt.getTopPokemonArr(topType, pokemonNum, filteredResult, (a, b) => cntxt.getStatAverage(b) - cntxt.getStatAverage(a)));
+                        observer.next(res);
+                        break;
+
+                    case 'height':
+                        const biggest = cntxt.getTopPokemonArr(topType, pokemonNum, filteredResult, (a, b) => b.height - a.height);
+                        const smallest = cntxt.getTopPokemonArr(topType, pokemonNum, filteredResult, (a, b) => a.height - b.height);
+                        res.push(biggest);
+                        res.push(smallest);
+                        observer.next(res);
+                        break;
+
+                    default:
+                        break;
                 }
-                function getAverage(obj) {
-                    return (
-                        (obj.stats[0].base_stat +
-                            obj.stats[1].base_stat +
-                            obj.stats[2].base_stat +
-                            obj.stats[3].base_stat +
-                            obj.stats[4].base_stat +
-                            obj.stats[5].base_stat) /
-                        6
-                    );
-                }
-                topHp = getTopTen(resultArr, 5);
-                topAttack = getTopTen(resultArr, 4);
-                topDefense = getTopTen(resultArr, 3);
-                topSAttack = getTopTen(resultArr, 2);
-                topSDefense = getTopTen(resultArr, 1);
-                topSpeed = getTopTen(resultArr, 0);
-                topAverage = resultArr.sort((a, b) => getAverage(b) - getAverage(a)).slice(0, 20);
-                topAverage = parseArr(topAverage, null);
-                observer.next([topSpeed, topSDefense, topSAttack, topDefense, topAttack, topHp, topAverage]);
-            });
-        });
-        return obs;
-    }
-    public getTopHeightPokemon(): Observable<any> {
-        const storageName = 'topHeightPokemonList';
-        if (window.sessionStorage[storageName] !== undefined) {
-            this.topHeightPokemonList = JSON.parse(window.sessionStorage[storageName]);
-            return new Observable(observer => {
-                observer.next(this.topHeightPokemonList);
-            });
-        } else {
-            return new Observable(observer => {
-                this.initTopHeightPokemon().subscribe((result: any) => {
-                    this.topHeightPokemonList = result;
-                    window.sessionStorage[storageName] = JSON.stringify(this.topHeightPokemonList);
-                    observer.next(this.topHeightPokemonList);
-                });
-            });
-        }
-    }
-    public initTopHeightPokemon(): Observable<any> {
-        const data = this.getAllPokemonDetails(false);
-        const obs = new Observable(observer => {
-            data.subscribe((result: any) => {
-                const resultArr = [];
-                function getBigTopTen(arr) {
-                    let myArr = arr;
-                    let myResultArr = [];
-                    myArr = arr
-                        .sort((a, b) => b.height - a.height)
-                        .filter(y => y.sprites.front_default !== null)
-                        .slice(0, 50);
-                    myResultArr = parseArr(myArr);
-                    return myResultArr;
-                }
-                function getSmallTopTen(arr) {
-                    let myArr = arr;
-                    let myResultArr = [];
-                    myArr = arr
-                        .sort((a, b) => a.height - b.height)
-                        .filter(y => y.sprites.front_default !== null)
-                        .slice(0, 50);
-                    myResultArr = parseArr(myArr);
-                    return myResultArr;
-                }
-                function parseArr(arr) {
-                    const myResultArr = [];
-                    for (const pokemon of arr) {
-                        const obj: any = {};
-                        obj.id = pokemon.id;
-                        obj.name = pokemon.name;
-                        obj.image = pokemon.sprites.front_default;
-                        obj.height = pokemon.height / 10;
-                        myResultArr.push(obj);
-                    }
-                    return myResultArr;
-                }
-                resultArr.push(getBigTopTen(result));
-                resultArr.push(getSmallTopTen(result));
-                observer.next(resultArr);
             });
         });
         return obs;
@@ -477,5 +452,16 @@ export class PokedexService {
             });
         });
         return obs;
+    }
+    private parseName(name: string): string {
+        const split = name.split('-');
+        let resultStr = '';
+        split.forEach((namePart, i) => {
+            resultStr += namePart.replace(/^./, namePart[0].toUpperCase());
+            if (i !== split.length - 1) {
+                resultStr += ' ';
+            }
+        });
+        return resultStr;
     }
 }

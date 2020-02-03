@@ -1,5 +1,9 @@
-<div class="pokedex">
+<div class="pokedex" *ngIf="topsArr[0] !== undefined && topsArr[1] !== undefined">
     <div class="left-container">
+        <select class="mySelect" name="search__select" [(ngModel)]="selectType" (change)="onTypeChange($event.target.value)">
+            <option value="{{ selectType }}" selected style="display:none">{{ 'selects.type' | translate }}</option>
+            <option *ngFor="let type of pokemonTypes" value="{{ type }}">{{ 'list.types.' + type | translate }}</option>
+        </select>
         <div class="pokemon-name" (click)="goToPokemonDetail()">
             {{ currentPokemonName() }}
         </div>
@@ -16,13 +20,9 @@
         <app-loading></app-loading>
         <div class="loading-text">{{ 'loading.topheight' | translate }}</div>
     </div>
-    <i
-        class="arrow arrow__desktop fas fa-caret-left"
-        (click)="pressArrowLeft()"
-        [class.arrow--disabled]="!canLeft()"
-    ></i>
+    <i class="arrow arrow__desktop fas fa-caret-left" (click)="pressArrow(-1)" [class.arrow--disabled]="!canLeft()"></i>
     <div class="pokedex__display">
-        <div class="all-container" *ngIf="topBigArr.length > 0">
+        <div class="all-container" *ngIf="topsArr[0].length > 0">
             <div class="pokemon__number">
                 {{ currentPokemon + 1 }}
             </div>
@@ -36,20 +36,16 @@
             </div>
             <div class="pokemons-container">
                 <div id="pokemon-canvas-container" class="elem-image-container"></div>
-                <div id="pokemon-height" class="elem-height">{{ currentHeight }} m</div>
+                <div id="pokemon-height" class="elem-height">{{ topsArr[selectedTop][currentPokemon].height }} m</div>
             </div>
         </div>
     </div>
-    <i
-        class="arrow arrow__desktop fas fa-caret-right"
-        (click)="pressArrowRight()"
-        [class.arrow--disabled]="!canRight()"
-    ></i>
+    <i class="arrow arrow__desktop fas fa-caret-right" (click)="pressArrow(1)" [class.arrow--disabled]="!canRight()"></i>
     <div class="mobile-buttons">
-        <i class="arrow fas fa-caret-left" (click)="pressArrowLeft()" [class.arrow--disabled]="!canLeft()"></i>
+        <i class="arrow fas fa-caret-left" (click)="pressArrow(-1)" [class.arrow--disabled]="!canLeft()"></i>
         <div class="pokemon-name--mobile" (click)="goToPokemonDetail()">
             {{ currentPokemonName() }}
         </div>
-        <i class="arrow fas fa-caret-right" (click)="pressArrowRight()" [class.arrow--disabled]="!canRight()"></i>
+        <i class="arrow fas fa-caret-right" (click)="pressArrow(1)" [class.arrow--disabled]="!canRight()"></i>
     </div>
 </div>

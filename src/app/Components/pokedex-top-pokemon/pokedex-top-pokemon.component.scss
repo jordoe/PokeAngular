@@ -6,16 +6,19 @@
     &__display {
         height: 90%;
     }
+    &__top {
+        width: 100%;
+    }
     @media only screen and (max-width: 800px) {
         width: 100vw;
     }
 }
 
 .buttons {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: row-reverse;
+    display: none;
     @media only screen and (max-width: 800px) {
+        margin-bottom: 1rem;
+        display: flex;
         justify-content: right;
         align-items: center;
         flex-wrap: wrap-reverse;
@@ -134,4 +137,34 @@
 
 .loading-container {
     margin-top: -3rem;
+}
+
+.statSelect {
+    font-family: 'pixelade';
+    font-size: 3rem;
+    color: #478390;
+    background-color: $borderColor;
+    box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+    border: none;
+    padding: 0.5rem 2rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    @media only screen and (max-width: 800px) {
+        display: none;
+    }
+}
+
+.mySelect {
+    font-family: 'pixelade';
+    font-size: 3rem;
+    color: #478390;
+    background-color: $borderColor;
+    box-shadow: -0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+    border: none;
+    padding: 0.5rem 2rem;
+    margin-bottom: 1rem;
+
+    @media only screen and (max-width: 800px) {
+        width: 100%;
+    }
 }

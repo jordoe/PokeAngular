@@ -15,29 +15,17 @@
                             </div>
                             <div class="pokemon-types">
                                 <div>
-                                    <img
-                                        src="assets/img/types_icons_2/{{ pokemonSelected.types[0].type.name }}_icon.png"
-                                        alt="{{ pokemonSelected.types[0].type.name }}"
-                                    />
+                                    <img src="assets/img/types_icons_2/{{ pokemonSelected.types[0].type.name }}_icon.png" alt="{{ pokemonSelected.types[0].type.name }}" />
                                 </div>
                                 <div *ngIf="pokemonSelected.types[1]">
-                                    <img
-                                        src="assets/img/types_icons_2/{{ pokemonSelected.types[1].type.name }}_icon.png"
-                                        alt="{{ pokemonSelected.types[1].type.name }}"
-                                    />
+                                    <img src="assets/img/types_icons_2/{{ pokemonSelected.types[1].type.name }}_icon.png" alt="{{ pokemonSelected.types[1].type.name }}" />
                                 </div>
                             </div>
                         </div>
                         <div class="general-info__image-container">
                             <i *ngIf="hasBack" class="fas fa-sync-alt turn-icon pointer" (click)="switchBack()"></i>
                             <i *ngIf="hasShiny" class="fas fa-star shiny-icon pointer" (click)="switchShiny()"></i>
-                            <img
-                                [class.general-info__image--start-flip]="startFlip"
-                                [class.general-info__image--end-flip]="endFlip"
-                                src="{{ currentSelectPokemonImage }}"
-                                alt="Pokemon image"
-                                class="general-info__image shadowed"
-                            />
+                            <img [class.general-info__image--start-flip]="startFlip" [class.general-info__image--end-flip]="endFlip" src="{{ currentSelectPokemonImage }}" alt="Pokemon image" class="general-info__image shadowed" />
                         </div>
                         <div class="general-info__dimension">
                             <div class="general-info__dimension--element">
@@ -66,21 +54,9 @@
                                     {{ 'details.noevolution' | translate }}
                                 </div>
                                 <div *ngIf="evolutionChain.length > 1" class="detail-panel__evolution__content">
-                                    <i
-                                        class="arrow fas fa-caret-left"
-                                        (click)="pokemonEvolveLeft()"
-                                        [class.arrow--disabled]="canLeft()"
-                                    ></i>
-                                    <img
-                                        src="{{ pokemonEvolveImage }}"
-                                        (click)="cleanPokemonData(true, index)"
-                                        routerLink="/detail/{{ evolutionChain[index].id }}"
-                                    />
-                                    <i
-                                        class="arrow fas fa-caret-right"
-                                        (click)="pokemonEvolveRight()"
-                                        [class.arrow--disabled]="canRight()"
-                                    ></i>
+                                    <i class="arrow fas fa-caret-left" (click)="pokemonEvolveLeft()" [class.arrow--disabled]="canLeft()"></i>
+                                    <img src="{{ pokemonEvolveImage }}" (click)="cleanPokemonData(true, index)" routerLink="/detail/{{ evolutionChain[index].id }}" />
+                                    <i class="arrow fas fa-caret-right" (click)="pokemonEvolveRight()" [class.arrow--disabled]="canRight()"></i>
                                 </div>
                             </div>
                         </div>
@@ -95,21 +71,24 @@
                                         *ngIf="stat.baseStat <= 35"
                                         class="progressBar progressBar--red"
                                         [ngStyle]="{
-                                            width: getPercentage(stat.baseStat)
+                                            width: getPercentage(stat.baseStat),
+                                            'max-width': '100%'
                                         }"
                                     />
                                     <hr
                                         *ngIf="stat.baseStat > 35 && stat.baseStat < 70"
                                         class="progressBar progressBar--yellow"
                                         [ngStyle]="{
-                                            width: getPercentage(stat.baseStat)
+                                            width: getPercentage(stat.baseStat),
+                                            'max-width': '100%'
                                         }"
                                     />
                                     <hr
                                         *ngIf="stat.baseStat >= 70"
                                         class="progressBar progressBar--green"
                                         [ngStyle]="{
-                                            width: getPercentage(stat.baseStat)
+                                            width: getPercentage(stat.baseStat),
+                                            'max-width': '100%'
                                         }"
                                     />
                                 </div>
@@ -134,11 +113,7 @@
                     <app-pokedex-detail-size [pokemonSelectedId]="pokemonSelectedId"> </app-pokedex-detail-size>
                 </div>
                 <div class="extra-option">
-                    <app-pokedex-detail-extend
-                        [pokemonSelectedId]="pokemonSelectedId"
-                        (movesLoadedEvent)="movesHasLoaded()"
-                    >
-                    </app-pokedex-detail-extend>
+                    <app-pokedex-detail-extend [pokemonSelectedId]="pokemonSelectedId" (movesLoadedEvent)="movesHasLoaded()"> </app-pokedex-detail-extend>
                 </div>
             </div>
         </div>
@@ -146,17 +121,9 @@
     <div class="buttons" *ngIf="pokemonSelected !== undefined">
         <a class="btn__back" routerLink="/list">{{ 'buttons.exit' | translate }}</a>
         <div class="buttons">
-            <i
-                class="arrow fas fa-caret-left"
-                (click)="cleanPokemonData()"
-                routerLink="/detail/{{ pokemonSelected.id - 1 }}"
-            ></i>
+            <i class="arrow fas fa-caret-left" (click)="cleanPokemonData()" routerLink="/detail/{{ pokemonSelected.id - 1 }}"></i>
             <a class="btn" routerLink="/map/{{ pokemonSelected.id }}">{{ 'buttons.locate' | translate }}</a>
-            <i
-                class="arrow fas fa-caret-right"
-                (click)="cleanPokemonData()"
-                routerLink="/detail/{{ pokemonSelected.id + 1 }}"
-            ></i>
+            <i class="arrow fas fa-caret-right" (click)="cleanPokemonData()" routerLink="/detail/{{ pokemonSelected.id + 1 }}"></i>
         </div>
     </div>
 </div>

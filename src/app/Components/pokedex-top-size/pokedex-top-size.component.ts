@@ -8,57 +8,75 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./pokedex-top-size.component.scss'],
 })
 export class PokedexTopSizeComponent implements OnInit {
-    public topBigArr: any[] = [];
-    public topSmallArr: any[] = [];
     public isLoaded: boolean = false;
+
+    public topsArr: any[] = [];
 
     public selectedTop: number;
 
-    private canvasBigLoaded = 0;
-    private canvasSmallLoaded = 0;
-    private canvasBigAreLoaded: boolean = false;
-    private canvasSmallAreLoaded: boolean = false;
-    private canvasBigArr: any[] = [];
-    private canvasSmallArr: any[] = [];
+    private canvasSets: any[] = [];
 
     public trainerHeight = 1.7;
-    public currentHeight: number;
-    private maxHeightRem: number;
+    private maxPokemonHeightRem: number;
     private maxTrainerHeightRem: number;
-    private maxHeightRemDesktop = 20;
-    private maxHeightRemMobile = 14;
-    private maxTrainerHeightRemDesktop = 22;
-    private maxTrainerHeightRemMobile = 18;
 
-    public currentPokemon = 0;
+    public currentPokemon: number;
+
+    public selectType: any;
+    public selectedType: string;
+    public pokemonTypes: string[] = ['all', 'normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ghost', 'ice', 'dark', 'fairy'];
 
     constructor(private pokedexService: PokedexService, private router: Router, private route: ActivatedRoute) {}
 
     ngOnInit() {
-        if (screen.width > 800) {
-            this.maxHeightRem = this.maxHeightRemDesktop;
-            this.maxTrainerHeightRem = this.maxTrainerHeightRemDesktop;
-        } else {
-            this.maxHeightRem = this.maxHeightRemMobile;
-            this.maxTrainerHeightRem = this.maxTrainerHeightRemMobile;
-        }
+        this.initTopsArr();
+        this.initCanvasSets();
+        this.setMaxHeights();
         this.selectedTop = 0;
+        this.currentPokemon = 0;
+        this.selectedType = 'all';
         this.checkIfLoaded();
-        this.pokedexService.getTopHeightPokemon().subscribe((response: any) => {
-            this.topBigArr = response[0];
-            this.topSmallArr = response[1];
-            this.initializeAllCanvas(0);
-            this.initializeAllCanvas(1);
+        this.pokedexService.getTopPokemon('height', 50, null, true).subscribe((response: any) => {
+            this.topsArr[0] = response[0];
+            this.topsArr[1] = response[1];
+            this.initializeCanvasSet(0);
+            this.initializeCanvasSet(1);
+        });
+    }
+
+    private setMaxHeights(): void {
+        if (screen.width > 800) {
+            this.maxPokemonHeightRem = 20;
+            this.maxTrainerHeightRem = 22;
+        } else {
+            this.maxPokemonHeightRem = 14;
+            this.maxTrainerHeightRem = 18;
+        }
+    }
+
+    private initTopsArr(): void {
+        for (let i = 0; i < 2; i++) {
+            this.topsArr.push([]);
+        }
+    }
+
+    private initCanvasSets(): void {
+        this.canvasSets.push({
+            arr: [],
+            name: 'big',
+            numLoaded: 0,
+            areLoaded: false,
+        });
+        this.canvasSets.push({
+            arr: [],
+            name: 'small',
+            numLoaded: 0,
+            areLoaded: false,
         });
     }
 
     private checkIfLoaded(): void {
-        if (
-            this.topBigArr.length !== 0 &&
-            this.topSmallArr.length !== 0 &&
-            this.canvasBigAreLoaded &&
-            this.canvasSmallAreLoaded
-        ) {
+        if (this.topsArr[0].length !== 0 && this.topsArr[1].length !== 0 && this.canvasSets[0].areLoaded && this.canvasSets[1].areLoaded) {
             setTimeout(() => {
                 this.isLoaded = true;
                 this.setInitialPokemonAndTrainer();
@@ -72,88 +90,67 @@ export class PokedexTopSizeComponent implements OnInit {
     }
 
     public currentPokemonName(): string {
-        const name =
-            this.selectedTop === 0
-                ? this.topBigArr[this.currentPokemon].name
-                : this.topSmallArr[this.currentPokemon].name;
+        const name = this.topsArr[this.selectedTop][this.currentPokemon].name;
         return name.charAt(0).toUpperCase() + name.slice(1);
     }
 
     public goToPokemonDetail(): void {
-        if (this.selectedTop === 0) {
-            this.router.navigate(['/detail/' + this.topBigArr[this.currentPokemon].id]);
-        } else if (this.selectedTop === 1) {
-            this.router.navigate(['/detail/' + this.topSmallArr[this.currentPokemon].id]);
+        this.router.navigate(['/detail/' + this.topsArr[this.selectedTop][this.currentPokemon].id]);
+    }
+
+    private resetToDefaults(full: boolean = false) {
+        if (full) {
+            this.topsArr.forEach((topArr, i) => {
+                this.topsArr[i] = [];
+            });
+            this.canvasSets.forEach((canvasSet, i) => {
+                this.canvasSets[i].arr = [];
+                this.canvasSets[i].numLoaded = 0;
+                this.canvasSets[i].areLoaded = false;
+            });
         }
+        this.canvasSets[this.selectedTop].areLoaded = false;
+        this.isLoaded = false;
+        const oldCanvas = document.getElementById('pokemon-img-' + this.currentPokemon);
+        oldCanvas.remove();
+        this.currentPokemon = 0;
+        this.initializeCanvasSet(this.selectedTop);
+    }
+
+    public onTypeChange(type: string): void {
+        this.resetToDefaults(true);
+        this.checkIfLoaded();
+        if (type === 'all') {
+            type = null;
+        }
+        this.pokedexService.getTopPokemon('height', 50, type, true).subscribe((response: any) => {
+            this.topsArr[0] = response[0];
+            this.topsArr[1] = response[1];
+            this.initializeCanvasSet(0);
+            this.initializeCanvasSet(1);
+        });
     }
 
     public selectTop(top: number): void {
         if (top !== this.selectedTop) {
             this.selectedTop = top;
-            if (top === 0) {
-                this.canvasBigAreLoaded = false;
-                this.isLoaded = false;
-                const oldCanvas = document.getElementById('pokemon-img-' + this.currentPokemon);
-                oldCanvas.remove();
-                this.currentPokemon = 0;
-                this.initializeAllCanvas(0);
-                this.checkIfLoaded();
-            }
-            if (top === 1) {
-                this.canvasSmallAreLoaded = false;
-                this.isLoaded = false;
-                const oldCanvas = document.getElementById('pokemon-img-' + this.currentPokemon);
-                oldCanvas.remove();
-                this.currentPokemon = 0;
-                this.initializeAllCanvas(1);
-                this.checkIfLoaded();
-            }
+            this.resetToDefaults();
+            this.checkIfLoaded();
         }
     }
 
-    public pressArrowLeft(): void {
-        if (this.canLeft()) {
+    public pressArrow(dir: number): void {
+        const can = (dir === -1 && this.canLeft()) || (dir === 1 && this.canRight());
+        if (can) {
             const oldCanvas = document.getElementById('pokemon-img-' + this.currentPokemon);
             oldCanvas.remove();
             let canvasArr;
             let arr;
-            if (this.selectedTop === 0) {
-                canvasArr = this.canvasBigArr;
-                arr = this.topBigArr;
-            } else if (this.selectedTop === 1) {
-                canvasArr = this.canvasSmallArr;
-                arr = this.topSmallArr;
-            }
-            this.currentPokemon -= 1;
-            this.currentHeight = arr[this.currentPokemon].height;
+            canvasArr = this.canvasSets[this.selectedTop].arr;
+            arr = this.topsArr[this.selectedTop];
+            this.currentPokemon += dir;
             document.getElementById('pokemon-canvas-container').appendChild(canvasArr[this.currentPokemon]);
-            if (this.selectedTop === 0) {
-                document.getElementById('trainer-img').style.height =
-                    (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
-            }
-        }
-    }
-
-    public pressArrowRight(): void {
-        if (this.canRight()) {
-            const oldCanvas = document.getElementById('pokemon-img-' + this.currentPokemon);
-            oldCanvas.remove();
-            let canvasArr;
-            let arr;
-            if (this.selectedTop === 0) {
-                canvasArr = this.canvasBigArr;
-                arr = this.topBigArr;
-            } else if (this.selectedTop === 1) {
-                canvasArr = this.canvasSmallArr;
-                arr = this.topSmallArr;
-            }
-            this.currentPokemon += 1;
-            this.currentHeight = arr[this.currentPokemon].height;
-            document.getElementById('pokemon-canvas-container').appendChild(canvasArr[this.currentPokemon]);
-            if (this.selectedTop === 0) {
-                document.getElementById('trainer-img').style.height =
-                    (this.trainerHeight * this.maxHeightRem) / this.currentHeight + 'rem';
-            }
+            this.setNodesHeights();
         }
     }
 
@@ -162,47 +159,39 @@ export class PokedexTopSizeComponent implements OnInit {
     }
 
     public canRight(): boolean {
-        if (this.selectedTop === 0) {
-            return !(this.currentPokemon === this.topBigArr.length - 1);
-        } else if (this.selectedTop === 1) {
-            return !(this.currentPokemon === this.topSmallArr.length - 1);
+        return !(this.currentPokemon === this.topsArr[this.selectedTop].length - 1);
+    }
+
+    private setNodesHeights(): void {
+        const trainerNode = document.getElementById('trainer-img');
+        const pokemonNode = document.getElementById('pokemon-img-' + this.currentPokemon);
+        const pokemonHeight = this.topsArr[this.selectedTop][this.currentPokemon].height;
+        if (pokemonHeight >= this.trainerHeight) {
+            pokemonNode.style.height = this.maxPokemonHeightRem + 'rem';
+            trainerNode.style.height = (this.trainerHeight * this.maxPokemonHeightRem) / pokemonHeight + 'rem';
+        } else {
+            pokemonNode.style.height = (this.topsArr[this.selectedTop][this.currentPokemon].height * this.maxTrainerHeightRem) / this.trainerHeight + 'rem';
+            trainerNode.style.height = this.maxTrainerHeightRem + 'rem';
         }
     }
 
     private setInitialPokemonAndTrainer(): void {
-        if (this.selectedTop === 0) {
-            this.currentHeight = this.topBigArr[0].height;
-            document.getElementById('trainer-img').style.height =
-                (this.trainerHeight * this.maxTrainerHeightRem) / this.currentHeight + 'rem';
-            document.getElementById('pokemon-canvas-container').appendChild(this.canvasBigArr[0]);
-        } else if (this.selectedTop === 1) {
-            document.getElementById('trainer-img').style.height = this.maxTrainerHeightRem + 'rem';
-            document.getElementById('pokemon-canvas-container').appendChild(this.canvasSmallArr[0]);
+        document.getElementById('pokemon-canvas-container').appendChild(this.canvasSets[this.selectedTop].arr[0]);
+        this.setNodesHeights();
+    }
+
+    private initializeCanvasSet(top: number): void {
+        if (this.canvasSets[top].arr.length === 0) {
+            this.topsArr[top].forEach((pokemon, i) => {
+                this.canvasSets[top].arr.push('');
+                this.initializeCanvas(pokemon, i, top);
+            });
+        } else {
+            this.canvasSets[top].areLoaded = true;
         }
     }
 
-    private initializeAllCanvas(selectedTop: number): void {
-        if (selectedTop === 0 && this.canvasBigArr.length === 0) {
-            this.topBigArr.forEach((pokemon, i) => {
-                this.canvasBigArr.push('');
-                this.initializeCanvas(pokemon, i, 0);
-            });
-        } else if (this.canvasBigArr.length !== 0) {
-            this.canvasBigAreLoaded = true;
-        }
-
-        if (selectedTop === 1 && this.canvasSmallArr.length === 0) {
-            this.topSmallArr.forEach((pokemon, i) => {
-                this.canvasSmallArr.push('');
-                this.initializeCanvas(pokemon, i, 1);
-            });
-        } else if (this.canvasSmallArr.length !== 0) {
-            this.currentHeight = this.topSmallArr[0].height;
-            this.canvasSmallAreLoaded = true;
-        }
-    }
-
-    private initializeCanvas(pokemon: any, index: number, selectedTop: number): void {
+    private initializeCanvas(pokemon: any, index: number, top: number): void {
         const image = new Image();
         image.crossOrigin = 'Anonymous';
         image.src = pokemon.image;
@@ -210,37 +199,18 @@ export class PokedexTopSizeComponent implements OnInit {
         canvas.id = 'image-canvas';
         const context = canvas.getContext('2d');
         image.onload = () => {
-            if (index === 0 && selectedTop === 0) {
-                this.currentHeight = this.topBigArr[0].height;
-            } else if (index === 0 && selectedTop === 1) {
-                this.currentHeight = this.topSmallArr[0].height;
-            }
             image.setAttribute('crossOrigin', '');
             context.drawImage(image, 0, 0);
             const trimmedCanvas = this.trimImage(canvas);
-            if (selectedTop === 0) {
-                trimmedCanvas.style.height = this.maxHeightRem + 'rem';
-            } else if (selectedTop === 1) {
-                trimmedCanvas.style.height =
-                    (this.topSmallArr[index].height * this.maxTrainerHeightRem) / this.trainerHeight + 'rem';
-            }
             trimmedCanvas.style.cursor = 'pointer';
             trimmedCanvas.id = 'pokemon-img-' + index;
             trimmedCanvas.addEventListener('click', () => {
                 this.router.navigate(['/detail/' + pokemon.id]);
             });
-            if (selectedTop === 0) {
-                this.canvasBigArr[index] = trimmedCanvas;
-                this.canvasBigLoaded += 1;
-                if (this.canvasBigLoaded === this.topBigArr.length) {
-                    this.canvasBigAreLoaded = true;
-                }
-            } else if (selectedTop === 1) {
-                this.canvasSmallArr[index] = trimmedCanvas;
-                this.canvasSmallLoaded += 1;
-                if (this.canvasSmallLoaded === this.topSmallArr.length) {
-                    this.canvasSmallAreLoaded = true;
-                }
+            this.canvasSets[top].arr[index] = trimmedCanvas;
+            this.canvasSets[top].numLoaded += 1;
+            if (this.canvasSets[top].numLoaded === this.topsArr[top].length) {
+                this.canvasSets[top].areLoaded = true;
             }
         };
     }

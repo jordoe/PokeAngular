@@ -4,14 +4,16 @@
         <div class="loading-text">{{ 'loading.top' | translate }}</div>
     </div>
     <div class="pokedex__top">
+        <select class="mySelect" name="type__select" [(ngModel)]="selectType" (change)="onTypeChange($event.target.value)">
+            <option value="{{ selectType }}" selected style="display:none">{{ 'selects.type' | translate }}</option>
+            <option *ngFor="let type of pokemonTypes" value="{{ type }}">{{ 'list.types.' + type | translate }}</option>
+        </select>
+        <select class="statSelect" name="stat__select" [(ngModel)]="selectType" (change)="selectStat($event.target.value)">
+            <option value="{{ selectType }}" selected style="display:none">{{ 'selects.stat' | translate }}</option>
+            <option *ngFor="let stat of statsButtons.reverse(); index as i" value="{{ statsButtons.length - 1 - i }}">{{ 'top.' + stat | translate }}</option>
+        </select>
         <div class="buttons">
-            <a
-                *ngFor="let stat of statsButtons; index as i"
-                id="{{ i }}"
-                class="btn"
-                (click)="selectStat(i)"
-                [class.btn--selectedStat]="i == selectedStat"
-            >
+            <a *ngFor="let stat of statsButtons.reverse(); index as i" id="{{ i }}" class="btn" (click)="selectStat(i)" [class.btn--selectedStat]="i == selectedStat">
                 {{ 'top.' + stat | translate }}
             </a>
         </div>
@@ -19,23 +21,14 @@
     <div class="pokedex__display">
         <div class="pokemons-container" *ngIf="topArr.length > 0">
             <div class="pokemons">
-                <div
-                    class="pokemon"
-                    *ngFor="let poke of topArr[selectedStat]; index as i"
-                >
+                <div class="pokemon" *ngFor="let poke of topArr[selectedStat]; index as i">
                     <div class="pokemon__number">
                         {{ i + 1 }}
                     </div>
                     <div class="pokemon__name">
-                        {{
-                            poke.name.charAt(0).toUpperCase() +
-                                poke.name.slice(1)
-                        }}
+                        {{ poke.name.charAt(0).toUpperCase() + poke.name.slice(1) }}
                     </div>
-                    <div
-                        class="pokemon__image"
-                        routerLink="/detail/{{ poke.id }}"
-                    >
+                    <div class="pokemon__image" routerLink="/detail/{{ poke.id }}">
                         <img src="{{ poke.image }}" alt="pokemonImage" />
                     </div>
                     <div class="pokemon__stats" *ngIf="poke !== undefined">
@@ -45,21 +38,24 @@
                                 *ngIf="stat.baseStat <= 35"
                                 class="progressBar progressBar--red"
                                 [ngStyle]="{
-                                    width: getPercentage(stat.baseStat)
+                                    width: getPercentage(stat.baseStat),
+                                    'max-width': '100%'
                                 }"
                             />
                             <hr
                                 *ngIf="stat.baseStat > 35 && stat.baseStat < 70"
                                 class="progressBar progressBar--yellow"
                                 [ngStyle]="{
-                                    width: getPercentage(stat.baseStat)
+                                    width: getPercentage(stat.baseStat),
+                                    'max-width': '100%'
                                 }"
                             />
                             <hr
                                 *ngIf="stat.baseStat >= 70"
                                 class="progressBar progressBar--green"
                                 [ngStyle]="{
-                                    width: getPercentage(stat.baseStat)
+                                    width: getPercentage(stat.baseStat),
+                                    'max-width': '100%'
                                 }"
                             />
                         </div>
