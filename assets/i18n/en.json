@@ -13,6 +13,10 @@
         "search": "Search",
         "searchph": "Search Pokémon"
     },
+    "selects": {
+        "type": "Type",
+        "stat": "Stat"
+    },
     "statistics": {
         "hp": "HP",
         "attack": "Attack",

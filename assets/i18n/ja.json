@@ -13,6 +13,10 @@
         "search": "探す",
         "searchph": "ポケモンを検索"
     },
+    "selects": {
+        "type": "とくこ",
+        "stat": "ぎょ"
+    },
     "statistics": {
         "hp": "HP",
         "attack": "こうげき",
