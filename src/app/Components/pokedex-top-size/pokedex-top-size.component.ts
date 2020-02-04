@@ -95,6 +95,8 @@ export class PokedexTopSizeComponent implements OnInit {
     }
 
     public goToPokemonDetail(): void {
+        const oldCanvas = document.getElementById('pokemon-img-' + this.currentPokemon);
+        oldCanvas.remove();
         this.router.navigate(['/detail/' + this.topsArr[this.selectedTop][this.currentPokemon].id]);
     }
 

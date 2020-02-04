@@ -33,26 +33,7 @@ import { PokedexTopPokemonComponent } from './Components/pokedex-top-pokemon/pok
 import { PokedexTopSizeComponent } from './Components/pokedex-top-size/pokedex-top-size.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        PokedexComponent,
-        PokedexListComponent,
-        PokedexDetailComponent,
-        PokedexMapComponent,
-        FilterNamePipe,
-        NavComponent,
-        PokedexDetailExtendComponent,
-        PokedexPokeworldComponent,
-        ModalComponent,
-        LoadingComponent,
-        TestComponentComponent,
-        ModalHeaderComponent,
-        ModalBodyComponent,
-        ModalFooterComponent,
-        PokedexDetailSizeComponent,
-        PokedexTopPokemonComponent,
-        PokedexTopSizeComponent,
-    ],
+    declarations: [AppComponent, PokedexComponent, PokedexListComponent, PokedexDetailComponent, PokedexMapComponent, FilterNamePipe, NavComponent, PokedexDetailExtendComponent, PokedexPokeworldComponent, ModalComponent, LoadingComponent, TestComponentComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent, PokedexDetailSizeComponent, PokedexTopPokemonComponent, PokedexTopSizeComponent],
     imports: [
         BrowserModule,
         HttpClientModule,
@@ -62,7 +43,7 @@ import { PokedexTopSizeComponent } from './Components/pokedex-top-size/pokedex-t
             loader: {
                 provide: TranslateLoader,
                 useFactory: (http: HttpClient) => {
-                    return new TranslateHttpLoader(http, '/PokeAngular/assets/i18n/', '.json');
+                    return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
                 },
                 deps: [HttpClient],
             },

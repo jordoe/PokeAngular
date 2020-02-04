@@ -8,7 +8,7 @@ body {
     flex-direction: column;
 
     @media only screen and (max-width: 800px) {
-        height: auto;
+        height: 100vh;
         flex-direction: column-reverse;
     }
 }

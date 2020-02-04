@@ -7,6 +7,8 @@
 
     @media only screen and (max-width: 800px) {
         width: 100vw;
+        padding: 1.5rem;
+        padding-bottom: 1.5rem;
     }
 
     &__display {
@@ -68,8 +70,8 @@
     margin-bottom: 1rem;
 
     @media only screen and (max-width: 375px) {
-        margin-bottom: 2rem;
-        flex-direction: column;
+        margin-bottom: 1.5rem;
+        flex-direction: row;
     }
 
     &__select {
@@ -81,10 +83,6 @@
         padding: 1rem 2rem;
         width: 30%;
         margin-right: 1rem;
-
-        @media only screen and (max-width: 375px) {
-            display: none;
-        }
     }
     &__input-parent {
         position: relative;
@@ -159,7 +157,7 @@
     }
 
     @media only screen and (max-width: 768px) {
-        line-height: 1;
+        display: none;
     }
 }
 

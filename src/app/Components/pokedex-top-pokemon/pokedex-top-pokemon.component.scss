@@ -11,6 +11,8 @@
     }
     @media only screen and (max-width: 800px) {
         width: 100vw;
+        padding: 1.5rem;
+        padding-bottom: 1.5rem;
     }
 }
 
@@ -136,7 +138,7 @@
 }
 
 .loading-container {
-    margin-top: -3rem;
+    margin-top: -1.5rem;
 }
 
 .statSelect {

@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: flex-start;
     @media only screen and (max-width: 800px) {
+        height: 6rem;
         box-shadow: 0 -0.5rem 0rem rgba(0, 0, 0, 0.2);
     }
 }
@@ -49,8 +50,7 @@
 .title {
     color: white;
     font-family: 'Arial Black', Gadget, sans-serif;
-    text-shadow: -2px 0 $title-shadowColor, 0 2px $title-shadowColor, 2px 0 $title-shadowColor,
-        0 -2px $title-shadowColor;
+    text-shadow: -2px 0 $title-shadowColor, 0 2px $title-shadowColor, 2px 0 $title-shadowColor, 0 -2px $title-shadowColor;
     font-size: 28px;
     margin: 0 20px 0 20px;
     padding: 0 10px 0 10px;
