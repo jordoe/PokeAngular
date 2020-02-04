@@ -43,7 +43,7 @@ import { PokedexTopSizeComponent } from './Components/pokedex-top-size/pokedex-t
             loader: {
                 provide: TranslateLoader,
                 useFactory: (http: HttpClient) => {
-                    return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+                    return new TranslateHttpLoader(http, '/PokeAngular/assets/i18n/', '.json');
                 },
                 deps: [HttpClient],
             },
